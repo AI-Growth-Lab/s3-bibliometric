@@ -4,6 +4,8 @@
     s3bib report scopus.csv --model specter --scopus --threshold 0.78
     s3bib compare-maps scopus.csv          which map to use, before the full analysis
     s3bib report scopus.csv --map hybrid   screen the hybrid maps, then run on the best one
+    s3bib extract-triples scopus.csv --backend claude-code -o triples.csv
+    s3bib report scopus.csv --triples triples.csv
     s3bib models
     s3bib questions
 
@@ -35,6 +37,13 @@ def _ask_scopus() -> bool:
           "With a Scopus API key S3 can fetch exact reference lists instead "
           "(needs your institution's network or an institutional token).", file=sys.stderr)
     return input("Use the Scopus API for exact citations? [y/N]: ").strip().lower() in ("y", "yes")
+
+
+def progress_bar(stage: str, fraction: float, width: int = 28) -> None:
+    """A one-line bar on stderr: [#########.........]  45%  stage"""
+    done = int(round(width * max(0.0, min(1.0, fraction))))
+    print(f"\r[{'#' * done}{'.' * (width - done)}] {fraction:4.0%}  {stage:<70.70}", end="", file=sys.stderr,
+          flush=True)
 
 
 def main(argv=None) -> None:
@@ -80,6 +89,8 @@ def main(argv=None) -> None:
                    help="review (default): brief, theme cards, research agenda, methods appendix; "
                         "questions: every question in order")
     r.add_argument("--save", help="Also save the run to this folder (reload with S3Result.load)")
+    r.add_argument("--triples", help="Knowledge-graph triples to add (CSV/Excel/JSON from extract-triples or "
+                                     "your own): methods, data, theories, findings; answers Q39 and Q40")
     r.add_argument("--cache-dir", default="~/s3bib_runs/_cache",
                     help="Keep embeddings here, so compare-maps and report embed only once "
                          "(default ~/s3bib_runs/_cache; '' to switch off)")
@@ -102,6 +113,16 @@ def main(argv=None) -> None:
     cm.add_argument("--cache-dir", default="~/s3bib_runs/_cache",
                     help="Keep embeddings here, so compare-maps and report embed only once "
                          "(default ~/s3bib_runs/_cache; '' to switch off)")
+    tx = sub.add_parser("extract-triples", help="Extract methods, data, theories, constructs, settings and "
+                                                  "findings from titles and abstracts with Claude or ChatGPT")
+    tx.add_argument("csv")
+    tx.add_argument("-o", "--output", default="triples.csv")
+    tx.add_argument("--backend", choices=["claude-code", "codex", "anthropic", "openai"], default="claude-code",
+                    help="claude-code: your Claude plan via Claude Code; codex: your ChatGPT plan via Codex; "
+                         "anthropic/openai: API keys in ANTHROPIC_API_KEY / OPENAI_API_KEY")
+    tx.add_argument("--model", help="Model name (optional for claude-code, codex and anthropic)")
+    tx.add_argument("--batch-size", type=int, default=15)
+    tx.add_argument("--max-papers", type=int, help="Only the first N papers, e.g. to test")
     sub.add_parser("models", help="List the embedding models you can choose")
     a = p.parse_args(argv)
 
@@ -117,6 +138,25 @@ def main(argv=None) -> None:
         for m in model_table():
             print(f"{m['key']:<12} {m['model']:<62} [{m['kind']}]{'  (default)' if m['default'] else ''}\n"
                   f"{'':<12} {m['description']}")
+        return
+
+    if a.cmd == "extract-triples":
+        from .pipeline import load_papers
+        from .triples import ExtractionError, extract_triples
+        papers = load_papers(a.csv, drop_empty=False)
+        try:
+            t = extract_triples(papers, a.backend, a.model, a.batch_size, a.max_papers, progress=progress_bar)
+        except ExtractionError as e:
+            print(file=sys.stderr)
+            sys.exit(str(e))
+        print(file=sys.stderr)
+        t.to_csv(a.output, index=False)
+        ok = t["evidence_found"].mean() if len(t) else 0
+        print(f"{len(t)} triples from {t['paper_id'].nunique() if len(t) else 0} papers written to {a.output} "
+              f"({ok:.0%} with evidence found in the abstract).")
+        for e in t.attrs.get("errors", []):
+            print(f"  failed {e}", file=sys.stderr)
+        print(f"Next: s3bib report {a.csv} --triples {a.output}")
         return
 
     if a.cmd == "compare-maps":
@@ -174,6 +214,11 @@ def main(argv=None) -> None:
         print(f"Bibliographic coupling uses the Scopus reference IDs for {src['scopus_ids']} papers"
               f" and the References text for {src['text']}." + (" The map was rebuilt on the exact data."
                                                                  if stats["map_rebuilt"] else ""), file=sys.stderr)
+    if a.triples:
+        rep = res.add_triples(a.triples)
+        print(f"Triples: {rep['triples']} matched to {rep['papers_with_triples']} papers"
+              + (f"; {rep['unmatched_triples']} did not match a paper" if rep["unmatched_triples"] else ""),
+              file=sys.stderr)
     if a.save:
         res.save(a.save)
     out = res.report(a.output, a.title, prediction=True if a.prediction else None,

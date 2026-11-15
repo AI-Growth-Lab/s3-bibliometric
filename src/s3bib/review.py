@@ -68,6 +68,8 @@ NOTES = {
     "Q36": "Whether ties stay within journals, countries or funders; mention strong homophily as a bias.",
     "Q37": "Which themes are knowledge sources and which build on others.",
     "Q38": "Evidence that the themes are coherent: report it when reviewers ask why you used S3.",
+    "Q39": "Describe each theme's methods and theories; the gaps are ready-made suggestions for future research.",
+    "Q40": "Established vs contested findings: the core of a review's discussion. Check each against the papers.",
 }
 
 SECTIONS = [
@@ -75,7 +77,7 @@ SECTIONS = [
      "The records that went in, what was removed, and papers that do not belong to the field.", ["Q3"]),
     ("themes", "2. Themes",
      "One card per theme: what it is about, what to read first, how it grows and how it links to "
-     "the other themes. Each card is the material for one subsection of your review.", ["Q5", "Q6", "Q7", "Q8"]),
+     "the other themes. Each card is the material for one subsection of your review.", ["Q5", "Q6", "Q7", "Q8", "Q39"]),
     ("connect", "3. How themes connect",
      "Closeness in content, citation flows and the papers that bridge themes.", ["Q9", "Q10", "Q37", "Q12", "Q21"]),
     ("evolution", "4. Evolution", "How the themes and their concepts change over time.", ["Q13", "Q14", "Q23"]),
@@ -84,7 +86,7 @@ SECTIONS = [
      ["Q15", "Q16", "Q18", "Q19", "Q20"]),
     ("agenda", "6. Research agenda",
      "Material for your discussion and future-research sections.",
-     ["Q11", "Q17", "Q22", "Q25", "Q26", "Q27", "Q28", "Q29", "Q33"]),
+     ["Q40", "Q11", "Q17", "Q22", "Q25", "Q26", "Q27", "Q28", "Q29", "Q33"]),
     ("methods", "7. Methods appendix",
      "A methods paragraph to adapt, a glossary, and the analyses that show the map can be trusted.",
      ["Q0", "Q1", "Q2", "Q38", "Q4", "Q35", "Q36", "Q24", "Q30", "Q31", "Q32", "Q34"]),
@@ -381,6 +383,8 @@ def _theme_cards(res, answers, level: int, tt: pd.DataFrame) -> str:
     geo = _tab(answers, "Q18", "Countries and institutions per community (RQ7/RQ8)")
     jr = _tab(answers, "Q19", "Top journals per community")
     fu = _tab(answers, "Q20", "Funding per community (RQ10)")
+    kg = _tab(answers, "Q39", "Methods, data, theories and settings per community")
+    kg = kg.set_index("community") if len(kg) else kg
     life, _, _ = lifecycle(res, comms)
     life = life.set_index("community") if len(life) else life
     out = []
@@ -401,6 +405,10 @@ def _theme_cards(res, answers, level: int, tt: pd.DataFrame) -> str:
                          f"{L['first year']}, peak {L['peak year']})</li>")
         if pd.notna(r["QI"]):
             about.append(f"<li><b>Citations:</b> QI {r['QI']} · MI {r['MI (%)']}%</li>")
+        if level >= 2 and len(kg) and c in kg.index:
+            for col, word in (("methods", "Methods"), ("theories", "Theories"), ("data", "Data")):
+                if col in kg and kg.at[c, col]:
+                    about.append(f"<li><b>{word}:</b> {_e(kg.at[c, col])}</li>")
         read = central[central["community"] == c].sort_values("eigenvector", ascending=False).head(3) \
             if len(central) else pd.DataFrame()
         rl = "".join(f"<li>{_e(_paper(x))} <span class='mut'>· cited {int(x['cited_by'])}</span></li>"

@@ -1,0 +1,887 @@
+paper_id,subject,subject_type,relation,object,object_type,evidence,evidence_found,source
+W2108795964,PAPER,Paper,STUDIES,absorptive capacity,Construct,Absorptive Capacity: A New Perspective on Learning and Innovation,True,claude-chat
+W2108795964,PAPER,Paper,STUDIES,learning,Construct,A New Perspective on Learning and Innovation,True,claude-chat
+W2108795964,PAPER,Paper,STUDIES,innovation,Construct,A New Perspective on Learning and Innovation,True,claude-chat
+W1993023795,PAPER,Paper,STUDIES,organizational learning,Construct,Organizational learning has many virtues,True,claude-chat
+W1993023795,PAPER,Paper,STUDIES,learning myopia,Construct,three forms of learning myopia,True,claude-chat
+W1993023795,PAPER,Paper,STUDIES,exploration,Construct,"balancing the competing goals of developing new knowledge (i.e., exploring) and exploiting current competencies",True,claude-chat
+W1993023795,PAPER,Paper,STUDIES,exploitation,Construct,a tendency to overinvest in exploitation,True,claude-chat
+W2058394280,PAPER,Paper,USES_METHOD,KEYS,Method,"a new instrument, KEYS: Assessing the Climate for Creativity",True,claude-chat
+W2058394280,PAPER,Paper,USES_METHOD,construct validity study,Method,A construct validity study shows that perceived work environments,True,claude-chat
+W2058394280,PAPER,Paper,STUDIES,work environment for creativity,Construct,ASSESSING THE WORK ENVIRONMENT FOR CREATIVITY.,True,claude-chat
+W2058394280,PAPER,Paper,STUDIES,creativity,Construct,perceived stimulants and obstacles to creativity in organizational work environments,True,claude-chat
+W2058394280,perceived work environment,Construct,ASSOCIATED_WITH,project creativity,Construct,"perceived work environments, as assessed by the KEYS scales, discriminate between high-creativity projects and low-creativity projects",True,claude-chat
+W2160449301,PAPER,Paper,USES_THEORY,knowledge-based theory of the firm,Theory,Toward a knowledge‐based theory of the firm,True,claude-chat
+W2160449301,PAPER,Paper,STUDIES,knowledge integration,Construct,the firm is conceptualized as an institution for integrating knowledge,True,claude-chat
+W2160449301,PAPER,Paper,STUDIES,coordination mechanisms,Construct,exploring the coordination mechanisms through which firms integrate the specialist knowledge of their members,True,claude-chat
+W2160449301,PAPER,Paper,STUDIES,organizational capability,Construct,implications for the basis of organizational capability,True,claude-chat
+W2160449301,PAPER,Paper,STUDIES,boundaries of the firm,Construct,the determinants of the horizontal and vertical boundaries of the firm,True,claude-chat
+W2172157658,PAPER,Paper,USES_METHOD,canonical correlation analysis,Method,tests the resulting model using canonical correlation analysis,True,claude-chat
+W2172157658,PAPER,Paper,USES_DATA,best-practice transfers sample,Dataset,a data set consisting of 271 observations of 122 best‐practice transfers in eight companies,True,claude-chat
+W2172157658,PAPER,Paper,STUDIES,internal stickiness,Construct,Exploring internal stickiness: Impediments to the transfer of best practice within the firm,True,claude-chat
+W2172157658,PAPER,Paper,STUDIES,internal knowledge transfer,Construct,the major barriers to internal knowledge transfer,True,claude-chat
+W2172157658,PAPER,Paper,STUDIES,best practice transfer,Construct,the transfer of best practice within the firm,True,claude-chat
+W2172157658,lack of absorptive capacity,Construct,DECREASES,internal knowledge transfer,Construct,the major barriers to internal knowledge transfer to be knowledge‐related factors such as the recipient's lack of absorptive capacity,True,claude-chat
+W2172157658,causal ambiguity,Construct,DECREASES,internal knowledge transfer,Construct,"the recipient's lack of absorptive capacity, causal ambiguity, and an arduous relationship between the source and the recipient",True,claude-chat
+W2172157658,arduous relationship,Construct,DECREASES,internal knowledge transfer,Construct,an arduous relationship between the source and the recipient,True,claude-chat
+W2108183214,PAPER,Paper,USES_THEORY,theory of the firm,Theory,Scholars of the theory of the firm,True,claude-chat
+W2108183214,PAPER,Paper,STUDIES,social capital,Construct,social capital facilitates the creation of new intellectual capital,True,claude-chat
+W2108183214,PAPER,Paper,STUDIES,intellectual capital,Construct,"Social Capital, Intellectual Capital, and the Organizational Advantage",True,claude-chat
+W2108183214,PAPER,Paper,STUDIES,organizational advantage,Construct,"Social Capital, Intellectual Capital, and the Organizational Advantage",True,claude-chat
+W2132081716,PAPER,Paper,USES_THEORY,relational view,Theory,The Relational View: Cooperative Strategy and Sources of Interorganizational Competitive Advantage,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,interorganizational competitive advantage,Construct,Sources of Interorganizational Competitive Advantage,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,relation-specific assets,Construct,(1) relation-specific assets,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,knowledge-sharing routines,Construct,(2) knowledge-sharing routines,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,complementary resources,Construct,(3) complementary resources/capabilities,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,effective governance,Construct,(4) effective governance,True,claude-chat
+W2132081716,PAPER,Paper,STUDIES,relational rents,Construct,the isolating mechanisms that serve to preserve relational rents,True,claude-chat
+W2160380001,PAPER,Paper,USES_DATA,pharmaceutical–biotechnology R&D alliances,Dataset,test the model using a sample of pharmaceutical–biotechnology R&D alliances,True,claude-chat
+W2160380001,PAPER,Paper,IN_INDUSTRY,pharmaceuticals,Industry,a sample of pharmaceutical–biotechnology R&D alliances,True,claude-chat
+W2160380001,PAPER,Paper,IN_INDUSTRY,biotechnology,Industry,a sample of pharmaceutical–biotechnology R&D alliances,True,claude-chat
+W2160380001,PAPER,Paper,STUDIES,relative absorptive capacity,Construct,Relative absorptive capacity and interorganizational learning,True,claude-chat
+W2160380001,PAPER,Paper,STUDIES,interorganizational learning,Construct,Relative absorptive capacity and interorganizational learning,True,claude-chat
+W2160380001,knowledge base similarity,Construct,INCREASES,interorganizational learning,Construct,"the similarity of the partners' basic knowledge, lower management formalization, research centralization, compensation practices, and research communities were positively related to interorganizational learning",True,claude-chat
+W2160380001,management formalization,Construct,DECREASES,interorganizational learning,Construct,"the similarity of the partners' basic knowledge, lower management formalization, research centralization, compensation practices, and research communities were positively related to interorganizational learning",True,claude-chat
+W2097549324,PAPER,Paper,USES_THEORY,organizational learning framework,Theory,An Organizational Learning Framework: From Intuition to Institution,True,claude-chat
+W2097549324,PAPER,Paper,STUDIES,organizational learning,Construct,presenting organizational learning as four processes,True,claude-chat
+W2097549324,PAPER,Paper,STUDIES,strategic renewal,Construct,We identify renewal of the overall enterprise as the underlying phenomenon of interest,True,claude-chat
+W2097549324,PAPER,Paper,AT_LEVEL,individual,Level,"linking the individual, group, and organizational levels",True,claude-chat
+W2097549324,PAPER,Paper,AT_LEVEL,team,Level,"linking the individual, group, and organizational levels",True,claude-chat
+W2097549324,PAPER,Paper,AT_LEVEL,firm,Level,"linking the individual, group, and organizational levels",True,claude-chat
+W2030747846,PAPER,Paper,USES_METHOD,case study,Method,Through in-depth case studies of eight sets of entrepreneurs who exploit a single MIT invention,True,claude-chat
+W2030747846,PAPER,Paper,USES_DATA,MIT invention case studies,Dataset,case studies of eight sets of entrepreneurs who exploit a single MIT invention,True,claude-chat
+W2030747846,PAPER,Paper,USES_THEORY,Austrian economics,Theory,Drawing on Austrian economics,True,claude-chat
+W2030747846,PAPER,Paper,STUDIES,prior knowledge,Construct,Prior Knowledge and the Discovery of Entrepreneurial Opportunities,True,claude-chat
+W2030747846,PAPER,Paper,STUDIES,opportunity discovery,Construct,opportunity discovery is a function of the distribution of information in society,True,claude-chat
+W2030747846,PAPER,Paper,AT_LEVEL,individual,Level,individual differences influence the opportunities that people discover,True,claude-chat
+W2030747846,prior knowledge,Construct,ASSOCIATED_WITH,opportunity discovery,Construct,entrepreneurs discover opportunities related to the information that they already possess,True,claude-chat
+W2095659828,PAPER,Paper,USES_THEORY,organizational capabilities perspective,Theory,Knowledge Management: An Organizational Capabilities Perspective,True,claude-chat
+W2095659828,PAPER,Paper,USES_METHOD,survey,Method,Through analysis of surveys collected from over 300 senior executives,True,claude-chat
+W2095659828,PAPER,Paper,USES_DATA,survey of senior executives,Dataset,surveys collected from over 300 senior executives,True,claude-chat
+W2095659828,PAPER,Paper,STUDIES,knowledge management effectiveness,Construct,effective knowledge management from the perspective of organizational capabilities,True,claude-chat
+W2095659828,PAPER,Paper,STUDIES,knowledge infrastructure,Construct,"a knowledge infrastructure consisting of technology, structure, and culture",True,claude-chat
+W2095659828,PAPER,Paper,STUDIES,knowledge process architecture,Construct,"a knowledge process architecture of acquisition, conversion, application, and protection",True,claude-chat
+W2098118776,PAPER,Paper,USES_METHOD,literature review,Method,This paper provides a review and interpretation of knowledge management literatures in different fields,True,claude-chat
+W2098118776,PAPER,Paper,STUDIES,knowledge management,Construct,Knowledge Management and Knowledge Management Systems: Conceptual Foundations And Research Issues,True,claude-chat
+W2098118776,PAPER,Paper,STUDIES,knowledge management systems,Construct,"a class of information systems, referred to as knowledge management systems (KMS)",True,claude-chat
+W2098118776,PAPER,Paper,STUDIES,information technology,Construct,the potential role of information technology in this process,True,claude-chat
+W2018514036,PAPER,Paper,STUDIES,dynamic capabilities,Construct,Deliberate Learning and the Evolution of Dynamic Capabilities,True,claude-chat
+W2018514036,PAPER,Paper,STUDIES,deliberate learning,Construct,Deliberate Learning and the Evolution of Dynamic Capabilities,True,claude-chat
+W2018514036,PAPER,Paper,STUDIES,experience accumulation,Construct,(1) experience accumulation,True,claude-chat
+W2018514036,PAPER,Paper,STUDIES,knowledge articulation,Construct,(2) knowledge articulation,True,claude-chat
+W2018514036,PAPER,Paper,STUDIES,knowledge codification,Construct,(3) knowledge codification processes,True,claude-chat
+W2119652992,PAPER,Paper,USES_METHOD,literature review,Method,we review the literature to identify key dimensions of absorptive capacity,True,claude-chat
+W2119652992,PAPER,Paper,USES_THEORY,dynamic capabilities view,Theory,Building upon the dynamic capabilities view of the firm,True,claude-chat
+W2119652992,PAPER,Paper,STUDIES,absorptive capacity,Construct,"Absorptive Capacity: A Review, Reconceptualization, and Extension",True,claude-chat
+W2119652992,PAPER,Paper,STUDIES,potential absorptive capacity,Construct,we distinguish between a firm's potential and realized capacity,True,claude-chat
+W2119652992,PAPER,Paper,STUDIES,realized absorptive capacity,Construct,we distinguish between a firm's potential and realized capacity,True,claude-chat
+W2119652992,PAPER,Paper,STUDIES,competitive advantage,Construct,the creation and sustenance of its competitive advantage,True,claude-chat
+W2138437782,PAPER,Paper,USES_METHOD,field study,Method,The current field study was conducted among 54 work teams from 13 different organizations,True,claude-chat
+W2138437782,PAPER,Paper,USES_DATA,54 work teams,Dataset,54 work teams from 13 different organizations,True,claude-chat
+W2138437782,PAPER,Paper,AT_LEVEL,team,Level,54 work teams from 13 different organizations,True,claude-chat
+W2138437782,PAPER,Paper,STUDIES,diversity,Construct,Diversity and team outcomes,True,claude-chat
+W2138437782,PAPER,Paper,STUDIES,reflexivity,Construct,the mediating effect of reflexivity,True,claude-chat
+W2138437782,PAPER,Paper,STUDIES,team outcomes,Construct,"team outcomes (i.e., satisfaction, commitment, and performance)",True,claude-chat
+W2138437782,outcome interdependence,Construct,MODERATES,team outcomes,Construct,the moderating effects of outcome interdependence and group longevity on the relation between diversity and team outcomes,True,claude-chat
+W2138437782,group longevity,Construct,MODERATES,team outcomes,Construct,the moderating effects of outcome interdependence and group longevity on the relation between diversity and team outcomes,True,claude-chat
+W2138437782,reflexivity,Construct,MEDIATES,team outcomes,Construct,reflexivity was shown to mediate these relationships,True,claude-chat
+W2138437782,outcome interdependence,Construct,MODERATES,reflexivity,Construct,"analyses showed interaction effects of diversity and outcome interdependence on the measures of reflexivity, satisfaction, and performance",True,claude-chat
+W2138437782,group longevity,Construct,MODERATES,reflexivity,Construct,"interaction effects were also found for diversity and group longevity on the measures of reflexivity, satisfaction, and performance",True,claude-chat
+W1998800754,PAPER,Paper,STUDIES,clusters,Construct,"Clusters and knowledge: local buzz, global pipelines and the process of knowledge creation",True,claude-chat
+W1998800754,PAPER,Paper,STUDIES,knowledge creation,Construct,the process of knowledge creation,True,claude-chat
+W1998800754,PAPER,Paper,STUDIES,local buzz,Construct,"local buzz, global pipelines",True,claude-chat
+W1998800754,PAPER,Paper,STUDIES,global pipelines,Construct,"local buzz, global pipelines",True,claude-chat
+W1998800754,PAPER,Paper,STUDIES,tacit knowledge,Construct,both tacit and codified knowledge can be exchanged locally and globally,True,claude-chat
+W2002779084,PAPER,Paper,USES_DATA,managers in an American electronics company,Dataset,the networks around managers in a large American electronics company,True,claude-chat
+W2002779084,PAPER,Paper,STUDIED_IN,United States,Country,a large American electronics company,True,claude-chat
+W2002779084,PAPER,Paper,IN_INDUSTRY,electronics,Industry,a large American electronics company,True,claude-chat
+W2002779084,PAPER,Paper,AT_LEVEL,individual,Level,people whose networks span structural holes,True,claude-chat
+W2002779084,PAPER,Paper,STUDIES,brokerage,Construct,the mechanism by which brokerage provides social capital,True,claude-chat
+W2002779084,PAPER,Paper,STUDIES,structural holes,Construct,Structural Holes and Good Ideas,True,claude-chat
+W2002779084,PAPER,Paper,STUDIES,good ideas,Construct,Structural Holes and Good Ideas,True,claude-chat
+W2002779084,brokerage,Construct,ASSOCIATED_WITH,good ideas,Construct,"Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes",True,claude-chat
+W2002779084,brokerage,Construct,ASSOCIATED_WITH,compensation,Construct,"Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes",True,claude-chat
+W2002779084,brokerage,Construct,ASSOCIATED_WITH,promotions,Construct,"Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes",True,claude-chat
+W2002779084,brokerage,Construct,ASSOCIATED_WITH,performance evaluations,Construct,"Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes",True,claude-chat
+W2159012497,PAPER,Paper,USES_THEORY,categorization-elaboration model,Theory,the authors propose the categorization-elaboration model (CEM),True,claude-chat
+W2159012497,PAPER,Paper,USES_THEORY,social categorization perspective,Theory,integrates information/decision making and social categorization perspectives,True,claude-chat
+W2159012497,PAPER,Paper,USES_THEORY,information/decision making perspective,Theory,integrates information/decision making and social categorization perspectives,True,claude-chat
+W2159012497,PAPER,Paper,STUDIES,work group diversity,Construct,Work Group Diversity and Group Performance,True,claude-chat
+W2159012497,PAPER,Paper,STUDIES,group performance,Construct,Work Group Diversity and Group Performance,True,claude-chat
+W2159012497,PAPER,Paper,AT_LEVEL,team,Level,Work Group Diversity and Group Performance,True,claude-chat
+W1965248592,PAPER,Paper,STUDIES,potential absorptive capacity,Construct,Managing Potential and Realized Absorptive Capacity,True,claude-chat
+W1965248592,PAPER,Paper,STUDIES,realized absorptive capacity,Construct,Managing Potential and Realized Absorptive Capacity,True,claude-chat
+W1965248592,PAPER,Paper,STUDIES,organizational antecedents,Construct,How do Organizational Antecedents Matter?,True,claude-chat
+W1965248592,coordination capabilities,Construct,INCREASES,potential absorptive capacity,Construct,"organizational mechanisms associated with coordination capabilities (cross-functional interfaces, participation in decision making, and job rotation) primarily enhance a unit's potential absorptive capacity",True,claude-chat
+W1965248592,cross-functional interfaces,Construct,INCREASES,potential absorptive capacity,Construct,"organizational mechanisms associated with coordination capabilities (cross-functional interfaces, participation in decision making, and job rotation) primarily enhance a unit's potential absorptive capacity",True,claude-chat
+W1965248592,participation in decision making,Construct,INCREASES,potential absorptive capacity,Construct,"organizational mechanisms associated with coordination capabilities (cross-functional interfaces, participation in decision making, and job rotation) primarily enhance a unit's potential absorptive capacity",True,claude-chat
+W1965248592,job rotation,Construct,INCREASES,potential absorptive capacity,Construct,"organizational mechanisms associated with coordination capabilities (cross-functional interfaces, participation in decision making, and job rotation) primarily enhance a unit's potential absorptive capacity",True,claude-chat
+W1965248592,socialization capabilities,Construct,INCREASES,realized absorptive capacity,Construct,Organizational mechanisms associated with socialization capabilities (connectedness and socialization tactics) primarily increase a unit's realized absorptive capacity,True,claude-chat
+W1965248592,connectedness,Construct,INCREASES,realized absorptive capacity,Construct,Organizational mechanisms associated with socialization capabilities (connectedness and socialization tactics) primarily increase a unit's realized absorptive capacity,True,claude-chat
+W1965248592,socialization tactics,Construct,INCREASES,realized absorptive capacity,Construct,Organizational mechanisms associated with socialization capabilities (connectedness and socialization tactics) primarily increase a unit's realized absorptive capacity,True,claude-chat
+W2087712586,PAPER,Paper,USES_DATA,sample of industrial firms,Dataset,Using a large‐scale sample of industrial firms,True,claude-chat
+W2087712586,PAPER,Paper,STUDIED_IN,United Kingdom,Country,innovation performance among U.K. manufacturing firms,True,claude-chat
+W2087712586,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,U.K. manufacturing firms,True,claude-chat
+W2087712586,PAPER,Paper,AT_LEVEL,firm,Level,U.K. manufacturing firms,True,claude-chat
+W2087712586,PAPER,Paper,STUDIES,openness,Construct,the role of openness in explaining innovation performance,True,claude-chat
+W2087712586,PAPER,Paper,STUDIES,search strategy,Construct,this paper links search strategy to innovative performance,True,claude-chat
+W2087712586,PAPER,Paper,STUDIES,innovation performance,Construct,the role of openness in explaining innovation performance,True,claude-chat
+W2087712586,search breadth,Construct,ASSOCIATED_WITH,innovation performance,Construct,finding that searching widely and deeply is curvilinearly (taking an inverted U‐shape) related to performance,True,claude-chat
+W2087712586,search depth,Construct,ASSOCIATED_WITH,innovation performance,Construct,finding that searching widely and deeply is curvilinearly (taking an inverted U‐shape) related to performance,True,claude-chat
+W2114483607,PAPER,Paper,USES_METHOD,longitudinal study,Method,"In a longitudinal, multiple-informant study of 93 organizations",True,claude-chat
+W2114483607,PAPER,Paper,USES_DATA,93 organizations,Dataset,multiple-informant study of 93 organizations,True,claude-chat
+W2114483607,PAPER,Paper,AT_LEVEL,firm,Level,various innovative capabilities in organizations,True,claude-chat
+W2114483607,PAPER,Paper,STUDIES,intellectual capital,Construct,The Influence of Intellectual Capital on the Types of Innovative Capabilities,True,claude-chat
+W2114483607,PAPER,Paper,STUDIES,incremental innovative capability,Construct,selectively influenced incremental and radical innovative capabilities,True,claude-chat
+W2114483607,PAPER,Paper,STUDIES,radical innovative capability,Construct,selectively influenced incremental and radical innovative capabilities,True,claude-chat
+W2114483607,organizational capital,Construct,INCREASES,incremental innovative capability,Construct,organizational capital positively influenced incremental innovative capability,True,claude-chat
+W2114483607,social capital,Construct,MODERATES,radical innovative capability,Construct,human capital interacted with social capital to positively influence radical innovative capability,True,claude-chat
+W2114483607,human capital,Construct,DECREASES,radical innovative capability,Construct,human capital by itself was negatively associated with radical innovative capability,True,claude-chat
+W2114483607,social capital,Construct,INCREASES,incremental innovative capability,Construct,it positively influenced incremental and radical innovative capabilities,True,claude-chat
+W2114483607,social capital,Construct,INCREASES,radical innovative capability,Construct,it positively influenced incremental and radical innovative capabilities,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,proximity,Construct,Proximity and Innovation: A Critical Assessment,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,geographical proximity,Construct,the impact of geographical proximity on interactive learning and innovation,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,interactive learning,Construct,the impact of geographical proximity on interactive learning and innovation,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,innovation,Construct,Proximity and Innovation: A Critical Assessment,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,lock-in,Construct,proximity may also have negative impacts on innovation due to the problem of lock-in,True,claude-chat
+W2129208071,PAPER,Paper,STUDIES,cognitive proximity,Construct,"cognitive, organizational, social, institutional and geographical proximity",True,claude-chat
+W2132440291,PAPER,Paper,USES_METHOD,literature review,Method,As we disentangle what researchers have learned from the last 50 years,True,claude-chat
+W2132440291,PAPER,Paper,USES_THEORY,similarity-attraction paradigm,Theory,"the similarity-attraction paradigm, self- and social categorization, and information processing",True,claude-chat
+W2132440291,PAPER,Paper,USES_THEORY,social categorization,Theory,"the similarity-attraction paradigm, self- and social categorization, and information processing",True,claude-chat
+W2132440291,PAPER,Paper,USES_THEORY,information processing,Theory,"the similarity-attraction paradigm, self- and social categorization, and information processing",True,claude-chat
+W2132440291,PAPER,Paper,AT_LEVEL,team,Level,The Promise and Reality of Diverse Teams in Organizations,True,claude-chat
+W2132440291,PAPER,Paper,STUDIES,diversity,Construct,the promise and the reality of diversity in team process and performance,True,claude-chat
+W2132440291,PAPER,Paper,STUDIES,team performance,Construct,the promise and the reality of diversity in team process and performance,True,claude-chat
+W2132440291,surface-level diversity,Construct,DECREASES,group functioning,Construct,"surface-level social- category differences, such as those of race/ethnicity, gender, or age, tend to be more likely to have negative effects",True,claude-chat
+W2132440291,underlying diversity,Construct,ASSOCIATED_WITH,team performance,Construct,"underlying differences, such as differences in functional background, education, or personality, are more often positively related to performance",True,claude-chat
+W1525360602,PAPER,Paper,USES_METHOD,literature review,Method,"Entrepreneurship and Dynamic Capabilities: A Review, Model and Research Agenda",True,claude-chat
+W1525360602,PAPER,Paper,STUDIES,dynamic capabilities,Construct,we offer a definition of dynamic capabilities,True,claude-chat
+W1525360602,PAPER,Paper,STUDIES,substantive capabilities,Construct,separating them from substantive capabilities,True,claude-chat
+W1525360602,PAPER,Paper,STUDIES,entrepreneurship,Construct,Entrepreneurship and Dynamic Capabilities,True,claude-chat
+W1525360602,PAPER,Paper,STUDIES,organizational age,Construct,how organizational age affects the speed of utilization of dynamic capabilities,True,claude-chat
+W1525360602,PAPER,Paper,STUDIES,market dynamism,Construct,how organizational knowledge and market dynamism affect the likely value of dynamic capabilities,True,claude-chat
+W2081918883,PAPER,Paper,USES_METHOD,cross-sectional survey,Method,results of a cross‐sectional survey of university faculty (n=133),True,claude-chat
+W2081918883,PAPER,Paper,USES_DATA,survey of university faculty,Dataset,a cross‐sectional survey of university faculty (n=133),True,claude-chat
+W2081918883,PAPER,Paper,IN_INDUSTRY,higher education,Industry,a cross‐sectional survey of university faculty (n=133),True,claude-chat
+W2081918883,PAPER,Paper,AT_LEVEL,individual,Level,The psychological relationship between individual and organization,True,claude-chat
+W2081918883,PAPER,Paper,STUDIES,organizational identification,Construct,Organizational identification versus organizational commitment,True,claude-chat
+W2081918883,PAPER,Paper,STUDIES,organizational commitment,Construct,Organizational identification versus organizational commitment,True,claude-chat
+W2081918883,PAPER,Paper,STUDIES,social exchange,Construct,commitment is more contingent on social exchange processes,True,claude-chat
+W2081918883,organizational commitment,Construct,ASSOCIATED_WITH,perceived organizational support,Construct,"commitment is uniquely related (i.e., controlling for identification) to perceived organizational support, job satisfaction, and turnover intentions",True,claude-chat
+W2081918883,organizational commitment,Construct,ASSOCIATED_WITH,job satisfaction,Construct,"commitment is uniquely related (i.e., controlling for identification) to perceived organizational support, job satisfaction, and turnover intentions",True,claude-chat
+W2081918883,organizational commitment,Construct,ASSOCIATED_WITH,turnover intentions,Construct,"commitment is uniquely related (i.e., controlling for identification) to perceived organizational support, job satisfaction, and turnover intentions",True,claude-chat
+W2081918883,organizational identification,Construct,ASSOCIATED_WITH,self-definition,Construct,"identification is uniquely aligned (i.e., controlling for affective commitment) with the self‐referential aspect of organizational membership",True,claude-chat
+W2144696435,PAPER,Paper,USES_METHOD,thematic analysis,Method,identify the substantive contributions to the broader literature using a thematic analysis,True,claude-chat
+W2144696435,PAPER,Paper,USES_METHOD,literature review,Method,A Critical Review and Rejuvenation of the Construct,True,claude-chat
+W2144696435,PAPER,Paper,USES_DATA,289 absorptive capacity papers,Dataset,We conduct a detailed analysis of 289 absorptive capacity papers from 14 journals,True,claude-chat
+W2144696435,PAPER,Paper,STUDIES,absorptive capacity,Construct,The Reification of Absorptive Capacity,True,claude-chat
+W2144696435,PAPER,Paper,STUDIES,reification,Construct,this reification has led to stifling of research in this area,True,claude-chat
+W1986362177,PAPER,Paper,USES_METHOD,literature review,Method,Dynamic capabilities: A review and research agenda,True,claude-chat
+W1986362177,PAPER,Paper,USES_THEORY,resource-based view,Theory,complements the premise of the resource‐based view of the firm,True,claude-chat
+W1986362177,PAPER,Paper,STUDIES,dynamic capabilities,Construct,this paper aims to clarify the concept of dynamic capabilities,True,claude-chat
+W2010751726,PAPER,Paper,USES_DATA,100 top Australian companies,Dataset,the board membership of 100 top Australian companies in 2003,True,claude-chat
+W2010751726,PAPER,Paper,STUDIED_IN,Australia,Country,the state of corporate governance in Australia,True,claude-chat
+W2010751726,PAPER,Paper,AT_LEVEL,firm,Level,the board membership of 100 top Australian companies in 2003,True,claude-chat
+W2010751726,PAPER,Paper,STUDIES,corporate governance,Construct,Corporate Governance and Board Composition,True,claude-chat
+W2010751726,PAPER,Paper,STUDIES,board composition,Construct,Corporate Governance and Board Composition,True,claude-chat
+W2010751726,PAPER,Paper,STUDIES,board diversity,Construct,diversity and independence of Australian boards,True,claude-chat
+W2010751726,PAPER,Paper,STUDIES,board independence,Construct,diversity and independence of Australian boards,True,claude-chat
+W2029374995,PAPER,Paper,USES_METHOD,computer simulation,Method,the authors used computer simulations to examine the impact,True,claude-chat
+W2029374995,PAPER,Paper,STUDIES,group member dissimilarity,Construct,relations between group member dissimilarity and outcome measures,True,claude-chat
+W2029374995,PAPER,Paper,STUDIES,participant nonresponse,Construct,"participant nonresponse, can have on dissimilarity-outcome relations",True,claude-chat
+W2029374995,PAPER,Paper,STUDIES,missing data,Construct,Assessing dissimilarity relations under missing data conditions,True,claude-chat
+W2029374995,participant nonresponse,Construct,DECREASES,estimated dissimilarity effects,Construct,using only survey responders to calculate dissimilarity typically results in underestimation of true dissimilarity effects,True,claude-chat
+W2070014147,PAPER,Paper,USES_DATA,75 research and development teams,Dataset,Using a sample of 75 research and development teams,True,claude-chat
+W2070014147,PAPER,Paper,AT_LEVEL,team,Level,creativity in research and development teams,True,claude-chat
+W2070014147,PAPER,Paper,STUDIES,educational specialization heterogeneity,Construct,teams' educational specialization heterogeneity was positively related to team creativity,True,claude-chat
+W2070014147,PAPER,Paper,STUDIES,team creativity,Construct,teams' educational specialization heterogeneity was positively related to team creativity,True,claude-chat
+W2070014147,PAPER,Paper,STUDIES,transformational leadership,Construct,Transformational leadership as a moderator.,True,claude-chat
+W2070014147,PAPER,Paper,STUDIES,creative efficacy,Construct,teams' creative efficacy mediated this moderated relationship,True,claude-chat
+W2070014147,transformational leadership,Construct,MODERATES,team creativity,Construct,transformational leadership and educational specialization heterogeneity interacted to affect team creativity,True,claude-chat
+W2070014147,educational specialization heterogeneity,Construct,INCREASES,team creativity,Construct,"when transformational leadership was high, teams with greater educational specialization heterogeneity exhibited greater team creativity",True,claude-chat
+W2070014147,creative efficacy,Construct,MEDIATES,team creativity,Construct,"teams' creative efficacy mediated this moderated relationship among educational specialization heterogeneity, transformational leadership, and team creativity",True,claude-chat
+W2115275369,PAPER,Paper,AT_LEVEL,team,Level,performance in diverse work groups,True,claude-chat
+W2115275369,PAPER,Paper,STUDIES,diversity faultlines,Construct,the disruptive effects of diversity faultlines can be overcome by convincing groups of the value of diversity,True,claude-chat
+W2115275369,PAPER,Paper,STUDIES,diversity beliefs,Construct,"Diversity beliefs, information elaboration, and performance in diverse work groups",True,claude-chat
+W2115275369,PAPER,Paper,STUDIES,information elaboration,Construct,"Diversity beliefs, information elaboration, and performance in diverse work groups",True,claude-chat
+W2115275369,PAPER,Paper,STUDIES,group performance,Construct,"Diversity beliefs, information elaboration, and performance in diverse work groups",True,claude-chat
+W2115275369,diversity beliefs,Construct,MODERATES,group performance,Construct,informationally diverse groups performed better when they held pro-diversity rather than pro-similarity beliefs,True,claude-chat
+W2115275369,diversity beliefs,Construct,NO_EFFECT_ON,group performance,Construct,the performance of informationally homogeneous groups was unaffected by diversity beliefs,True,claude-chat
+W2115275369,information elaboration,Construct,MEDIATES,group performance,Construct,This effect was mediated by group-level information elaboration,True,claude-chat
+W2115981184,PAPER,Paper,USES_METHOD,partial least squares,Method,Results from partial least squares analyses,True,claude-chat
+W2115981184,PAPER,Paper,USES_METHOD,survey,Method,The hypotheses were tested using survey data from companies that have already implemented ERP systems,True,claude-chat
+W2115981184,PAPER,Paper,USES_DATA,survey of ERP-implementing companies,Dataset,survey data from companies that have already implemented ERP systems,True,claude-chat
+W2115981184,PAPER,Paper,AT_LEVEL,firm,Level,survey data from companies that have already implemented ERP systems,True,claude-chat
+W2115981184,PAPER,Paper,STUDIES,ERP assimilation,Construct,the ERP assimilation process,True,claude-chat
+W2115981184,PAPER,Paper,STUDIES,institutional pressures,Construct,The Effect of Institutional Pressures and the Mediating Role of Top Management,True,claude-chat
+W2115981184,PAPER,Paper,STUDIES,top management participation,Construct,top management participation in the ERP assimilation process,True,claude-chat
+W2115981184,mimetic pressures,Construct,INCREASES,top management beliefs,Construct,mimetic pressures positively affect top management beliefs,True,claude-chat
+W2115981184,top management beliefs,Construct,INCREASES,top management participation,Construct,which then positively affects top management participation in the ERP assimilation process,True,claude-chat
+W2115981184,top management participation,Construct,INCREASES,ERP usage,Construct,top management participation is confirmed to positively affect the degree of ERP usage,True,claude-chat
+W2115981184,coercive pressures,Construct,INCREASES,top management participation,Construct,coercive pressures positively affect top management participation without the mediation of top management beliefs,True,claude-chat
+W2115981184,normative pressures,Construct,ASSOCIATED_WITH,ERP usage,Construct,normative pressures directly affect ERP usage,True,claude-chat
+W2115981184,top management,Construct,MEDIATES,IT assimilation,Construct,the important role of top management in mediating the effect of institutional pressures on IT assimilation,True,claude-chat
+W2121191282,PAPER,Paper,STUDIES,stakeholder influence capacity,Construct,I develop the construct of stakeholder influence capacity,True,claude-chat
+W2121191282,PAPER,Paper,STUDIES,corporate social responsibility,Construct,the business case for corporate social responsibility,True,claude-chat
+W2121191282,PAPER,Paper,STUDIES,corporate financial performance,Construct,the effects of corporate social responsibility on corporate financial performance vary across firms and time,True,claude-chat
+W1965594769,PAPER,Paper,USES_DATA,five ambidextrous firms,Dataset,"we sought to learn from five, ambidextrous firms that lead the product design industry",True,claude-chat
+W1965594769,PAPER,Paper,IN_INDUSTRY,product design,Industry,"five, ambidextrous firms that lead the product design industry",True,claude-chat
+W1965594769,PAPER,Paper,AT_LEVEL,firm,Level,"five, ambidextrous firms that lead the product design industry",True,claude-chat
+W1965594769,PAPER,Paper,USES_THEORY,paradox theory,Theory,Building from innovation and paradox literature,True,claude-chat
+W1965594769,PAPER,Paper,STUDIES,organizational ambidexterity,Construct,Exploitation-Exploration Tensions and Organizational Ambidexterity,True,claude-chat
+W1965594769,PAPER,Paper,STUDIES,exploitation,Construct,Exploitation-Exploration Tensions and Organizational Ambidexterity,True,claude-chat
+W1965594769,PAPER,Paper,STUDIES,exploration,Construct,Exploitation-Exploration Tensions and Organizational Ambidexterity,True,claude-chat
+W1965594769,PAPER,Paper,STUDIES,paradoxes of innovation,Construct,Managing Paradoxes of Innovation,True,claude-chat
+W2064535528,PAPER,Paper,USES_DATA,62 R&D teams,Dataset,In a sample of 62 research and development (R&D) teams,True,claude-chat
+W2064535528,PAPER,Paper,AT_LEVEL,team,Level,In a sample of 62 research and development (R&D) teams,True,claude-chat
+W2064535528,PAPER,Paper,STUDIES,transformational leadership,Construct,The promise of transformational leadership.,True,claude-chat
+W2064535528,PAPER,Paper,STUDIES,team diversity,Construct,demographic and informational/cognitive team diversity,True,claude-chat
+W2064535528,PAPER,Paper,STUDIES,team performance,Construct,team leaders' longitudinal ratings of team performance,True,claude-chat
+W2064535528,transformational leadership,Construct,MODERATES,team performance,Construct,"examined transformational leadership as a moderator of the relationship of age, nationality, and educational background diversity with team outcomes",True,claude-chat
+W2064535528,nationality diversity,Construct,INCREASES,team performance,Construct,"When levels of transformational leadership were high, nationality and educational diversity were positively related to team leaders' longitudinal ratings of team performance",True,claude-chat
+W2064535528,educational diversity,Construct,INCREASES,team performance,Construct,"When levels of transformational leadership were high, nationality and educational diversity were positively related to team leaders' longitudinal ratings of team performance",True,claude-chat
+W2064535528,age diversity,Construct,DECREASES,team performance,Construct,it was negatively related to team performance when transformational leadership was low,True,claude-chat
+W2064535528,elaboration of task-relevant information,Construct,INCREASES,team performance,Construct,"the elaboration of task-relevant information, which in turn was positively associated with team performance",True,claude-chat
+W2064535528,collective team identification,Construct,INCREASES,elaboration of task-relevant information,Construct,"collective team identification, which in turn was positively related to the elaboration of task-relevant information",True,claude-chat
+W2064535528,transformational leadership,Construct,MODERATES,elaboration of task-relevant information,Construct,Transformational leadership moderated the relationship of the 3 examined diversity dimensions with the elaboration of task-relevant information,True,claude-chat
+W2115638724,PAPER,Paper,USES_METHOD,meta-analysis,Method,we conducted a meta-analysis examining the role of contextual factors in team diversity research,True,claude-chat
+W2115638724,PAPER,Paper,USES_DATA,"8,757 teams in 39 studies",Dataset,"Using data from 8,757 teams in 39 studies conducted in organizational settings",True,claude-chat
+W2115638724,PAPER,Paper,AT_LEVEL,team,Level,Work Team Diversity Research,True,claude-chat
+W2115638724,PAPER,Paper,STUDIES,team diversity,Construct,the role of contextual factors in team diversity research,True,claude-chat
+W2115638724,PAPER,Paper,STUDIES,contextual factors,Construct,the role of contextual factors in team diversity research,True,claude-chat
+W2115638724,PAPER,Paper,STUDIES,relations-oriented diversity,Construct,the performance outcomes of relations-oriented and task-oriented diversity,True,claude-chat
+W2115638724,PAPER,Paper,STUDIES,task-oriented diversity,Construct,the performance outcomes of relations-oriented and task-oriented diversity,True,claude-chat
+W2115638724,team diversity,Construct,ASSOCIATED_WITH,team performance,Construct,The direct effects were very small yet significant,True,claude-chat
+W2115638724,contextual factors,Construct,MODERATES,team performance,Construct,occupation- and industry-level moderators explained significant variance in effect sizes across studies,True,claude-chat
+W2117486603,PAPER,Paper,STUDIES,organizational ambidexterity,Construct,Organizational Ambidexterity: Balancing Exploitation and Exploration for Sustained Performance,True,claude-chat
+W2117486603,PAPER,Paper,STUDIES,exploitation,Construct,Balancing Exploitation and Exploration for Sustained Performance,True,claude-chat
+W2117486603,PAPER,Paper,STUDIES,exploration,Construct,Balancing Exploitation and Exploration for Sustained Performance,True,claude-chat
+W2146435039,PAPER,Paper,USES_THEORY,dialectic perspective,Theory,we apply a dialectic perspective on innovation,True,claude-chat
+W2146435039,PAPER,Paper,STUDIES,innovation,Construct,A Dialectic Perspective on Innovation,True,claude-chat
+W2146435039,PAPER,Paper,STUDIES,organizational ambidexterity,Construct,the concept of organizational ambidexterity,True,claude-chat
+W2146435039,PAPER,Paper,STUDIES,innovation management,Construct,principles of innovation management,True,claude-chat
+W2146435039,PAPER,Paper,AT_LEVEL,individual,Level,"individuals, teams, and organizations need to self-regulate and manage conflicting demands of innovation",True,claude-chat
+W2146435039,PAPER,Paper,AT_LEVEL,team,Level,"individuals, teams, and organizations need to self-regulate and manage conflicting demands of innovation",True,claude-chat
+W2146435039,PAPER,Paper,AT_LEVEL,firm,Level,"individuals, teams, and organizations need to self-regulate and manage conflicting demands of innovation",True,claude-chat
+W2313678682,PAPER,Paper,USES_DATA,83 teams from eight organizations,Dataset,In a study of 83 teams from eight organizations,True,claude-chat
+W2313678682,PAPER,Paper,AT_LEVEL,team,Level,In a study of 83 teams from eight organizations,True,claude-chat
+W2313678682,PAPER,Paper,STUDIES,need for cognition,Construct,The Importance Of Team Members' Need For Cognition,True,claude-chat
+W2313678682,PAPER,Paper,STUDIES,age diversity,Construct,the relationships between both age diversity and educational specialization diversity,True,claude-chat
+W2313678682,PAPER,Paper,STUDIES,educational specialization diversity,Construct,the relationships between both age diversity and educational specialization diversity,True,claude-chat
+W2313678682,PAPER,Paper,STUDIES,team performance,Construct,"collective team identification and, ultimately, team performance",True,claude-chat
+W2313678682,need for cognition,Construct,MODERATES,team performance,Construct,"Age and educational diversity were positively related to these outcomes when team need for cognition was high, rather than low",True,claude-chat
+W2313678682,age diversity,Construct,INCREASES,team performance,Construct,Age and educational diversity were positively related to these outcomes when team need for cognition was high,True,claude-chat
+W2313678682,educational specialization diversity,Construct,INCREASES,team performance,Construct,Age and educational diversity were positively related to these outcomes when team need for cognition was high,True,claude-chat
+W2313678682,elaboration of task-relevant information,Construct,MEDIATES,team performance,Construct,Both the elaboration of task-relevant information and collective team identification mediated a moderating effect of need for cognition,True,claude-chat
+W2313678682,collective team identification,Construct,MEDIATES,team performance,Construct,Both the elaboration of task-relevant information and collective team identification mediated a moderating effect of need for cognition,True,claude-chat
+W3125646472,PAPER,Paper,USES_DATA,Levin et al. survey,Dataset,"cross-sectional survey data on technological opportunity and appropriability conditions--collected over the period 1975 to 1977 for 1,719 business units",True,claude-chat
+W3125646472,PAPER,Paper,USES_DATA,FTC Line of Business Program,Dataset,the Federal Trade Commission's Line of Business Program data,True,claude-chat
+W3125646472,PAPER,Paper,STUDIED_IN,United States,Country,in the American manufacturing sector,True,claude-chat
+W3125646472,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,in the American manufacturing sector,True,claude-chat
+W3125646472,PAPER,Paper,STUDIES,absorptive capacity,Construct,Absorptive Capacity: A New Perspective on Learning and Innovation.,True,claude-chat
+W3125646472,PAPER,Paper,STUDIES,R&D intensity,Construct,A simple model of firm R&D intensity,True,claude-chat
+W3125646472,PAPER,Paper,STUDIES,spillovers,Construct,spillovers will provide a positive incentive to conduct R&D,True,claude-chat
+W3125646472,PAPER,Paper,STUDIES,technological opportunity,Construct,"demand, appropriability, and technological opportunity conditions",True,claude-chat
+W3125646472,PAPER,Paper,STUDIES,appropriability,Construct,"demand, appropriability, and technological opportunity conditions",True,claude-chat
+W3125646472,absorptive capacity,Construct,ASSOCIATED_WITH,R&D investment,Construct,absorptive capacity does appear to be a part of a firm's decisions regarding resource allocation for innovative activity,True,claude-chat
+W3125646472,spillovers,Construct,INCREASES,R&D intensity,Construct,the analysis showing a positive effect of spillovers in two industry groups,True,claude-chat
+W2029969606,PAPER,Paper,USES_METHOD,web survey,Method,Data were collected through a Web survey of U.S. manufacturing firms in various industries,True,claude-chat
+W2029969606,PAPER,Paper,USES_METHOD,confirmatory factor analysis,Method,"The statistical methods used include confirmatory factor analysis and structural equation modeling (i.e., LISREL)",True,claude-chat
+W2029969606,PAPER,Paper,USES_METHOD,structural equation modeling,Method,"The statistical methods used include confirmatory factor analysis and structural equation modeling (i.e., LISREL)",True,claude-chat
+W2029969606,PAPER,Paper,USES_METHOD,LISREL,Method,"structural equation modeling (i.e., LISREL)",True,claude-chat
+W2029969606,PAPER,Paper,STUDIED_IN,United States,Country,a Web survey of U.S. manufacturing firms in various industries,True,claude-chat
+W2029969606,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,a Web survey of U.S. manufacturing firms in various industries,True,claude-chat
+W2029969606,PAPER,Paper,AT_LEVEL,firm,Level,a Web survey of U.S. manufacturing firms in various industries,True,claude-chat
+W2029969606,PAPER,Paper,STUDIES,supply chain collaboration,Construct,Supply chain collaboration: Impact on collaborative advantage and firm performance,True,claude-chat
+W2029969606,PAPER,Paper,STUDIES,collaborative advantage,Construct,Supply chain collaboration: Impact on collaborative advantage and firm performance,True,claude-chat
+W2029969606,PAPER,Paper,STUDIES,firm performance,Construct,Supply chain collaboration: Impact on collaborative advantage and firm performance,True,claude-chat
+W2029969606,supply chain collaboration,Construct,INCREASES,collaborative advantage,Construct,supply chain collaboration improves collaborative advantage,True,claude-chat
+W2029969606,supply chain collaboration,Construct,INCREASES,firm performance,Construct,indeed has a bottom‐line influence on firm performance,True,claude-chat
+W2029969606,collaborative advantage,Construct,MEDIATES,firm performance,Construct,collaborative advantage completely mediates the relationship between supply chain collaboration and firm performance for small firms,True,claude-chat
+W2029969606,firm size,Construct,MODERATES,firm performance,Construct,A further analysis of the moderation effect of firm size reveals that collaborative advantage completely mediates the relationship,True,claude-chat
+W1974963036,PAPER,Paper,USES_DATA,Urban Audit,Dataset,the most recent version of the Urban Audit data set,True,claude-chat
+W1974963036,PAPER,Paper,USES_METHOD,statistical analysis,Method,Our statistical and graphical analyses exploit in depth,True,claude-chat
+W1974963036,PAPER,Paper,STUDIED_IN,Europe,Country,Smart Cities in Europe,True,claude-chat
+W1974963036,PAPER,Paper,STUDIES,smart city,Construct,the often elusive definition of the concept of the “smart city.”,True,claude-chat
+W1974963036,PAPER,Paper,STUDIES,urban performance,Construct,Urban performance currently depends not only on a city's endowment of hard infrastructure,True,claude-chat
+W1974963036,PAPER,Paper,STUDIES,urban wealth,Construct,are all positively correlated with urban wealth,True,claude-chat
+W1974963036,creative class,Construct,ASSOCIATED_WITH,urban wealth,Construct,"We find that the presence of a creative class, the quality of and dedicated attention to the urban environment",True,claude-chat
+W1974963036,urban environment quality,Construct,ASSOCIATED_WITH,urban wealth,Construct,"the urban environment, the level of education, and the accessibility to and use of ICTs for public administration are all positively correlated with urban wealth",True,claude-chat
+W1974963036,education level,Construct,ASSOCIATED_WITH,urban wealth,Construct,"the level of education, and the accessibility to and use of ICTs for public administration are all positively correlated with urban wealth",True,claude-chat
+W1974963036,ICT use in public administration,Construct,ASSOCIATED_WITH,urban wealth,Construct,the accessibility to and use of ICTs for public administration are all positively correlated with urban wealth,True,claude-chat
+W2092098860,PAPER,Paper,USES_DATA,KLD ratings,Dataset,the natural environment ratings data from Kinder Lydenberg Domini (KLD) Inc.,True,claude-chat
+W2092098860,PAPER,Paper,USES_DATA,78 Fortune 1000 companies,Dataset,for 78 Fortune 1000 companies,True,claude-chat
+W2092098860,PAPER,Paper,AT_LEVEL,firm,Level,for 78 Fortune 1000 companies,True,claude-chat
+W2092098860,PAPER,Paper,STUDIES,board composition,Construct,the relationship between boards of directors’ composition and environmental corporate social responsibility (ECSR),True,claude-chat
+W2092098860,PAPER,Paper,STUDIES,environmental corporate social responsibility,Construct,the relationship between boards of directors’ composition and environmental corporate social responsibility (ECSR),True,claude-chat
+W2092098860,outside directors,Construct,INCREASES,environmental corporate social responsibility,Construct,a higher proportion of outside board directors is associated with more favorable ECSR and higher KLD strengths scores,True,claude-chat
+W2092098860,female directors,Construct,INCREASES,environmental corporate social responsibility,Construct,Firms with boards composed of three or more female directors received higher KLD strengths scores,True,claude-chat
+W2092098860,Western European directors,Construct,INCREASES,environmental governance,Construct,those with a higher proportion of Western European directors are more likely to implement environmental governance structures or processes,True,claude-chat
+W2092098860,director age,Construct,ASSOCIATED_WITH,environmental governance,Construct,boards whose directors average closer to 56 years in age,True,claude-chat
+W2123841895,PAPER,Paper,USES_METHOD,literature review,Method,"We review the paradox literature, categorizing types and highlighting fundamental debates",True,claude-chat
+W2123841895,PAPER,Paper,USES_THEORY,paradox theory,Theory,TOWARD A THEORY OF PARADOX,True,claude-chat
+W2123841895,PAPER,Paper,STUDIES,paradoxical tensions,Construct,cyclical responses to paradoxical tensions enable sustainability,True,claude-chat
+W2123841895,PAPER,Paper,STUDIES,sustainability,Construct,cyclical responses to paradoxical tensions enable sustainability,True,claude-chat
+W2123841895,PAPER,Paper,STUDIES,dynamic equilibrium,Construct,A DYNAMIC EQUILIBRIUM MODEL OF ORGANIZING.,True,claude-chat
+W2169521630,PAPER,Paper,STUDIES,organizational learning,Construct,Organizational Learning: From Experience to Knowledge,True,claude-chat
+W2169521630,PAPER,Paper,STUDIES,organizational experience,Construct,organizational experience interacts with the context to create knowledge,True,claude-chat
+W2169521630,PAPER,Paper,STUDIES,knowledge creation,Construct,organizational experience interacts with the context to create knowledge,True,claude-chat
+W2169521630,PAPER,Paper,STUDIES,context,Construct,The context is conceived as having both a latent component and an active component,True,claude-chat
+W2038520498,PAPER,Paper,USES_METHOD,laboratory experiment,Method,Results of a laboratory experiment support the hypothesized interaction,True,claude-chat
+W2038520498,PAPER,Paper,AT_LEVEL,team,Level,Fostering team creativity,True,claude-chat
+W2038520498,PAPER,Paper,STUDIES,team creativity,Construct,Fostering team creativity,True,claude-chat
+W2038520498,PAPER,Paper,STUDIES,diversity,Construct,Perspective taking as key to unlocking diversity's potential.,True,claude-chat
+W2038520498,PAPER,Paper,STUDIES,perspective taking,Construct,Perspective taking as key to unlocking diversity's potential.,True,claude-chat
+W2038520498,PAPER,Paper,STUDIES,information elaboration,Construct,perspective taking helps realize the creative benefits of diversity of perspectives by fostering information elaboration,True,claude-chat
+W2038520498,perspective taking,Construct,MODERATES,team creativity,Construct,the hypothesized interaction between diversity and perspective taking on team creativity,True,claude-chat
+W2038520498,diversity,Construct,INCREASES,team creativity,Construct,Diverse teams performed more creatively than homogeneous teams when they engaged in perspective taking,True,claude-chat
+W2038520498,information elaboration,Construct,MEDIATES,team creativity,Construct,Team information elaboration was found to mediate this moderated effect,True,claude-chat
+W2083046711,PAPER,Paper,USES_METHOD,panel data analysis,Method,A panel data investigation,True,claude-chat
+W2083046711,PAPER,Paper,USES_DATA,"S&P 1,500 top management teams",Dataset,"15 years of panel data on the top management teams of the S&P 1,500 firms",True,claude-chat
+W2083046711,PAPER,Paper,AT_LEVEL,firm,Level,"the top management teams of the S&P 1,500 firms",True,claude-chat
+W2083046711,PAPER,Paper,STUDIES,female representation in top management,Construct,Does female representation in top management improve firm performance?,True,claude-chat
+W2083046711,PAPER,Paper,STUDIES,firm performance,Construct,Does female representation in top management improve firm performance?,True,claude-chat
+W2083046711,PAPER,Paper,STUDIES,gender diversity,Construct,the informational and social benefits of gender diversity,True,claude-chat
+W2083046711,female representation in top management,Construct,INCREASES,firm performance,Construct,female representation in top management improves firm performance but only to the extent that a firm's strategy is focused on innovation,True,claude-chat
+W2083046711,innovation strategy,Construct,MODERATES,firm performance,Construct,improves firm performance but only to the extent that a firm's strategy is focused on innovation,True,claude-chat
+W2086973855,PAPER,Paper,USES_METHOD,hierarchical linear modeling,Method,Hierarchical linear modeling results using 316 employees on 68 teams from Chinese companies,True,claude-chat
+W2086973855,PAPER,Paper,USES_DATA,316 employees on 68 teams,Dataset,using 316 employees on 68 teams from Chinese companies,True,claude-chat
+W2086973855,PAPER,Paper,STUDIED_IN,China,Country,316 employees on 68 teams from Chinese companies,True,claude-chat
+W2086973855,PAPER,Paper,AT_LEVEL,individual,Level,Cognitive Team Diversity and Individual Team Member Creativity: A Cross-Level Interaction,True,claude-chat
+W2086973855,PAPER,Paper,AT_LEVEL,team,Level,Cognitive Team Diversity and Individual Team Member Creativity: A Cross-Level Interaction,True,claude-chat
+W2086973855,PAPER,Paper,STUDIES,cognitive team diversity,Construct,Cognitive Team Diversity and Individual Team Member Creativity,True,claude-chat
+W2086973855,PAPER,Paper,STUDIES,individual creativity,Construct,Cognitive Team Diversity and Individual Team Member Creativity,True,claude-chat
+W2086973855,creative self-efficacy,Construct,MODERATES,individual creativity,Construct,a team member's creative self-efficacy moderated the relationship between cognitive team diversity and individual creativity,True,claude-chat
+W2086973855,transformational leadership,Construct,MODERATES,individual creativity,Construct,cognitive team diversity was positively related to individual creativity only when transformational leadership was high,True,claude-chat
+W2086973855,cognitive team diversity,Construct,INCREASES,individual creativity,Construct,this relationship was positive only when creative self-efficacy was high,True,claude-chat
+W2158378292,PAPER,Paper,AT_LEVEL,team,Level,The Benefits of Climate for Inclusion for Gender-Diverse Groups,True,claude-chat
+W2158378292,PAPER,Paper,STUDIES,climate for inclusion,Construct,I introduce the construct of climate for inclusion,True,claude-chat
+W2158378292,PAPER,Paper,STUDIES,gender diversity,Construct,gender diversity is associated with lower levels of conflict,True,claude-chat
+W2158378292,PAPER,Paper,STUDIES,conflict,Construct,gender diversity is associated with lower levels of conflict,True,claude-chat
+W2158378292,PAPER,Paper,STUDIES,unit-level satisfaction,Construct,the negative effect that group conflict typically has on unit-level satisfaction disappears,True,claude-chat
+W2158378292,climate for inclusion,Construct,MODERATES,conflict,Construct,"within inclusive climates, interpersonal bias is reduced in such a way that gender diversity is associated with lower levels of conflict",True,claude-chat
+W2158378292,gender diversity,Construct,DECREASES,conflict,Construct,"within inclusive climates, interpersonal bias is reduced in such a way that gender diversity is associated with lower levels of conflict",True,claude-chat
+W2158378292,climate for inclusion,Construct,MODERATES,unit-level satisfaction,Construct,the negative effect that group conflict typically has on unit-level satisfaction disappears,True,claude-chat
+W2158378292,unit-level satisfaction,Construct,DECREASES,turnover,Construct,unit-level satisfaction is negatively associated with turnover in groups,True,claude-chat
+W1545818590,PAPER,Paper,USES_METHOD,meta-analysis,Method,Organizational Culture and Innovation: A Meta‐Analytic Review,True,claude-chat
+W1545818590,PAPER,Paper,USES_DATA,43 studies of 6341 organizations,Dataset,43 studies with a combined sample size of 6341 organizations,True,claude-chat
+W1545818590,PAPER,Paper,USES_THEORY,Competing Values Framework,Theory,Quinn and Rohrbaugh's Competing Values Framework provides a meaningful structure,True,claude-chat
+W1545818590,PAPER,Paper,USES_THEORY,control theory,Theory,Control theory is used to explain the relationship of organizational culture and innovation,True,claude-chat
+W1545818590,PAPER,Paper,AT_LEVEL,firm,Level,a combined sample size of 6341 organizations,True,claude-chat
+W1545818590,PAPER,Paper,STUDIES,organizational culture,Construct,The relationship of organizational culture and innovation,True,claude-chat
+W1545818590,PAPER,Paper,STUDIES,organizational innovation,Construct,to assess their relationship with organizational innovation,True,claude-chat
+W1545818590,developmental culture,Construct,ASSOCIATED_WITH,organizational innovation,Construct,managers of innovative organizations most likely implement a developmental culture,True,claude-chat
+W1545818590,hierarchical culture,Construct,ASSOCIATED_WITH,organizational innovation,Construct,Hierarchical cultures emphasize control and an internal orientation and are less likely to be found in innovative organizations,True,claude-chat
+W1997726814,PAPER,Paper,USES_METHOD,econometric analysis,Method,Based on econometric analysis of data from a UK innovation survey,True,claude-chat
+W1997726814,PAPER,Paper,USES_DATA,UK innovation survey,Dataset,data from a UK innovation survey,True,claude-chat
+W1997726814,PAPER,Paper,STUDIED_IN,United Kingdom,Country,data from a UK innovation survey,True,claude-chat
+W1997726814,PAPER,Paper,AT_LEVEL,firm,Level,the strength of the firms’ appropriability strategies,True,claude-chat
+W1997726814,PAPER,Paper,STUDIES,paradox of openness,Construct,"The paradox of openness: Appropriability, external search and collaboration",True,claude-chat
+W1997726814,PAPER,Paper,STUDIES,appropriability,Construct,"The paradox of openness: Appropriability, external search and collaboration",True,claude-chat
+W1997726814,PAPER,Paper,STUDIES,open innovation,Construct,the literature on open innovation and innovation strategy,True,claude-chat
+W1997726814,appropriability strategy,Construct,ASSOCIATED_WITH,external search breadth,Construct,"we find a concave relationship between firms’ breadth of external search and formal collaboration for innovation, and the strength of the firms’ appropriability strategies",True,claude-chat
+W1997726814,appropriability strategy,Construct,ASSOCIATED_WITH,formal collaboration breadth,Construct,"we find a concave relationship between firms’ breadth of external search and formal collaboration for innovation, and the strength of the firms’ appropriability strategies",True,claude-chat
+W2050362133,PAPER,Paper,USES_METHOD,grounded theory,Method,we present a grounded theory of motivation,True,claude-chat
+W2050362133,PAPER,Paper,USES_METHOD,semistructured interviews,Method,By performing 83 semistructured interviews,True,claude-chat
+W2050362133,PAPER,Paper,USES_METHOD,qualitative study,Method,the first cross-platform qualitative study of the crowdfunding community,True,claude-chat
+W2050362133,PAPER,Paper,USES_DATA,83 semistructured interviews,Dataset,By performing 83 semistructured interviews,True,claude-chat
+W2050362133,PAPER,Paper,AT_LEVEL,individual,Level,what drives people to either create or fund these projects,True,claude-chat
+W2050362133,PAPER,Paper,STUDIES,crowdfunding,Construct,Crowdfunding: Motivations and deterrents for participation,True,claude-chat
+W2050362133,PAPER,Paper,STUDIES,motivation,Construct,Crowdfunding: Motivations and deterrents for participation,True,claude-chat
+W2050362133,fear of failure,Construct,DECREASES,crowdfunding participation,Construct,"deterrents to crowdfunding participation, including, among creators, fear of failure",True,claude-chat
+W2050362133,lack of trust,Construct,DECREASES,crowdfunding participation,Construct,"deterrents to crowdfunding participation, including, among creators, fear of failure, and, for supporters, lack of trust",True,claude-chat
+W2106460825,PAPER,Paper,USES_METHOD,literature review,Method,A Review of Research on Open Innovation,True,claude-chat
+W2106460825,PAPER,Paper,USES_DATA,291 open innovation publications,Dataset,A review of 291 open innovation‐related publications from these sources,True,claude-chat
+W2106460825,PAPER,Paper,STUDIES,open innovation,Construct,A Review of Research on Open Innovation,True,claude-chat
+W2106460825,PAPER,Paper,STUDIES,external sources of innovation,Construct,Leveraging External Sources of Innovation,True,claude-chat
+W2106460825,PAPER,Paper,STUDIES,business models,Construct,a tendency to ignore the importance of business models,True,claude-chat
+W2150694466,PAPER,Paper,STUDIES,microfoundations,Construct,What Are Microfoundations?,True,claude-chat
+W2150694466,PAPER,Paper,STUDIES,social aggregation,Construct,questions of social aggregation and emergence need to be center stage,True,claude-chat
+W2150694466,PAPER,Paper,STUDIES,emergence,Construct,questions of social aggregation and emergence need to be center stage,True,claude-chat
+W2150694466,PAPER,Paper,STUDIES,capabilities,Construct,the origins of capabilities and competitive advantage,True,claude-chat
+W2150694466,PAPER,Paper,STUDIES,competitive advantage,Construct,the origins of capabilities and competitive advantage,True,claude-chat
+W2034909844,PAPER,Paper,USES_METHOD,literature review,Method,Dynamic Managerial Capabilities: Review and Assessment of Managerial Impact on Strategic Change,True,claude-chat
+W2034909844,PAPER,Paper,STUDIES,dynamic managerial capabilities,Construct,Dynamic Managerial Capabilities: Review and Assessment of Managerial Impact on Strategic Change,True,claude-chat
+W2034909844,PAPER,Paper,STUDIES,managerial cognition,Construct,"managerial cognition, managerial social capital, and managerial human capital",True,claude-chat
+W2034909844,PAPER,Paper,STUDIES,managerial social capital,Construct,"managerial cognition, managerial social capital, and managerial human capital",True,claude-chat
+W2034909844,PAPER,Paper,STUDIES,managerial human capital,Construct,"managerial cognition, managerial social capital, and managerial human capital",True,claude-chat
+W2034909844,PAPER,Paper,STUDIES,strategic change,Construct,"the relationship between the quality of managerial decisions, strategic change, and organizational performance",True,claude-chat
+W2034909844,PAPER,Paper,AT_LEVEL,individual,Level,managers differ in their impact on strategic change and firm performance,True,claude-chat
+W1537386724,PAPER,Paper,USES_DATA,Fortune 500 CEOs and boards,Dataset,Using a dataset of all Fortune 500 CEOs and boards of directors for a ten‐year period,True,claude-chat
+W1537386724,PAPER,Paper,AT_LEVEL,firm,Level,the corporate environmental strategies of organizations,True,claude-chat
+W1537386724,PAPER,Paper,STUDIES,women leaders,Construct,the impact women leaders have on the corporate environmental strategies of organizations,True,claude-chat
+W1537386724,PAPER,Paper,STUDIES,board gender diversity,Construct,the proportion of women on the BOD,True,claude-chat
+W1537386724,PAPER,Paper,STUDIES,environmental strategy,Construct,we examine several aspects of gender in leadership on environmental strategy,True,claude-chat
+W1537386724,PAPER,Paper,STUDIES,environmental performance,Construct,Analyzing the Effect of Corporate Governance Composition on Environmental Performance,True,claude-chat
+W1537386724,gender diverse leadership,Construct,INCREASES,environmental strategy,Construct,firms characterized by gender diverse leadership teams are more effective than other firms at pursuing environmentally friendly strategies,True,claude-chat
+W1889273139,PAPER,Paper,USES_METHOD,literature review,Method,"we review variables moderating the effects of workplace diversity on social integration, performance, and well-being outcomes",True,claude-chat
+W1889273139,PAPER,Paper,USES_THEORY,categorization-elaboration model,Theory,Using the Categorization-Elaboration Model as our theoretical lens,True,claude-chat
+W1889273139,PAPER,Paper,STUDIES,workplace diversity,Construct,What moderates the effects of workplace diversity?,True,claude-chat
+W1889273139,PAPER,Paper,STUDIES,social integration,Construct,"the effects of workplace diversity on social integration, performance, and well-being outcomes",True,claude-chat
+W1889273139,PAPER,Paper,STUDIES,well-being,Construct,"the effects of workplace diversity on social integration, performance, and well-being outcomes",True,claude-chat
+W1993502890,PAPER,Paper,USES_DATA,seven crowd science projects,Dataset,Analyzing data on seven different projects,True,claude-chat
+W1993502890,PAPER,Paper,AT_LEVEL,individual,Level,Analyzing user-level data,True,claude-chat
+W1993502890,PAPER,Paper,STUDIES,crowd science,Construct,Crowd science user contribution patterns and their implications,True,claude-chat
+W1993502890,PAPER,Paper,STUDIES,volunteer contributions,Construct,the effort contributions volunteers are willing to make to crowd science projects,True,claude-chat
+W1993502890,outreach efforts,Construct,INCREASES,volunteer contributions,Construct,spikes typically resulting from outreach efforts or media attention,True,claude-chat
+W1993502890,media attention,Construct,INCREASES,volunteer contributions,Construct,spikes typically resulting from outreach efforts or media attention,True,claude-chat
+W1993502890,top contributor status,Construct,ASSOCIATED_WITH,work speed,Construct,top contributors also tend to work faster,True,claude-chat
+W1994034555,PAPER,Paper,USES_METHOD,meta-analysis,Method,Empirical evidence from a meta-analysis based on 108 primary studies from 42 countries supports our hypotheses,True,claude-chat
+W1994034555,PAPER,Paper,USES_DATA,108 primary studies,Dataset,a meta-analysis based on 108 primary studies from 42 countries,True,claude-chat
+W1994034555,PAPER,Paper,AT_LEVEL,firm,Level,Innovation Input and Output in Family Firms,True,claude-chat
+W1994034555,PAPER,Paper,STUDIES,family firms,Construct,Innovation Input and Output in Family Firms,True,claude-chat
+W1994034555,PAPER,Paper,STUDIES,innovation input,Construct,Innovation Input and Output in Family Firms,True,claude-chat
+W1994034555,PAPER,Paper,STUDIES,innovation output,Construct,Innovation Input and Output in Family Firms,True,claude-chat
+W1994034555,family firm,Construct,DECREASES,innovation input,Construct,invest less in innovation but have an increased conversion rate of innovation input into output,True,claude-chat
+W1994034555,family firm,Construct,INCREASES,innovation output,Construct,"invest less in innovation but have an increased conversion rate of innovation input into output and, ultimately, a higher innovation output than nonfamily firms",True,claude-chat
+W1994034555,later-generation family CEO,Construct,MODERATES,innovation output,Construct,the observed effects are even stronger when the CEO of the family firm is a later-generation family member,True,claude-chat
+W1994034555,founder CEO,Construct,INCREASES,innovation input,Construct,"when the CEO of the family firm is the firm’s founder, innovation input is higher",True,claude-chat
+W1994034555,founder CEO,Construct,DECREASES,innovation output,Construct,innovation output is lower than that in other firms,True,claude-chat
+W1994034555,minority shareholder protection,Construct,MODERATES,innovation output,Construct,the level of minority shareholder protection and the education level of the workforce in the country,True,claude-chat
+W1994034555,workforce education,Construct,MODERATES,innovation output,Construct,the level of minority shareholder protection and the education level of the workforce in the country,True,claude-chat
+W3124618612,PAPER,Paper,USES_DATA,Chinese firms that committed securities fraud,Dataset,data from a large sample of Chinese firms that committed securities fraud,True,claude-chat
+W3124618612,PAPER,Paper,STUDIED_IN,China,Country,a large sample of Chinese firms that committed securities fraud,True,claude-chat
+W3124618612,PAPER,Paper,AT_LEVEL,firm,Level,a large sample of Chinese firms that committed securities fraud,True,claude-chat
+W3124618612,PAPER,Paper,STUDIES,board gender diversity,Construct,the effect of board of director gender diversity on the broad spectrum of securities fraud,True,claude-chat
+W3124618612,PAPER,Paper,STUDIES,securities fraud,Construct,Gender Diversity and Securities Fraud,True,claude-chat
+W3124618612,board gender diversity,Construct,DECREASES,securities fraud,Construct,gender diversity on boards can operate as a significant moderator for the frequency of fraud,True,claude-chat
+W3124618612,board gender diversity,Construct,DECREASES,stock market reaction to fraud,Construct,the stock market response to fraud from a more gender-diverse board is significantly less pronounced,True,claude-chat
+W3124618612,male-dominated industry,Construct,MODERATES,securities fraud,Construct,women are more effective in male-dominated industries in reducing both the frequency and severity of fraud,True,claude-chat
+W4247276882,PAPER,Paper,STUDIES,microfoundations,Construct,The Microfoundations Movement in Strategy and Organization Theory,True,claude-chat
+W4247276882,PAPER,Paper,STUDIES,macro management,Construct,the unique features of the microfoundations movement in macro management,True,claude-chat
+W2254055897,PAPER,Paper,USES_METHOD,longitudinal analysis,Method,Gender and Environmental Sustainability: A Longitudinal Analysis,True,claude-chat
+W2254055897,PAPER,Paper,USES_DATA,296 US publicly traded firms,Dataset,"Based on a sample of 296 firms, drawn from the population of US publicly traded firms",True,claude-chat
+W2254055897,PAPER,Paper,STUDIED_IN,United States,Country,the population of US publicly traded firms,True,claude-chat
+W2254055897,PAPER,Paper,AT_LEVEL,firm,Level,Based on a sample of 296 firms,True,claude-chat
+W2254055897,PAPER,Paper,STUDIES,gender diversity,Construct,the relationship between gender and environmental sustainability,True,claude-chat
+W2254055897,PAPER,Paper,STUDIES,board gender diversity,Construct,more gender diverse boards of directors,True,claude-chat
+W2254055897,PAPER,Paper,STUDIES,environmental sustainability,Construct,the relationship between gender and environmental sustainability,True,claude-chat
+W2254055897,demographic gender diversity,Construct,ASSOCIATED_WITH,environmental sustainability,Construct,both ‘demographic’ and ‘structural’ gender diversity are significant predictors of a firm's environmental sustainability initiatives,True,claude-chat
+W2254055897,structural gender diversity,Construct,ASSOCIATED_WITH,environmental sustainability,Construct,both ‘demographic’ and ‘structural’ gender diversity are significant predictors of a firm's environmental sustainability initiatives,True,claude-chat
+W2289522766,PAPER,Paper,USES_METHOD,bibliometric analysis,Method,A Bibliometric Review of Open Innovation,True,claude-chat
+W2289522766,PAPER,Paper,USES_METHOD,co-citation analysis,Method,combining two complementary bibliometric methods of co‐citation analysis and text mining,True,claude-chat
+W2289522766,PAPER,Paper,USES_METHOD,text mining,Method,co‐citation analysis and text mining of 321 journal articles on OI,True,claude-chat
+W2289522766,PAPER,Paper,USES_DATA,321 journal articles on open innovation,Dataset,text mining of 321 journal articles on OI,True,claude-chat
+W2289522766,PAPER,Paper,STUDIES,open innovation,Construct,review of the literature on open innovation (OI),True,claude-chat
+W2289522766,PAPER,Paper,STUDIES,OI networks,Construct,(2) management of OI networks,True,claude-chat
+W2289522766,PAPER,Paper,STUDIES,user communities,Construct,(3) role of users and communities in OI,True,claude-chat
+W2332175428,PAPER,Paper,USES_METHOD,meta-analysis,Method,A State-of-the-Art Review and Meta-Analysis,True,claude-chat
+W2332175428,PAPER,Paper,USES_DATA,"30 studies of 496,740 workers",Dataset,"this study analyzes 30 qualified studies (N = 496,740 workers)",True,claude-chat
+W2332175428,PAPER,Paper,STUDIES,diversity management,Construct,The Promise of Diversity Management for Climate of Inclusion,True,claude-chat
+W2332175428,PAPER,Paper,STUDIES,climate of inclusion,Construct,The Promise of Diversity Management for Climate of Inclusion,True,claude-chat
+W2332175428,PAPER,Paper,STUDIES,organizational diversity,Construct,"a theory-based conceptual model of organizational diversity, climate of inclusion, and beneficial/detrimental outcomes",True,claude-chat
+W2332175428,diversity management,Construct,ASSOCIATED_WITH,beneficial outcomes,Construct,diversity management efforts that promote a climate of inclusion are consistently associated with positive outcomes,True,claude-chat
+W2332175428,climate of inclusion,Construct,ASSOCIATED_WITH,beneficial outcomes,Construct,diversity management efforts that promote a climate of inclusion are consistently associated with positive outcomes,True,claude-chat
+W2332175428,diversity,Construct,ASSOCIATED_WITH,detrimental outcomes,Construct,diversity is associated with both beneficial and detrimental outcomes,True,claude-chat
+W2345504508,PAPER,Paper,USES_METHOD,meta-analysis,Method,"Our meta–analysis, which includes 55 empirical samples and 8,892 observations",True,claude-chat
+W2345504508,PAPER,Paper,USES_DATA,55 empirical samples,Dataset,"which includes 55 empirical samples and 8,892 observations",True,claude-chat
+W2345504508,PAPER,Paper,USES_THEORY,upper echelon theory,Theory,Upper echelon theory highlights the importance of top management teams,True,claude-chat
+W2345504508,PAPER,Paper,AT_LEVEL,team,Level,the composition of entrepreneurial teams and its effects on performance,True,claude-chat
+W2345504508,PAPER,Paper,STUDIES,entrepreneurial team composition,Construct,Entrepreneurial Team Composition Characteristics and New Venture Performance,True,claude-chat
+W2345504508,PAPER,Paper,STUDIES,new venture performance,Construct,Entrepreneurial Team Composition Characteristics and New Venture Performance,True,claude-chat
+W2345504508,PAPER,Paper,STUDIES,team heterogeneity,Construct,"(i.e., aggregated, heterogeneity, team size)",True,claude-chat
+W2345504508,PAPER,Paper,STUDIES,team size,Construct,"(i.e., aggregated, heterogeneity, team size)",True,claude-chat
+W2345504508,entrepreneurial team composition,Construct,ASSOCIATED_WITH,new venture performance,Construct,finds significant and unique effects of entrepreneurial team characteristics on new ventures,True,claude-chat
+W2388878075,PAPER,Paper,STUDIES,innovation policy,Construct,a new framework for innovation policy,True,claude-chat
+W2388878075,PAPER,Paper,STUDIES,market creation,Construct,Market creation has characterized the kind of mission-oriented investments,True,claude-chat
+W2388878075,PAPER,Paper,STUDIES,mission-oriented innovation,Construct,Mission-oriented innovation has required public agencies,True,claude-chat
+W2388878075,PAPER,Paper,STUDIES,inclusive growth,Construct,smart growth can also result in inclusive growth,True,claude-chat
+W2409365872,PAPER,Paper,USES_METHOD,content analysis,Method,content analysis is undertaken to analyse the extent of CSR disclosures in annual reports,True,claude-chat
+W2409365872,PAPER,Paper,USES_METHOD,panel regression,Method,Regression analysis using panel data is used,True,claude-chat
+W2409365872,PAPER,Paper,USES_METHOD,longitudinal study,Method,The quantitative analysis involving a longitudinal study is used,True,claude-chat
+W2409365872,PAPER,Paper,USES_DATA,annual reports,Dataset,the extent of CSR disclosures in annual reports,True,claude-chat
+W2409365872,PAPER,Paper,USES_DATA,top 150 listed Australian companies,Dataset,among the top 150 listed companies in Australia over a three-year period,True,claude-chat
+W2409365872,PAPER,Paper,STUDIED_IN,Australia,Country,Board diversity and CSR reporting: an Australian study,True,claude-chat
+W2409365872,PAPER,Paper,AT_LEVEL,firm,Level,among the top 150 listed companies in Australia,True,claude-chat
+W2409365872,PAPER,Paper,STUDIES,board diversity,Construct,Board diversity and CSR reporting,True,claude-chat
+W2409365872,PAPER,Paper,STUDIES,CSR reporting,Construct,Board diversity and CSR reporting,True,claude-chat
+W2409365872,board gender diversity,Construct,ASSOCIATED_WITH,CSR reporting,Construct,"three of the board diversity attributes (gender, tenure and multiple directorships) and the overall diversity measure have the potential to influence CSR reporting",True,claude-chat
+W2409365872,director tenure,Construct,ASSOCIATED_WITH,CSR reporting,Construct,"three of the board diversity attributes (gender, tenure and multiple directorships) and the overall diversity measure have the potential to influence CSR reporting",True,claude-chat
+W2409365872,multiple directorships,Construct,ASSOCIATED_WITH,CSR reporting,Construct,"three of the board diversity attributes (gender, tenure and multiple directorships) and the overall diversity measure have the potential to influence CSR reporting",True,claude-chat
+W2409365872,board diversity,Construct,ASSOCIATED_WITH,CSR reporting,Construct,the overall diversity measure have the potential to influence CSR reporting,True,claude-chat
+W2409365872,firm size,Construct,ASSOCIATED_WITH,CSR disclosure,Construct,"three of the control variables (firm size, industry and CEO duality) are found to have some influence on CSR disclosure",True,claude-chat
+W2409365872,CEO duality,Construct,ASSOCIATED_WITH,CSR disclosure,Construct,"three of the control variables (firm size, industry and CEO duality) are found to have some influence on CSR disclosure",True,claude-chat
+W2409365872,board size,Construct,NO_EFFECT_ON,CSR disclosure,Construct,board size and profitability are found to be insignificant,True,claude-chat
+W2409365872,profitability,Construct,NO_EFFECT_ON,CSR disclosure,Construct,board size and profitability are found to be insignificant,True,claude-chat
+W2414213196,PAPER,Paper,USES_METHOD,meta-analysis,Method,We test predictions from this framework using meta-analytic techniques,True,claude-chat
+W2414213196,PAPER,Paper,USES_DATA,146 primary studies,Dataset,a sample of 146 primary studies conducted in 33 different countries,True,claude-chat
+W2414213196,PAPER,Paper,AT_LEVEL,firm,Level,might affect firm performance,True,claude-chat
+W2414213196,PAPER,Paper,STUDIES,female representation in upper echelons,Construct,"female representation in the upper echelons (i.e., top management teams and chief executive officer positions)",True,claude-chat
+W2414213196,PAPER,Paper,STUDIES,firm performance,Construct,might affect firm performance,True,claude-chat
+W2414213196,female representation in upper echelons,Construct,INCREASES,long-term financial performance,Construct,female representation in the upper echelons in general is positively and weakly related to forms of long-term financial performance,True,claude-chat
+W2414213196,female representation in upper echelons,Construct,DECREASES,short-term stock market returns,Construct,but negatively and weakly related to short-term stock market returns,True,claude-chat
+W2414213196,reduced strategic risk-taking,Construct,MEDIATES,financial performance,Construct,reduced strategic risk-taking is a mediating mechanism that explains why financial performance is improved,True,claude-chat
+W2414213196,executive decision latitude,Construct,MODERATES,financial performance,Construct,financial performance improvements are accentuated in environmental and organizational contexts that provide greater decision latitude to executives,True,claude-chat
+W2584772404,PAPER,Paper,USES_METHOD,literature review,Method,The authors review the evolution of team research over the past century,True,claude-chat
+W2584772404,PAPER,Paper,USES_DATA,Journal of Applied Psychology,Dataset,A century of work teams in the Journal of Applied Psychology.,True,claude-chat
+W2584772404,PAPER,Paper,AT_LEVEL,team,Level,a focus on the team itself and larger systems of teams,True,claude-chat
+W2584772404,PAPER,Paper,STUDIES,work teams,Construct,A century of work teams in the Journal of Applied Psychology.,True,claude-chat
+W2584772404,PAPER,Paper,STUDIES,team composition,Construct,the roles of team members' characteristics and composition,True,claude-chat
+W2584772404,PAPER,Paper,STUDIES,team dynamics,Construct,team dynamics in terms of processes and emergent states,True,claude-chat
+W2586315688,PAPER,Paper,STUDIES,innovation policy,Construct,"Innovation policy: what, why, and how",True,claude-chat
+W2625945284,PAPER,Paper,USES_THEORY,social exchange theory,Theory,Drawing on the social exchange theory,True,claude-chat
+W2625945284,PAPER,Paper,USES_THEORY,social categorization theory,Theory,based on the social categorization theory,True,claude-chat
+W2625945284,PAPER,Paper,USES_METHOD,field study,Method,a field study of 621 employees nested among 70 teams,True,claude-chat
+W2625945284,PAPER,Paper,USES_METHOD,quasi-experiment,Method,A quasi-experimental study of 104 international students nested in 24 teams,True,claude-chat
+W2625945284,PAPER,Paper,USES_DATA,621 employees in 70 teams,Dataset,a field study of 621 employees nested among 70 teams,True,claude-chat
+W2625945284,PAPER,Paper,USES_DATA,104 international students in 24 teams,Dataset,A quasi-experimental study of 104 international students nested in 24 teams,True,claude-chat
+W2625945284,PAPER,Paper,AT_LEVEL,individual,Level,"Cultural intelligence, knowledge hiding, and individual and team creativity",True,claude-chat
+W2625945284,PAPER,Paper,AT_LEVEL,team,Level,"Cultural intelligence, knowledge hiding, and individual and team creativity",True,claude-chat
+W2625945284,PAPER,Paper,STUDIES,knowledge hiding,Construct,"Cultural intelligence, knowledge hiding, and individual and team creativity",True,claude-chat
+W2625945284,PAPER,Paper,STUDIES,cultural intelligence,Construct,"Cultural intelligence, knowledge hiding, and individual and team creativity",True,claude-chat
+W2625945284,knowledge hiding,Construct,DECREASES,individual creativity,Construct,individual knowledge hiding is negatively related to individual creativity,True,claude-chat
+W2625945284,cultural intelligence,Construct,MODERATES,individual creativity,Construct,cultural intelligence moderates the relationship between knowledge hiding and creativity at an individual level,True,claude-chat
+W2625945284,knowledge hiding,Construct,DECREASES,team creativity,Construct,individual knowledge hiding is also negatively related to team creativity,True,claude-chat
+W2765820910,PAPER,Paper,USES_METHOD,literature review,Method,develops a framework for knowledge management and decision-making style by reviewing existing management literature,True,claude-chat
+W2765820910,PAPER,Paper,STUDIES,knowledge management,Construct,"Knowledge management, decision-making style and organizational performance",True,claude-chat
+W2765820910,PAPER,Paper,STUDIES,decision-making style,Construct,"Knowledge management, decision-making style and organizational performance",True,claude-chat
+W2765820910,PAPER,Paper,STUDIES,organizational performance,Construct,"Knowledge management, decision-making style and organizational performance",True,claude-chat
+W2765820910,PAPER,Paper,STUDIES,knowledge creation process,Construct,the mediating effect of knowledge creation process,True,claude-chat
+W2783212887,PAPER,Paper,USES_THEORY,instrumental stakeholder theory,Theory,How Applying Instrumental Stakeholder Theory Can Provide Sustainable Competitive Advantage,True,claude-chat
+W2783212887,PAPER,Paper,STUDIES,sustainable competitive advantage,Construct,How Applying Instrumental Stakeholder Theory Can Provide Sustainable Competitive Advantage,True,claude-chat
+W2783212887,PAPER,Paper,STUDIES,close relationship capability,Construct,to a close relationship capability,True,claude-chat
+W2783212887,PAPER,Paper,STUDIES,stakeholder management,Construct,instrumental stakeholder theory–based stakeholder management could provide sustainable competitive advantage,True,claude-chat
+W2788493143,PAPER,Paper,USES_THEORY,close relationships theory,Theory,"Drawing on theories of close relationships, social exchange, and boundary management",True,claude-chat
+W2788493143,PAPER,Paper,USES_THEORY,social exchange theory,Theory,"Drawing on theories of close relationships, social exchange, and boundary management",True,claude-chat
+W2788493143,PAPER,Paper,USES_THEORY,boundary management,Theory,"Drawing on theories of close relationships, social exchange, and boundary management",True,claude-chat
+W2788493143,PAPER,Paper,STUDIES,workplace friendship,Construct,Understanding the Dark Sides of Workplace Friendship,True,claude-chat
+W2788493143,PAPER,Paper,STUDIES,self-disclosure,Construct,mutual self-disclosure and perceived similarity develop and deepen friendships,True,claude-chat
+W2788493143,PAPER,Paper,STUDIES,perceived similarity,Construct,mutual self-disclosure and perceived similarity develop and deepen friendships,True,claude-chat
+W2804679270,PAPER,Paper,USES_THEORY,attention-based view,Theory,Drawing on the attention based view of the firm (ABV),True,claude-chat
+W2804679270,PAPER,Paper,USES_DATA,422 UK SMEs,Dataset,a sample of 422 small and medium-sized enterprises in the UK,True,claude-chat
+W2804679270,PAPER,Paper,STUDIED_IN,United Kingdom,Country,422 small and medium-sized enterprises in the UK,True,claude-chat
+W2804679270,PAPER,Paper,AT_LEVEL,firm,Level,422 small and medium-sized enterprises in the UK,True,claude-chat
+W2804679270,PAPER,Paper,STUDIES,organizational ambidexterity,Construct,three antecedents of organizational ambidexterity,True,claude-chat
+W2804679270,PAPER,Paper,STUDIES,exploration,Construct,Exploration and exploitation,True,claude-chat
+W2804679270,PAPER,Paper,STUDIES,exploitation,Construct,Exploration and exploitation,True,claude-chat
+W2804679270,PAPER,Paper,STUDIES,TMT composition,Construct,the influence of top management team (TMT) composition,True,claude-chat
+W2804679270,PAPER,Paper,STUDIES,written vision,Construct,whether or not the firm has a clear written vision,True,claude-chat
+W2804679270,integration and differentiation,Construct,INCREASES,organizational ambidexterity,Construct,ambidexterity is supported by a blend of integration and differentiation approaches,True,claude-chat
+W2897383306,PAPER,Paper,USES_METHOD,literature review,Method,The article reviews the characteristics of mission-oriented programs,True,claude-chat
+W2897383306,PAPER,Paper,STUDIES,mission-oriented innovation policy,Construct,Mission-oriented innovation policies: challenges and opportunities,True,claude-chat
+W2897383306,PAPER,Paper,STUDIES,market shaping,Construct,market cocreating and market shaping,True,claude-chat
+W2898537837,PAPER,Paper,USES_THEORY,upper echelon theory,Theory,We integrate insights from upper echelon theory,True,claude-chat
+W2898537837,PAPER,Paper,USES_METHOD,panel data analysis,Method,In a panel of 165 manufacturing MNCs based in 20 countries,True,claude-chat
+W2898537837,PAPER,Paper,USES_DATA,165 manufacturing MNCs,Dataset,In a panel of 165 manufacturing MNCs based in 20 countries,True,claude-chat
+W2898537837,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,165 manufacturing MNCs based in 20 countries,True,claude-chat
+W2898537837,PAPER,Paper,AT_LEVEL,firm,Level,innovation in multinational firms,True,claude-chat
+W2898537837,PAPER,Paper,STUDIES,TMT nationality diversity,Construct,"Top management team nationality diversity, corporate entrepreneurship, and innovation in multinational firms",True,claude-chat
+W2898537837,PAPER,Paper,STUDIES,corporate entrepreneurship,Construct,"Top management team nationality diversity, corporate entrepreneurship, and innovation in multinational firms",True,claude-chat
+W2898537837,PAPER,Paper,STUDIES,innovation performance,Construct,through this innovation performance in MNCs,True,claude-chat
+W2898537837,TMT nationality diversity,Construct,INCREASES,corporate entrepreneurship,Construct,the positive effects of TMT nationality diversity on corporate entrepreneurship and innovation are only unleashed in TMTs with low social stratification,True,claude-chat
+W2898537837,TMT nationality diversity,Construct,INCREASES,innovation performance,Construct,the positive effects of TMT nationality diversity on corporate entrepreneurship and innovation are only unleashed in TMTs with low social stratification,True,claude-chat
+W2898537837,social stratification,Construct,MODERATES,corporate entrepreneurship,Construct,the positive effects of TMT nationality diversity on corporate entrepreneurship and innovation are only unleashed in TMTs with low social stratification,True,claude-chat
+W2898537837,power distance,Construct,MODERATES,corporate entrepreneurship,Construct,in MNCs located in home countries that are low in national power distance,True,claude-chat
+W2898537837,corporate entrepreneurship,Construct,MEDIATES,innovation performance,Construct,MNCs with diverse TMTs engage more in corporate entrepreneurship and subsequently see increased innovation performance,True,claude-chat
+W2901834984,PAPER,Paper,USES_METHOD,structural equation modelling,Method,an empirical analysis based on structural equation modelling with data collected from 88 Italian SMEs,True,claude-chat
+W2901834984,PAPER,Paper,USES_DATA,88 Italian SMEs,Dataset,data collected from 88 Italian SMEs,True,claude-chat
+W2901834984,PAPER,Paper,STUDIED_IN,Italy,Country,data collected from 88 Italian SMEs,True,claude-chat
+W2901834984,PAPER,Paper,AT_LEVEL,firm,Level,data collected from 88 Italian SMEs,True,claude-chat
+W2901834984,PAPER,Paper,STUDIES,big data analytics capabilities,Construct,Big data analytics capabilities and knowledge management: impact on firm performance,True,claude-chat
+W2901834984,PAPER,Paper,STUDIES,knowledge management,Construct,Big data analytics capabilities and knowledge management: impact on firm performance,True,claude-chat
+W2901834984,PAPER,Paper,STUDIES,firm performance,Construct,Big data analytics capabilities and knowledge management: impact on firm performance,True,claude-chat
+W2901834984,big data analytics capabilities,Construct,INCREASES,firm performance,Construct,"firms that developed more BDA capabilities than others, both technological and managerial, increased their performances",True,claude-chat
+W2901834984,knowledge management,Construct,MEDIATES,firm performance,Construct,"tested if BDA capabilities have a positive impact on firm performances, as well as the mediator effect of knowledge management (KM) on this relationship",True,claude-chat
+W2905452688,PAPER,Paper,USES_METHOD,fixed effects panel regression,Method,We use fixed effects panel regression models on a sample of 108 listed banks,True,claude-chat
+W2905452688,PAPER,Paper,USES_DATA,108 listed banks,Dataset,a sample of 108 listed banks in Europe and the United States for the period 2011–2016,True,claude-chat
+W2905452688,PAPER,Paper,USES_THEORY,critical mass theory,Theory,the critical mass theory for banks is not supported,True,claude-chat
+W2905452688,PAPER,Paper,STUDIED_IN,Europe,Country,108 listed banks in Europe and the United States,True,claude-chat
+W2905452688,PAPER,Paper,STUDIED_IN,United States,Country,108 listed banks in Europe and the United States,True,claude-chat
+W2905452688,PAPER,Paper,IN_INDUSTRY,banking,Industry,Impact on ESG Performance in the Banking System,True,claude-chat
+W2905452688,PAPER,Paper,AT_LEVEL,firm,Level,a sample of 108 listed banks,True,claude-chat
+W2905452688,PAPER,Paper,STUDIES,women on board,Construct,how a critical mass of women on the board of directors affects performance,True,claude-chat
+W2905452688,PAPER,Paper,STUDIES,ESG performance,Construct,Composition and Activity of the Board of Directors: Impact on ESG Performance in the Banking System,True,claude-chat
+W2905452688,women on board,Construct,ASSOCIATED_WITH,ESG performance,Construct,the relationship between women on the board of directors and a bank’s ESG performance is an inverted U-shape,True,claude-chat
+W2905452688,board size,Construct,INCREASES,ESG performance,Construct,There is a positive link between ESG performance and board size or the presence of a CSR committee,True,claude-chat
+W2905452688,CSR committee,Construct,INCREASES,ESG performance,Construct,There is a positive link between ESG performance and board size or the presence of a CSR committee,True,claude-chat
+W2905452688,board independence,Construct,DECREASES,ESG performance,Construct,while it is negative with the share of independent directors,True,claude-chat
+W2910462204,PAPER,Paper,STUDIES,organizational resilience,Construct,Organizational resilience: a capability-based conceptualization,True,claude-chat
+W2910462204,PAPER,Paper,STUDIES,anticipation,Construct,"three successive resilience stages (anticipation, coping, and adaptation)",True,claude-chat
+W2910462204,PAPER,Paper,STUDIES,coping,Construct,"three successive resilience stages (anticipation, coping, and adaptation)",True,claude-chat
+W2910462204,PAPER,Paper,STUDIES,adaptation,Construct,"three successive resilience stages (anticipation, coping, and adaptation)",True,claude-chat
+W2910676044,PAPER,Paper,STUDIES,diversity,Construct,The role of diversity in organizational resilience: a theoretical framework,True,claude-chat
+W2910676044,PAPER,Paper,STUDIES,organizational resilience,Construct,The role of diversity in organizational resilience: a theoretical framework,True,claude-chat
+W2910676044,PAPER,Paper,STUDIES,diversity management,Construct,What does this mean for resilience-enhancing diversity management?,True,claude-chat
+W2912711099,PAPER,Paper,USES_THEORY,demographic faultline perspective,Theory,Drawing on the demographic faultline perspective,True,claude-chat
+W2912711099,PAPER,Paper,USES_METHOD,panel study,Method,In a panel study (2003–2015),True,claude-chat
+W2912711099,PAPER,Paper,AT_LEVEL,team,Level,Top management team demographic‐faultline strength and strategic change,True,claude-chat
+W2912711099,PAPER,Paper,STUDIES,TMT faultline strength,Construct,Top management team demographic‐faultline strength and strategic change,True,claude-chat
+W2912711099,PAPER,Paper,STUDIES,strategic change,Construct,Top management team demographic‐faultline strength and strategic change,True,claude-chat
+W2912711099,PAPER,Paper,STUDIES,environmental dynamism,Construct,What role does environmental dynamism play?,True,claude-chat
+W2912711099,relationship-related faultline strength,Construct,DECREASES,strategic change,Construct,TMT relationship‐related faultline strength (especially educational‐level) negatively influences strategic change,True,claude-chat
+W2912711099,task-related faultline strength,Construct,INCREASES,strategic change,Construct,TMT task‐related faultline strength positively affects strategic change,True,claude-chat
+W2912711099,environmental dynamism,Construct,MODERATES,strategic change,Construct,environmental dynamism strengthens the positive effects of task‐related TMT faultline strength on strategic change,True,claude-chat
+W2912711099,environmental dynamism,Construct,MODERATES,strategic change,Construct,Environmental dynamism reduces the negative effect of TMT gender and educational‐level faultline strengths on strategic change,True,claude-chat
+W2912711099,relationship-related faultline strength,Construct,DECREASES,subgroup cohesion,Construct,stronger relationship based faultlines hinders between subgroup cohesion,True,claude-chat
+W2912711099,task-related faultline strength,Construct,INCREASES,inter-subgroup knowledge sharing,Construct,stronger task‐related faultlines facilitate inter‐subgroup knowledge‐sharing,True,claude-chat
+W2920352970,PAPER,Paper,USES_METHOD,meta-analysis,Method,Team creativity/innovation in culturally diverse teams: A meta‐analysis,True,claude-chat
+W2920352970,PAPER,Paper,USES_THEORY,socio-technical systems framework,Theory,the moderators suggested by the socio‐technical systems framework,True,claude-chat
+W2920352970,PAPER,Paper,AT_LEVEL,team,Level,Team creativity/innovation in culturally diverse teams,True,claude-chat
+W2920352970,PAPER,Paper,STUDIES,cultural diversity,Construct,culturally diverse teams,True,claude-chat
+W2920352970,PAPER,Paper,STUDIES,team creativity,Construct,the relationship between diversity in culturally diverse teams and team creativity/innovation,True,claude-chat
+W2920352970,surface-level diversity,Construct,NO_EFFECT_ON,team creativity,Construct,Surface‐level diversity in culturally diverse teams is not related to team creativity/innovation,True,claude-chat
+W2920352970,deep-level diversity,Construct,INCREASES,team creativity,Construct,deep‐level diversity in culturally diverse teams is positively related to team creativity/innovation,True,claude-chat
+W2920352970,task complexity,Construct,MODERATES,team creativity,Construct,surface‐level diversity in culturally diverse teams and team creativity/innovation are negatively related for simple tasks but unrelated for complex tasks,True,claude-chat
+W2920352970,team virtuality,Construct,MODERATES,team creativity,Construct,positively related for collocated teams and interdependent tasks but unrelated for noncollocated teams and independent tasks,True,claude-chat
+W2920352970,task interdependence,Construct,MODERATES,team creativity,Construct,positively related for collocated teams and interdependent tasks but unrelated for noncollocated teams and independent tasks,True,claude-chat
+W2941282123,PAPER,Paper,USES_METHOD,panel regression,Method,The results of panel regression supported resource‐based view theory,True,claude-chat
+W2941282123,PAPER,Paper,USES_THEORY,resource-based view,Theory,The results of panel regression supported resource‐based view theory,True,claude-chat
+W2941282123,PAPER,Paper,USES_DATA,86 Pakistan Stock Exchange firms,Dataset,across 86 firms listed in Pakistan Stock Exchange from 2010 to 2017,True,claude-chat
+W2941282123,PAPER,Paper,STUDIED_IN,Pakistan,Country,Evidence from Pakistan,True,claude-chat
+W2941282123,PAPER,Paper,AT_LEVEL,firm,Level,across 86 firms listed in Pakistan Stock Exchange,True,claude-chat
+W2941282123,PAPER,Paper,STUDIES,board diversity,Construct,Does board diversity affect quality of corporate social responsibility disclosure?,True,claude-chat
+W2941282123,PAPER,Paper,STUDIES,CSR disclosure quality,Construct,Does board diversity affect quality of corporate social responsibility disclosure?,True,claude-chat
+W2941282123,gender diversity,Construct,INCREASES,CSR disclosure quality,Construct,"gender, nation, and tenure diversity are resources improving QCSR disclosure",True,claude-chat
+W2941282123,nationality diversity,Construct,INCREASES,CSR disclosure quality,Construct,"gender, nation, and tenure diversity are resources improving QCSR disclosure",True,claude-chat
+W2941282123,tenure diversity,Construct,INCREASES,CSR disclosure quality,Construct,"gender, nation, and tenure diversity are resources improving QCSR disclosure",True,claude-chat
+W2941282123,educational background diversity,Construct,DECREASES,CSR disclosure quality,Construct,educational background has a negative impact on QCSR disclosure,True,claude-chat
+W2951959118,PAPER,Paper,USES_METHOD,panel data regression,Method,different panel data regressions are proposed,True,claude-chat
+W2951959118,PAPER,Paper,USES_DATA,"9,744 firm-year observations",Dataset,"an international sample of 9,744 firm‐year observations from 2007 to 2016",True,claude-chat
+W2951959118,PAPER,Paper,AT_LEVEL,firm,Level,"9,744 firm‐year observations",True,claude-chat
+W2951959118,PAPER,Paper,STUDIES,critical mass of female directors,Construct,"Critical mass of female directors, human capital, and stakeholder engagement by corporate social reporting",True,claude-chat
+W2951959118,PAPER,Paper,STUDIES,board human capital,Construct,the moderation of the human capital of board members,True,claude-chat
+W2951959118,PAPER,Paper,STUDIES,CSR disclosure,Construct,the effect of the presence of female directors on boards on corporate social responsibility disclosure,True,claude-chat
+W2951959118,board gender diversity,Construct,INCREASES,CSR disclosure,Construct,a positive impact of gender board diversity on voluntary socially responsible disclosure,True,claude-chat
+W2951959118,board human capital,Construct,MODERATES,CSR disclosure,Construct,"the paper reports a greater effect when the board's background, skills, and experience are greater",True,claude-chat
+W2951959118,female chairperson,Construct,NO_EFFECT_ON,CSR disclosure,Construct,the female role does not remain when women achieve the position of chairperson,True,claude-chat
+W2955882674,PAPER,Paper,USES_THEORY,institutional theory,Theory,Drawing from institutional theory,True,claude-chat
+W2955882674,PAPER,Paper,USES_METHOD,survey,Method,this study used survey data from 237 manufacturing firms in China,True,claude-chat
+W2955882674,PAPER,Paper,USES_DATA,237 Chinese manufacturing firms,Dataset,survey data from 237 manufacturing firms in China,True,claude-chat
+W2955882674,PAPER,Paper,STUDIED_IN,China,Country,237 manufacturing firms in China,True,claude-chat
+W2955882674,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,237 manufacturing firms in China,True,claude-chat
+W2955882674,PAPER,Paper,AT_LEVEL,firm,Level,237 manufacturing firms in China,True,claude-chat
+W2955882674,PAPER,Paper,STUDIES,environmental regulation,Construct,Green innovation to respond to environmental regulation,True,claude-chat
+W2955882674,PAPER,Paper,STUDIES,green product innovation,Construct,affect green product innovation and green process innovation,True,claude-chat
+W2955882674,PAPER,Paper,STUDIES,green process innovation,Construct,affect green product innovation and green process innovation,True,claude-chat
+W2955882674,PAPER,Paper,STUDIES,green absorptive capacity,Construct,the moderating role of green absorptive capacity,True,claude-chat
+W2955882674,command and control regulation,Construct,INCREASES,external knowledge adoption,Construct,both command and control regulation and market‐based regulation have positive influences on external knowledge adoption,True,claude-chat
+W2955882674,market-based regulation,Construct,INCREASES,external knowledge adoption,Construct,both command and control regulation and market‐based regulation have positive influences on external knowledge adoption,True,claude-chat
+W2955882674,external knowledge adoption,Construct,MEDIATES,green innovation,Construct,External knowledge adoption fully mediates these positive relationships,True,claude-chat
+W2955882674,green absorptive capacity,Construct,MODERATES,external knowledge adoption,Construct,green absorptive capacity only strengthens the positive impact of market‐based regulation on external knowledge adoption,True,claude-chat
+W2959550490,PAPER,Paper,USES_METHOD,panel random effects regression,Method,is estimated by using panel random effects regression,True,claude-chat
+W2959550490,PAPER,Paper,USES_METHOD,Blau's index,Method,by applying Blau’s index,True,claude-chat
+W2959550490,PAPER,Paper,USES_THEORY,resource-based view,Theory,from the perspective of the resource-based view theory,True,claude-chat
+W2959550490,PAPER,Paper,USES_DATA,57 Pakistan Stock Exchange firms,Dataset,across 57 firms producing exclusive sustainability reports listed in the Pakistan Stock Exchange from 2010 to 2017,True,claude-chat
+W2959550490,PAPER,Paper,STUDIED_IN,Pakistan,Country,Board diversity and quality of CSR disclosure: evidence from Pakistan,True,claude-chat
+W2959550490,PAPER,Paper,AT_LEVEL,firm,Level,across 57 firms producing exclusive sustainability reports,True,claude-chat
+W2959550490,PAPER,Paper,STUDIES,board diversity,Construct,Board diversity and quality of CSR disclosure,True,claude-chat
+W2959550490,PAPER,Paper,STUDIES,CSR disclosure quality,Construct,Board diversity and quality of CSR disclosure,True,claude-chat
+W2959550490,gender diversity,Construct,INCREASES,CSR disclosure quality,Construct,"gender and national diversities are the firms’ valuable resources, having the potential to promote QCSR disclosure",True,claude-chat
+W2959550490,nationality diversity,Construct,INCREASES,CSR disclosure quality,Construct,"gender and national diversities are the firms’ valuable resources, having the potential to promote QCSR disclosure",True,claude-chat
+W2959550490,age diversity,Construct,DECREASES,CSR disclosure quality,Construct,age diversity was found to be negatively associated to QCSR disclosure,True,claude-chat
+W2959550490,educational level diversity,Construct,NO_EFFECT_ON,CSR disclosure quality,Construct,"educational level, educational background, ethnicity and tenure were insignificant on QCSR disclosure",True,claude-chat
+W2959550490,educational background diversity,Construct,NO_EFFECT_ON,CSR disclosure quality,Construct,"educational level, educational background, ethnicity and tenure were insignificant on QCSR disclosure",True,claude-chat
+W2959550490,ethnic diversity,Construct,NO_EFFECT_ON,CSR disclosure quality,Construct,"educational level, educational background, ethnicity and tenure were insignificant on QCSR disclosure",True,claude-chat
+W2959550490,tenure diversity,Construct,NO_EFFECT_ON,CSR disclosure quality,Construct,"educational level, educational background, ethnicity and tenure were insignificant on QCSR disclosure",True,claude-chat
+W2965291833,PAPER,Paper,USES_METHOD,nonparametric frontier analysis,Method,we apply a nonparametric frontier analysis framework to a sample of 320 Japanese firms,True,claude-chat
+W2965291833,PAPER,Paper,USES_DATA,320 Japanese firms,Dataset,a sample of 320 Japanese firms over the period 2008–2016,True,claude-chat
+W2965291833,PAPER,Paper,STUDIED_IN,Japan,Country,a sample of 320 Japanese firms,True,claude-chat
+W2965291833,PAPER,Paper,AT_LEVEL,firm,Level,a sample of 320 Japanese firms,True,claude-chat
+W2965291833,PAPER,Paper,STUDIES,corporate social responsibility,Construct,Does corporate social responsibility impact firms' innovation capacity?,True,claude-chat
+W2965291833,PAPER,Paper,STUDIES,ESG policy adoption,Construct,a nonlinear relationship between ESG policy adoption and firms' innovation capacity,True,claude-chat
+W2965291833,PAPER,Paper,STUDIES,innovation capacity,Construct,Does corporate social responsibility impact firms' innovation capacity?,True,claude-chat
+W2965291833,ESG policy adoption,Construct,ASSOCIATED_WITH,innovation capacity,Construct,a nonlinear relationship between ESG policy adoption and firms' innovation capacity,True,claude-chat
+W2965291833,ESG policy adoption,Construct,INCREASES,innovation capacity,Construct,firms' CSR/ESG policy adoption initially enhances their ability to pursue innovation activities,True,claude-chat
+W2997411915,PAPER,Paper,USES_METHOD,log-log linear regression,Method,By estimating several log–log linear regressions,True,claude-chat
+W2997411915,PAPER,Paper,USES_DATA,Romanian active enterprises,Dataset,"for Romanian active enterprises, especially SMEs, over the period 2009–2017",True,claude-chat
+W2997411915,PAPER,Paper,STUDIED_IN,Romania,Country,"for Romanian active enterprises, especially SMEs",True,claude-chat
+W2997411915,PAPER,Paper,AT_LEVEL,firm,Level,"for Romanian active enterprises, especially SMEs",True,claude-chat
+W2997411915,PAPER,Paper,STUDIES,SMEs,Construct,Small and Medium-Sized Enterprises (SMEs): The Engine of Economic Growth through Investments and Innovation,True,claude-chat
+W2997411915,PAPER,Paper,STUDIES,economic growth,Construct,the impact of investments and innovation on territorial economic growth,True,claude-chat
+W2997411915,PAPER,Paper,STUDIES,investments,Construct,the impact of investments and innovation on territorial economic growth,True,claude-chat
+W2997411915,investments,Construct,INCREASES,turnover,Construct,a positive influence of investments on turnover,True,claude-chat
+W2997411915,innovation expenditures,Construct,INCREASES,turnover,Construct,"As regards expenditures on innovation, a positive impact on turnover was acknowledged for all enterprises and particularly for big companies",True,claude-chat
+W2997411915,innovation expenditures,Construct,NO_EFFECT_ON,turnover,Construct,there was an absence of any statistically significant relation in the case of SMEs,True,claude-chat
+W2997411915,firm size,Construct,INCREASES,turnover,Construct,The impact of firm size on turnover was positive for all active enterprises at the national level,True,claude-chat
+W2997411915,number of micro-units,Construct,INCREASES,economic growth,Construct,a positive impact of the number of active micro-units on territorial economic growth,True,claude-chat
+W2998825973,PAPER,Paper,USES_THEORY,resource-based view,Theory,Expanding the resource based view model of strategic human resource management,True,claude-chat
+W2998825973,PAPER,Paper,USES_THEORY,dynamic managerial capabilities,Theory,I draw on the literature on dynamic managerial capabilities,True,claude-chat
+W2998825973,PAPER,Paper,STUDIES,strategic human resource management,Construct,Expanding the resource based view model of strategic human resource management,True,claude-chat
+W2998825973,PAPER,Paper,STUDIES,high commitment HR strategy,Construct,a high commitment human resource (HCHR) strategy leads to firm competitive advantage,True,claude-chat
+W2998825973,PAPER,Paper,STUDIES,employee-based resources,Construct,greater firm-level employee-based resources that are rare and valuable,True,claude-chat
+W2998825973,PAPER,Paper,STUDIES,CEO managerial cognition,Construct,"CEO managerial cognition, social capital, and human capital",True,claude-chat
+W2998825973,PAPER,Paper,STUDIES,competitive advantage,Construct,employee-based resources only lead to competitive advantage,True,claude-chat
+W3000794329,PAPER,Paper,STUDIES,customer relationship management,Construct,Customer relationship management: digital transformation and sustainable business model innovation,True,claude-chat
+W3000794329,PAPER,Paper,STUDIES,digital transformation,Construct,Customer relationship management: digital transformation and sustainable business model innovation,True,claude-chat
+W3000794329,PAPER,Paper,STUDIES,sustainable business model innovation,Construct,Customer relationship management: digital transformation and sustainable business model innovation,True,claude-chat
+W3000794329,PAPER,Paper,STUDIES,sustainability,Construct,"the three dimensions of sustainability (economic, environmental, and social)",True,claude-chat
+W3002530379,PAPER,Paper,USES_METHOD,structural equation modeling,Method,Hypotheses were tested on a sample of 293 team members clustered in 45 public sector teams using structural equation modeling,True,claude-chat
+W3002530379,PAPER,Paper,USES_DATA,293 members of 45 public sector teams,Dataset,a sample of 293 team members clustered in 45 public sector teams,True,claude-chat
+W3002530379,PAPER,Paper,IN_INDUSTRY,public sector,Industry,Inclusive Climate in Diverse Public Sector Teams,True,claude-chat
+W3002530379,PAPER,Paper,AT_LEVEL,team,Level,293 team members clustered in 45 public sector teams,True,claude-chat
+W3002530379,PAPER,Paper,STUDIES,inclusive leadership,Construct,The Role of Inclusive Leadership in Supporting an Inclusive Climate in Diverse Public Sector Teams,True,claude-chat
+W3002530379,PAPER,Paper,STUDIES,inclusive climate,Construct,The Role of Inclusive Leadership in Supporting an Inclusive Climate in Diverse Public Sector Teams,True,claude-chat
+W3002530379,PAPER,Paper,STUDIES,team ethnic-cultural diversity,Construct,the negative relation between team ethnic–cultural diversity and inclusive climate,True,claude-chat
+W3002530379,inclusive leadership,Construct,MODERATES,inclusive climate,Construct,inclusive leadership positively moderates the negative relation between team ethnic–cultural diversity and inclusive climate,True,claude-chat
+W3002530379,team ethnic-cultural diversity,Construct,DECREASES,inclusive climate,Construct,the negative relation between team ethnic–cultural diversity and inclusive climate,True,claude-chat
+W3003927097,PAPER,Paper,USES_METHOD,structural equation modeling,Method,"an analysis of data from 221 German industrial enterprises, conducted through structural equation modeling",True,claude-chat
+W3003927097,PAPER,Paper,USES_DATA,221 German industrial enterprises,Dataset,data from 221 German industrial enterprises,True,claude-chat
+W3003927097,PAPER,Paper,STUDIED_IN,Germany,Country,data from 221 German industrial enterprises,True,claude-chat
+W3003927097,PAPER,Paper,AT_LEVEL,firm,Level,data from 221 German industrial enterprises,True,claude-chat
+W3003927097,PAPER,Paper,STUDIES,absorptive capacity,Construct,The role of absorptive capacity and innovation strategy in the design of industry 4.0 business Models,True,claude-chat
+W3003927097,PAPER,Paper,STUDIES,innovation strategy,Construct,The role of absorptive capacity and innovation strategy in the design of industry 4.0 business Models,True,claude-chat
+W3003927097,PAPER,Paper,STUDIES,business model design,Construct,"integrates the concepts of business model design, absorptive capacity, and innovation strategy",True,claude-chat
+W3003927097,PAPER,Paper,STUDIES,Industry 4.0,Construct,the emergence of Industry 4.0,True,claude-chat
+W3003927097,absorptive capacity,Construct,INCREASES,exploratory innovation strategy,Construct,"the acquisition, assimilation, transformation, and exploitation of knowledge from the environment enable companies to engage in both exploratory and exploitative innovation strategies",True,claude-chat
+W3003927097,absorptive capacity,Construct,INCREASES,exploitative innovation strategy,Construct,"the acquisition, assimilation, transformation, and exploitation of knowledge from the environment enable companies to engage in both exploratory and exploitative innovation strategies",True,claude-chat
+W3012751801,PAPER,Paper,USES_THEORY,intellectual capital perspective,Theory,An intellectual capital perspective.,True,claude-chat
+W3012751801,PAPER,Paper,AT_LEVEL,firm,Level,Leveraging age diversity for organizational performance,True,claude-chat
+W3012751801,PAPER,Paper,STUDIES,age diversity,Construct,Leveraging age diversity for organizational performance,True,claude-chat
+W3012751801,PAPER,Paper,STUDIES,organizational performance,Construct,Leveraging age diversity for organizational performance,True,claude-chat
+W3012751801,age diversity,Construct,INCREASES,organizational performance,Construct,age diversity was positively associated with organizational performance through the mediation of increased human and social capital,True,claude-chat
+W3012751801,human capital,Construct,MEDIATES,organizational performance,Construct,through the mediation of increased human and social capital,True,claude-chat
+W3012751801,social capital,Construct,MEDIATES,organizational performance,Construct,through the mediation of increased human and social capital,True,claude-chat
+W3012751801,functional diversity,Construct,MODERATES,human capital,Construct,functional diversity and age-inclusive management amplified the positive effects of age diversity on human and social capital,True,claude-chat
+W3012751801,age-inclusive management,Construct,MODERATES,human capital,Construct,functional diversity and age-inclusive management amplified the positive effects of age diversity on human and social capital,True,claude-chat
+W3021709162,PAPER,Paper,USES_METHOD,survey,Method,Based on data from a survey of Chinese (Hong Kong) firms,True,claude-chat
+W3021709162,PAPER,Paper,USES_DATA,survey of Hong Kong firms,Dataset,data from a survey of Chinese (Hong Kong) firms,True,claude-chat
+W3021709162,PAPER,Paper,STUDIED_IN,Hong Kong,Country,a survey of Chinese (Hong Kong) firms,True,claude-chat
+W3021709162,PAPER,Paper,AT_LEVEL,firm,Level,a survey of Chinese (Hong Kong) firms,True,claude-chat
+W3021709162,PAPER,Paper,STUDIES,green supply chain integration,Construct,Effects of green supply chain integration and green innovation on environmental and cost performance,True,claude-chat
+W3021709162,PAPER,Paper,STUDIES,green innovation,Construct,Effects of green supply chain integration and green innovation on environmental and cost performance,True,claude-chat
+W3021709162,PAPER,Paper,STUDIES,environmental performance,Construct,Effects of green supply chain integration and green innovation on environmental and cost performance,True,claude-chat
+W3021709162,PAPER,Paper,STUDIES,cost performance,Construct,Effects of green supply chain integration and green innovation on environmental and cost performance,True,claude-chat
+W3021709162,green customer integration,Construct,INCREASES,environmental performance,Construct,green customer integration improves cost and environmental performance through green process innovation (not green product innovation),True,claude-chat
+W3021709162,green customer integration,Construct,INCREASES,cost performance,Construct,green customer integration improves cost and environmental performance through green process innovation (not green product innovation),True,claude-chat
+W3021709162,green process innovation,Construct,MEDIATES,environmental performance,Construct,green customer integration improves cost and environmental performance through green process innovation (not green product innovation),True,claude-chat
+W3021709162,green customer integration,Construct,INCREASES,green product innovation,Construct,Both green product and process innovations are facilitated by green customer integration (not green supplier integration),True,claude-chat
+W3021709162,green customer integration,Construct,INCREASES,green process innovation,Construct,Both green product and process innovations are facilitated by green customer integration (not green supplier integration),True,claude-chat
+W3021709162,green supplier integration,Construct,NO_EFFECT_ON,green process innovation,Construct,Both green product and process innovations are facilitated by green customer integration (not green supplier integration),True,claude-chat
+W3021709162,green internal integration,Construct,INCREASES,green customer integration,Construct,both green customer and supplier integration significantly depend on green internal integration,True,claude-chat
+W3021709162,green internal integration,Construct,INCREASES,green supplier integration,Construct,both green customer and supplier integration significantly depend on green internal integration,True,claude-chat
+W3022058416,PAPER,Paper,USES_METHOD,ordinal logistic regression,Method,Ordinal logistic regression (OLR) is used for data analysis,True,claude-chat
+W3022058416,PAPER,Paper,USES_METHOD,cross-sectional analysis,Method,Cross-sectional data analysis is used for the Financial Stock Exchange 350 (UK FTSE 350) in 2017,True,claude-chat
+W3022058416,PAPER,Paper,USES_DATA,FTSE 350,Dataset,Cross-sectional data analysis is used for the Financial Stock Exchange 350 (UK FTSE 350) in 2017,True,claude-chat
+W3022058416,PAPER,Paper,USES_DATA,Carbon Disclosure Project,Dataset,measured using the scores of the Carbon Disclosure Project (CDP),True,claude-chat
+W3022058416,PAPER,Paper,STUDIED_IN,United Kingdom,Country,evidence from the United Kingdom,True,claude-chat
+W3022058416,PAPER,Paper,AT_LEVEL,firm,Level,to what extent companies voluntarily disclose and manage greenhouse gas (GHG) information,True,claude-chat
+W3022058416,PAPER,Paper,STUDIES,board diversity,Construct,The effect of board diversity on disclosure and management of greenhouse gas information,True,claude-chat
+W3022058416,PAPER,Paper,STUDIES,GHG disclosure,Construct,The effect of board diversity on disclosure and management of greenhouse gas information,True,claude-chat
+W3022058416,female directors,Construct,INCREASES,GHG disclosure,Construct,representation of female directors in the board of directors positively influences disclosure and management of GHG information,True,claude-chat
+W3022058416,directors' financial and industrial background,Construct,DECREASES,GHG disclosure,Construct,a high percentage of directors with a financial and industrial background negatively affects GHG information,True,claude-chat
+W3022058416,board tenure,Construct,NO_EFFECT_ON,GHG disclosure,Construct,board tenure has no significant effect on GHG information,True,claude-chat
+W3022058416,firm size,Construct,ASSOCIATED_WITH,GHG disclosure,Construct,only firm size and industry type are significant in their relationships to GHG information,True,claude-chat
+W3022058416,industry type,Construct,ASSOCIATED_WITH,GHG disclosure,Construct,only firm size and industry type are significant in their relationships to GHG information,True,claude-chat
+W3022968270,PAPER,Paper,USES_METHOD,online survey,Method,Data were collected from an online survey of respondents working in a public sector organization,True,claude-chat
+W3022968270,PAPER,Paper,USES_METHOD,partial least squares structural equation modelling,Method,Partial least squares structural equation modelling and mediation analysis by the bootstrap method were used,True,claude-chat
+W3022968270,PAPER,Paper,USES_METHOD,bootstrap mediation analysis,Method,mediation analysis by the bootstrap method,True,claude-chat
+W3022968270,PAPER,Paper,STUDIED_IN,Norway,Country,empirical evidence from Norway,True,claude-chat
+W3022968270,PAPER,Paper,IN_INDUSTRY,public sector,Industry,individual innovative behaviour in the public sector,True,claude-chat
+W3022968270,PAPER,Paper,AT_LEVEL,individual,Level,individual learning orientation and individual innovative behaviour,True,claude-chat
+W3022968270,PAPER,Paper,STUDIES,empowering leadership,Construct,"Empowering leadership, work group cohesiveness, individual learning orientation and individual innovative behaviour",True,claude-chat
+W3022968270,PAPER,Paper,STUDIES,individual innovative behaviour,Construct,individual learning orientation and individual innovative behaviour in the public sector,True,claude-chat
+W3022968270,empowering leadership,Construct,INCREASES,individual innovative behaviour,Construct,Empowering leadership and individual learning orientation had significant direct effects on individual innovative behaviour,True,claude-chat
+W3022968270,individual learning orientation,Construct,INCREASES,individual innovative behaviour,Construct,Empowering leadership and individual learning orientation had significant direct effects on individual innovative behaviour,True,claude-chat
+W3022968270,empowering leadership,Construct,INCREASES,work group cohesiveness,Construct,Empowering leadership was positively related to work group cohesiveness,True,claude-chat
+W3022968270,empowering leadership,Construct,INCREASES,individual learning orientation,Construct,Both empowering leadership and work group cohesiveness have significant direct effects on individual learning orientation,True,claude-chat
+W3022968270,work group cohesiveness,Construct,INCREASES,individual learning orientation,Construct,Both empowering leadership and work group cohesiveness have significant direct effects on individual learning orientation,True,claude-chat
+W3022968270,individual learning orientation,Construct,MEDIATES,individual innovative behaviour,Construct,individual learning orientation mediates the relationships between empowering leadership and individual innovative behaviour,True,claude-chat
+W3096948557,PAPER,Paper,USES_METHOD,literature review,Method,We trace the evolution of research on organizational learning,True,claude-chat
+W3096948557,PAPER,Paper,STUDIES,organizational learning,Construct,Organizational Learning Processes and Outcomes,True,claude-chat
+W3096948557,PAPER,Paper,STUDIES,knowledge creation,Construct,"search, knowledge creation, knowledge retention, and knowledge transfer",True,claude-chat
+W3096948557,PAPER,Paper,STUDIES,knowledge retention,Construct,"search, knowledge creation, knowledge retention, and knowledge transfer",True,claude-chat
+W3096948557,PAPER,Paper,STUDIES,knowledge transfer,Construct,"search, knowledge creation, knowledge retention, and knowledge transfer",True,claude-chat
+W3096948557,organizational experience,Construct,INCREASES,organizational performance,Construct,"As organizations acquire experience, their performance typically improves at a decreasing rate",True,claude-chat
+W3100134654,PAPER,Paper,USES_DATA,239 manufacturing firms,Dataset,an analysis of a sample of 239 manufacturing firms,True,claude-chat
+W3100134654,PAPER,Paper,IN_INDUSTRY,manufacturing,Industry,a sample of 239 manufacturing firms,True,claude-chat
+W3100134654,PAPER,Paper,AT_LEVEL,firm,Level,a sample of 239 manufacturing firms,True,claude-chat
+W3100134654,PAPER,Paper,STUDIES,buyer-driven knowledge transfer,Construct,the impact of buyer‐driven knowledge transfer activities on green product innovation and green process innovation,True,claude-chat
+W3100134654,PAPER,Paper,STUDIES,knowledge acquisition capability,Construct,a firm's knowledge acquisition capability and investment in environmental management,True,claude-chat
+W3100134654,PAPER,Paper,STUDIES,environmental investment,Construct,knowledge acquisition and environmental investment,True,claude-chat
+W3100134654,PAPER,Paper,STUDIES,green product innovation,Construct,Enhancing green product and process innovation,True,claude-chat
+W3100134654,PAPER,Paper,STUDIES,green process innovation,Construct,Enhancing green product and process innovation,True,claude-chat
+W3100134654,buyer-driven knowledge transfer,Construct,INCREASES,green product innovation,Construct,buyer‐driven knowledge activities have a greater positive impact on green product innovation than green process innovation,True,claude-chat
+W3100134654,buyer-driven knowledge transfer,Construct,INCREASES,green process innovation,Construct,buyer‐driven knowledge activities have a greater positive impact on green product innovation than green process innovation,True,claude-chat
+W3100134654,environmental investment,Construct,MEDIATES,green process innovation,Construct,Investment in environmental management fully mediates the relationship between buyer‐driven knowledge transfer activities and green process innovation,True,claude-chat
+W3100134654,knowledge acquisition capability,Construct,MEDIATES,green product innovation,Construct,knowledge acquisition capability partially mediates the relationship between buyer‐driven knowledge transfer activities and green product innovation,True,claude-chat
+W3121678221,PAPER,Paper,USES_METHOD,literature review,Method,This article reviews discrimination and diversity research published inHuman Resource Management(HRM) over the past 60 years,True,claude-chat
+W3121678221,PAPER,Paper,USES_METHOD,bibliographic search,Method,We conducted bibliographic searches for terms related to discrimination and diversity,True,claude-chat
+W3121678221,PAPER,Paper,USES_DATA,135 HRM research articles,Dataset,The search resulted in 135 research articles with 136 unique studies,True,claude-chat
+W3121678221,PAPER,Paper,STUDIES,discrimination,Construct,Sixty years of discrimination and diversity research in human resource management,True,claude-chat
+W3121678221,PAPER,Paper,STUDIES,diversity,Construct,Sixty years of discrimination and diversity research in human resource management,True,claude-chat
+W3121678221,PAPER,Paper,STUDIES,LGBTQ employees,Construct,"lesbian, gay, bisexual, transgender, and queer (LGBTQ) employees in the workplace",True,claude-chat
+W3129844933,PAPER,Paper,USES_THEORY,technology-organization-environment model,Theory,"introduces the technology, organization, and environment (TOE) model from information systems research",True,claude-chat
+W3129844933,PAPER,Paper,USES_THEORY,transaction cost theory,Theory,integrates it with the transaction cost theory,True,claude-chat
+W3129844933,PAPER,Paper,USES_METHOD,survey,Method,Survey results from 297 Chinese companies,True,claude-chat
+W3129844933,PAPER,Paper,USES_DATA,297 Chinese companies,Dataset,Survey results from 297 Chinese companies,True,claude-chat
+W3129844933,PAPER,Paper,STUDIED_IN,China,Country,Survey results from 297 Chinese companies,True,claude-chat
+W3129844933,PAPER,Paper,AT_LEVEL,firm,Level,Survey results from 297 Chinese companies,True,claude-chat
+W3129844933,PAPER,Paper,STUDIES,AI adoption,Construct,The adoption of artificial intelligence in employee recruitment,True,claude-chat
+W3129844933,PAPER,Paper,STUDIES,employee recruitment,Construct,The adoption of artificial intelligence in employee recruitment,True,claude-chat
+W3129844933,perceived complexity,Construct,DECREASES,AI adoption,Construct,companies’ perceived complexity toward AI constrains AI adoption,True,claude-chat
+W3129844933,technology competence,Construct,INCREASES,AI adoption,Construct,technology competence and regulatory support encourage AI adoption,True,claude-chat
+W3129844933,regulatory support,Construct,INCREASES,AI adoption,Construct,technology competence and regulatory support encourage AI adoption,True,claude-chat
+W3129844933,relative advantage,Construct,NO_EFFECT_ON,AI adoption,Construct,"Relative advantages of AI technology, company size, and industry have no significant impact on AI usage",True,claude-chat
+W3129844933,firm size,Construct,NO_EFFECT_ON,AI adoption,Construct,"Relative advantages of AI technology, company size, and industry have no significant impact on AI usage",True,claude-chat
+W3129844933,industry,Construct,NO_EFFECT_ON,AI adoption,Construct,"Relative advantages of AI technology, company size, and industry have no significant impact on AI usage",True,claude-chat
+W3129844933,transaction costs,Construct,MODERATES,AI adoption,Construct,the moderating effects of transaction costs on the influential power of technological complexity and organizations’ technology competence,True,claude-chat
+W3133502163,PAPER,Paper,USES_METHOD,abduction,Method,Generating Theory by Abduction,True,claude-chat
+W3133502163,PAPER,Paper,STUDIES,theory generation,Construct,Generating Theory by Abduction,True,claude-chat
+W3160829258,PAPER,Paper,USES_METHOD,panel regression,Method,the authors applied linear regressions with a panel data,True,claude-chat
+W3160829258,PAPER,Paper,USES_DATA,ASSET4,Dataset,the Thomson Reuters database (ASSET4),True,claude-chat
+W3160829258,PAPER,Paper,USES_DATA,annual reports,Dataset,from the annual reports from European companies,True,claude-chat
+W3160829258,PAPER,Paper,USES_DATA,253 listed ESG index companies,Dataset,"253 listed companies selected from the environmental, social and governance (ESG) index between 2010 and 2019",True,claude-chat
+W3160829258,PAPER,Paper,STUDIED_IN,Europe,Country,evidence from ESG European companies,True,claude-chat
+W3160829258,PAPER,Paper,AT_LEVEL,firm,Level,"253 listed companies selected from the environmental, social and governance (ESG) index",True,claude-chat
+W3160829258,PAPER,Paper,STUDIES,board characteristics,Construct,Board characteristics and integrated reporting quality,True,claude-chat
+W3160829258,PAPER,Paper,STUDIES,integrated reporting quality,Construct,Board characteristics and integrated reporting quality,True,claude-chat
+W3160829258,board size,Construct,INCREASES,integrated reporting quality,Construct,"both of the board size, independence and diversity appear to have a significantly positive effect on the integrated reporting quality",True,claude-chat
+W3160829258,board independence,Construct,INCREASES,integrated reporting quality,Construct,"both of the board size, independence and diversity appear to have a significantly positive effect on the integrated reporting quality",True,claude-chat
+W3160829258,board diversity,Construct,INCREASES,integrated reporting quality,Construct,"both of the board size, independence and diversity appear to have a significantly positive effect on the integrated reporting quality",True,claude-chat
+W3160829258,independent nonexecutive chairman,Construct,INCREASES,integrated reporting quality,Construct,the appointment of an independent nonexecutive chairman is positively associated with the integrated reporting related quality,True,claude-chat
+W3164078163,PAPER,Paper,USES_METHOD,online questionnaire,Method,Online questionnaire has been used to collect the data from 259 randomly selected SME managers in Saudi Arabia,True,claude-chat
+W3164078163,PAPER,Paper,USES_METHOD,PLS-SEM,Method,PLS-SEM bootstrap results indicated,True,claude-chat
+W3164078163,PAPER,Paper,USES_METHOD,SmartPLS,Method,the data was analyzed using the SmartPLS3 software,True,claude-chat
+W3164078163,PAPER,Paper,USES_DATA,259 SME managers,Dataset,259 randomly selected SME managers in Saudi Arabia,True,claude-chat
+W3164078163,PAPER,Paper,STUDIED_IN,Saudi Arabia,Country,259 randomly selected SME managers in Saudi Arabia,True,claude-chat
+W3164078163,PAPER,Paper,AT_LEVEL,firm,Level,the association between innovation practices and the SMEs' performance and survival,True,claude-chat
+W3164078163,PAPER,Paper,STUDIES,innovation practices,Construct,Innovation practices for survival of small and medium enterprises (SMEs) in the COVID-19 times,True,claude-chat
+W3164078163,PAPER,Paper,STUDIES,business survival,Construct,Innovation practices for survival of small and medium enterprises (SMEs) in the COVID-19 times,True,claude-chat
+W3164078163,PAPER,Paper,STUDIES,external support,Construct,the role of external support,True,claude-chat
+W3164078163,PAPER,Paper,STUDIES,COVID-19,Construct,in the COVID-19 times,True,claude-chat
+W3164078163,innovation practices,Construct,INCREASES,SME performance,Construct,the innovation practices adopted by SMEs to face the repercussions of COVID-19 had a positive impact on the performance and likelihood of business survival,True,claude-chat
+W3164078163,innovation practices,Construct,INCREASES,business survival,Construct,the innovation practices adopted by SMEs to face the repercussions of COVID-19 had a positive impact on the performance and likelihood of business survival,True,claude-chat
+W3164078163,external support,Construct,MODERATES,business survival,Construct,external support aids strengthen the positive impact of SMEs' innovation practices on business survival rather than its performance,True,claude-chat
+W4224297471,PAPER,Paper,USES_METHOD,literature review,Method,This paper presents a review of SMMs and the associated literature,True,claude-chat
+W4224297471,PAPER,Paper,AT_LEVEL,team,Level,The role of shared mental models in human-AI teams,True,claude-chat
+W4224297471,PAPER,Paper,STUDIES,shared mental models,Construct,The role of shared mental models in human-AI teams,True,claude-chat
+W4224297471,PAPER,Paper,STUDIES,human-AI teaming,Construct,Applied understanding of SMMs should lead to improvements in human-AI teaming,True,claude-chat
+W4224297471,shared mental model quality,Construct,ASSOCIATED_WITH,team performance,Construct,Research on human teaming has linked SMM quality to improved team performance,True,claude-chat
+W4229020385,PAPER,Paper,USES_THEORY,transaction cost economics,Theory,"three main economic theories: transaction cost economics, game theory, and the knowledge-based view",True,claude-chat
+W4229020385,PAPER,Paper,USES_THEORY,game theory,Theory,"three main economic theories: transaction cost economics, game theory, and the knowledge-based view",True,claude-chat
+W4229020385,PAPER,Paper,USES_THEORY,knowledge-based view,Theory,"three main economic theories: transaction cost economics, game theory, and the knowledge-based view",True,claude-chat
+W4229020385,PAPER,Paper,STUDIES,collaborative innovation,Construct,The costs of collaborative innovation,True,claude-chat
+W4229020385,PAPER,Paper,STUDIES,collaboration costs,Construct,a need to theorize the costs of these arrangements systematically,True,claude-chat
+W4229020385,PAPER,Paper,STUDIES,governance structure,Construct,to determine an optimal governance structure,True,claude-chat
+W4293382414,PAPER,Paper,USES_THEORY,practice-based view,Theory,we grounded our theoretical model in the practice-based view,True,claude-chat
+W4293382414,PAPER,Paper,USES_METHOD,partial least squares,Method,We used Partial Least Squares (PLS) to test our theoretical model and research hypotheses,True,claude-chat
+W4293382414,PAPER,Paper,USES_METHOD,web survey,Method,gathered through a web survey of international non-governmental organizations (NGOs),True,claude-chat
+W4293382414,PAPER,Paper,USES_DATA,survey of international NGOs,Dataset,171 useable responses gathered through a web survey of international non-governmental organizations (NGOs),True,claude-chat
+W4293382414,PAPER,Paper,IN_INDUSTRY,humanitarian relief,Industry,the role of artificial intelligence-driven big data analytics capability in humanitarian relief operations,True,claude-chat
+W4293382414,PAPER,Paper,AT_LEVEL,firm,Level,a web survey of international non-governmental organizations (NGOs),True,claude-chat
+W4293382414,PAPER,Paper,STUDIES,AI-driven big data analytics capability,Construct,artificial intelligence-driven big data analytics capability (AI-BDAC),True,claude-chat
+W4293382414,PAPER,Paper,STUDIES,agility,Construct,Impact of artificial intelligence-driven big data analytics culture on agility and resilience in humanitarian supply chain,True,claude-chat
+W4293382414,PAPER,Paper,STUDIES,resilience,Construct,Impact of artificial intelligence-driven big data analytics culture on agility and resilience in humanitarian supply chain,True,claude-chat
+W4293382414,PAPER,Paper,STUDIES,humanitarian supply chain performance,Construct,"AI-BDAC is a significant determinant of agility, resilience, and performance of the humanitarian supply chain",True,claude-chat
+W4293382414,AI-driven big data analytics capability,Construct,INCREASES,agility,Construct,"AI-BDAC is a significant determinant of agility, resilience, and performance of the humanitarian supply chain",True,claude-chat
+W4293382414,AI-driven big data analytics capability,Construct,INCREASES,resilience,Construct,"AI-BDAC is a significant determinant of agility, resilience, and performance of the humanitarian supply chain",True,claude-chat
+W4293382414,AI-driven big data analytics capability,Construct,INCREASES,humanitarian supply chain performance,Construct,"AI-BDAC is a significant determinant of agility, resilience, and performance of the humanitarian supply chain",True,claude-chat
+W4361019934,PAPER,Paper,USES_METHOD,field experiment,Method,we provide causal evidence from a field experiment conducted at a telemarketing company,True,claude-chat
+W4361019934,PAPER,Paper,USES_METHOD,semi-structured interviews,Method,we conducted a qualitative study using semi-structured interviews with the employees,True,claude-chat
+W4361019934,PAPER,Paper,IN_INDUSTRY,telemarketing,Industry,a field experiment conducted at a telemarketing company,True,claude-chat
+W4361019934,PAPER,Paper,AT_LEVEL,individual,Level,When and How Artificial Intelligence Augments Employee Creativity,True,claude-chat
+W4361019934,PAPER,Paper,STUDIES,AI assistance,Construct,we examine AI assistance in the form of a sequential division of labor within organizations,True,claude-chat
+W4361019934,PAPER,Paper,STUDIES,employee creativity,Construct,When and How Artificial Intelligence Augments Employee Creativity,True,claude-chat
+W4361019934,PAPER,Paper,STUDIES,job design,Construct,"Drawing on research on AI–human collaboration, job design, and employee creativity",True,claude-chat
+W4361019934,AI assistance,Construct,INCREASES,employee creativity,Construct,"AI assistance in generating sales leads, on average, increases employees’ creativity",True,claude-chat
+W4361019934,employee creativity,Construct,INCREASES,sales,Construct,Enhanced creativity leads to increased sales.,True,claude-chat
+W4361019934,employee skill,Construct,MODERATES,employee creativity,Construct,"However, this effect is much more pronounced for higher-skilled employees.",True,claude-chat
+W4361019934,AI assistance,Construct,ASSOCIATED_WITH,job design,Construct,AI assistance changes job design by intensifying employees’ interactions with more serious customers,True,claude-chat
+W4385484319,PAPER,Paper,USES_METHOD,systematic review,Method,this article presents a systematic review of empirical research that sheds light on the implications of AI use at work,True,claude-chat
+W4385484319,PAPER,Paper,STUDIES,artificial intelligence in organizations,Construct,A multilevel review of artificial intelligence in organizations,True,claude-chat
+W4385484319,PAPER,Paper,STUDIES,human-AI collaboration,Construct,(1) human–AI collaboration,True,claude-chat
+W4385484319,PAPER,Paper,STUDIES,algorithmic management,Construct,AI as a control mechanism in algorithmic management of platform‐based work,True,claude-chat
+W4385484319,PAPER,Paper,STUDIES,worker attitudes towards AI,Construct,(3) worker attitudes towards AI,True,claude-chat
+W4385484319,PAPER,Paper,AT_LEVEL,individual,Level,"we uncover individual, group, and organizational factors that shape the interplay between humans and AI",True,claude-chat
+W4385484319,PAPER,Paper,AT_LEVEL,team,Level,"we uncover individual, group, and organizational factors that shape the interplay between humans and AI",True,claude-chat
+W4385484319,PAPER,Paper,AT_LEVEL,firm,Level,"we uncover individual, group, and organizational factors that shape the interplay between humans and AI",True,claude-chat

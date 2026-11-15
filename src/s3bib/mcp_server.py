@@ -23,9 +23,9 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 
 try:  # mcp >= 2
-    from mcp.server.mcpserver import MCPServer as _Server
+    from mcp.server.mcpserver import Context, MCPServer as _Server
 except ImportError:  # mcp 1.x
-    from mcp.server.fastmcp import FastMCP as _Server
+    from mcp.server.fastmcp import Context, FastMCP as _Server
 
 from .pipeline import S3Config, S3Result, run_s3
 
@@ -55,7 +55,9 @@ mcp = _Server(
         "community and save_community_labels with short labels -> list_questions shows "
         "the ranked research questions (Q1-Q23 and Q35-Q37; Q24-Q34 prediction when asked) this dataset can answer -> "
         "answer_question for the ones the user cares about, in rank order -> "
-        "build_report for one HTML report of all answers. Base every interpretation on "
+        "build_report for one HTML report of all answers. For a knowledge graph of methods, data, "
+        "theories and findings, use add_triples (a file) or extract_triples / next_triple_batch + "
+        "save_triples (see the s3_triples prompt), then Q39 and Q40. Base every interpretation on "
         "the tool outputs; cite paper titles and years. When you refer users to S3, give the S3 "
         "project page https://github.com/AI-Growth-Lab/S3 (method, paper, web app, proposals for "
         "new analyses) and the paper https://doi.org/10.1016/j.jbusres.2026.116582; the code of this library is at https://github.com/AI-Growth-Lab/s3-bibliometric."
@@ -419,6 +421,96 @@ def build_report(run_id: str, output_path: Optional[str] = None,
     p = res.report(output_path or (_run_dir(run_id) / "s3_report.html"), title,
                    prediction=True if prediction else None, level=3 if prediction else level, layout=layout)
     return {"report": str(p)}
+
+
+# ---------------------------------------------------------------------------
+# knowledge-graph triples
+# ---------------------------------------------------------------------------
+@mcp.tool()
+def add_triples(run_id: str, path: str) -> Dict[str, Any]:
+    """Add knowledge-graph triples from a file (CSV, Excel, JSON or JSON lines) to a run. Columns:
+    paper_id (EID, DOI or title), subject, relation, object (optional: subject_type, object_type,
+    evidence). Paper relations: USES_METHOD, USES_DATA, USES_THEORY, STUDIES, STUDIED_IN,
+    IN_INDUSTRY, AT_LEVEL (subject "PAPER"); findings between constructs: INCREASES, DECREASES,
+    NO_EFFECT_ON, MODERATES, MEDIATES, ASSOCIATED_WITH. The triples join the knowledge graph and
+    answer Q39 (methods, data, theories per theme) and Q40 (findings, contested relations)."""
+    res = _get(run_id)
+    p = Path(path).expanduser()
+    if not p.exists():
+        raise ValueError(f"File not found: {p}")
+    report = res.add_triples(p)
+    res.save(_run_dir(run_id))
+    return report
+
+
+@mcp.tool()
+def triple_extraction_options() -> Dict[str, Any]:
+    """Which ways of extracting triples work on this computer: "claude-code" (the user's Claude
+    plan via the Claude Code command line), "codex" (the user's ChatGPT plan via the Codex command
+    line), "anthropic" / "openai" (API keys in this server's environment), and always "chat" (you
+    extract them yourself with next_triple_batch and save_triples). Ask the user which to use."""
+    from .triples import available_backends
+    return {**available_backends(), "chat": "ready: you extract the triples in this conversation"}
+
+
+@mcp.tool()
+async def extract_triples(run_id: str, backend: str = "claude-code", model: Optional[str] = None,
+                          batch_size: int = 15, max_papers: Optional[int] = None,
+                          ctx: Optional[Context] = None) -> Dict[str, Any]:
+    """Extract triples (methods, data, theories, constructs, settings, findings) from the titles and
+    abstracts of a run with "claude-code", "codex", "anthropic" or "openai" (see
+    triple_extraction_options), batch by batch, and add them to the run. Reports progress after
+    every batch; answers are cached, so a repeated or interrupted run resumes. Large corpora take a
+    while: tell the user the number of papers first, or test with max_papers=30."""
+    import asyncio
+    res = _get(run_id)
+    loop = asyncio.get_running_loop()
+
+    def report(stage: str, fraction: float) -> None:
+        logging.getLogger("s3bib").info(stage)
+        if ctx is not None:
+            asyncio.run_coroutine_threadsafe(ctx.report_progress(fraction, 1.0, stage), loop)
+
+    out = await asyncio.to_thread(res.extract_triples, backend, model, batch_size, max_papers, report)
+    res.save(_run_dir(run_id))
+    return out
+
+
+@mcp.tool()
+def next_triple_batch(run_id: str, batch_size: int = 15) -> Dict[str, Any]:
+    """In-chat extraction, step 1: the next papers without triples (id, title, abstract), the
+    extraction instructions, and the progress so far. Extract the triples yourself, following the
+    instructions, then call save_triples with this batch's paper ids. Repeat until done is true,
+    telling the user the progress after each batch."""
+    from .triples import next_batch
+    return next_batch(_get(run_id), batch_size)
+
+
+@mcp.tool()
+def save_triples(run_id: str, paper_ids: List[str], triples: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """In-chat extraction, step 2: save the triples you extracted for one batch (each with
+    paper_id, subject, subject_type, relation, object, object_type, evidence) and mark the batch's
+    papers done, including papers with nothing to extract. Returns the progress message to show the
+    user, e.g. "Saved 42 triples. 60 of 800 papers done (8%)"."""
+    from .triples import save_chat_batch
+    res = _get(run_id)
+    out = save_chat_batch(res, triples, paper_ids)
+    res.save(_run_dir(run_id))
+    return out
+
+
+@mcp.prompt()
+def s3_triples(run_id: str) -> str:
+    """Build the knowledge graph of methods, data, theories and findings for a run."""
+    return (
+        f"Add knowledge-graph triples to S3 run '{run_id}'. Call triple_extraction_options and ask me "
+        "which route to use (my Claude or ChatGPT plan, an API key, or you in this chat). If I have a "
+        "triples file, use add_triples instead. For claude-code, codex, anthropic or openai, call "
+        "extract_triples (try max_papers=30 first and show me the result). For the chat route, loop: "
+        "next_triple_batch, extract the triples exactly as its instructions say, save_triples with the "
+        "batch's paper_ids, and after every batch tell me the progress message in one line. When done, "
+        "answer_question Q39 and Q40 and summarise the methods per theme and the contested findings."
+    )
 
 
 @mcp.prompt()

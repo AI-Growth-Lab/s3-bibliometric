@@ -1,6 +1,7 @@
 """Tests on real data: 109 OpenAlex records (CC0) on absorptive capacity and work group
 diversity, with their real all-mpnet-base-v2 embeddings precomputed, so no model download
 is needed. Rebuild the data with tests/data/build_openalex_sample.py."""
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -96,7 +97,9 @@ def test_every_question_answers(res, tmp_path):
     qt = res.questions()
     assert list(qt["id"]) == [q.qid for q in s3bib.QUESTIONS if not q.prediction]  # prediction hidden
     assert list(res.questions(prediction=True)["id"]) == [q.qid for q in s3bib.QUESTIONS]
-    assert qt["available"].all()
+    needs_triples = qt["id"].isin(["Q39", "Q40"])  # answered once triples are added
+    assert qt.loc[~needs_triples, "available"].all() and not qt.loc[needs_triples, "available"].any()
+    assert "triples" in res.answer("Q39").findings[0]
     for qid in qt["id"]:
         a = res.answer(qid)
         assert a.findings, qid
@@ -681,3 +684,99 @@ def test_r_package_version_matches_python():
     py = re.search(r'^version = "([^"]+)"', (root / "pyproject.toml").read_text(), re.M).group(1)
     r = re.search(r"^Version:\s*(\S+)", (root / "r" / "DESCRIPTION").read_text(), re.M).group(1)
     assert r == py == s3bib.__version__
+
+
+TRIPLES = DATA / "openalex_sample_triples.csv"  # real triples Claude extracted from the sample abstracts
+
+
+def test_triples_upload_kg_and_questions(df, tmp_path):
+    """Triples (real ones extracted from the sample abstracts) join the knowledge graph and
+    answer Q39 and Q40; uploads with other column names and repeated uploads work."""
+    from s3bib.networks import knowledge_graph, triple_graph
+    from s3bib.triples import PAPER_RELATIONS, read_triples
+    real = pd.read_csv(TRIPLES)
+    r = s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), **QUIET)
+    rep = r.add_triples(TRIPLES)
+    assert rep["unmatched_triples"] == 0 and rep["triples"] > 0
+    assert rep["papers_with_triples"] == real["paper_id"].nunique()
+    assert r.add_triples(TRIPLES)["triples_in_run"] == rep["triples_in_run"]  # no duplicates
+    # every paper triple becomes a typed edge from its paper in the knowledge graph
+    nodes, edges = knowledge_graph(r)
+    pt = r.triples[r.triples["relation"].isin(list(PAPER_RELATIONS))]
+    assert (edges["type"] == "USES_METHOD").sum() == (pt["relation"] == "USES_METHOD").sum()
+    assert set(nodes["type"]) >= {"paper", "community", "method", "construct"}
+    en, ee = triple_graph(r)
+    assert en["papers"].min() >= 1
+    # Q39 and Q40 in the report
+    a = r.answer("Q39")
+    assert a.tables and any("papers" in f for f in a.findings)
+    a40 = r.answer("Q40")
+    assert a40.findings
+    html = r.report(tmp_path / "r.html", level=2).read_text()
+    assert 'id="Q39"' in html and 'id="Q40"' in html and "<b>Methods:</b>" in html
+    # save and load keep the triples
+    back = s3bib.S3Result.load(r.save(tmp_path / "run"))
+    assert len(back.triples) == len(r.triples)
+    # other column names (head / predicate / tail, title as paper id) are understood
+    alt = real.head(20).merge(df[["EID", "Title"]], left_on="paper_id", right_on="EID")
+    alt = alt.rename(columns={"subject": "head", "relation": "predicate", "object": "tail"})
+    alt = alt[["Title", "head", "predicate", "tail"]].rename(columns={"Title": "paper"})
+    f = tmp_path / "alt.xlsx"
+    alt.to_excel(f, index=False)
+    assert len(read_triples(f)) == len(alt)
+    r2 = s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), **QUIET)
+    assert r2.add_triples(f)["unmatched_triples"] == 0
+
+
+def test_triple_extraction_routes(df, tmp_path, monkeypatch):
+    """Extraction through a command-line model (a stand-in that answers with the real triples),
+    with progress and a cache; and the in-chat route, batch by batch."""
+    import json
+    import stat
+    from s3bib.triples import ExtractionError, extract_triples, next_batch, parse_response, paper_table, \
+        save_chat_batch
+    real = pd.read_csv(TRIPLES)
+    by_paper = {p: g.drop(columns=["evidence_found", "source"]).to_dict("records")
+                for p, g in real.groupby("paper_id")}
+    calls = tmp_path / "calls.txt"
+    (tmp_path / "triples.json").write_text(json.dumps(by_paper))
+    fake = tmp_path / "claude"
+    fake.write_text(f"""#!{sys.executable}
+import json, re, sys
+prompt = sys.stdin.read()
+papers = json.loads(prompt.split("Papers:", 1)[1])
+known = json.load(open({str(tmp_path / 'triples.json')!r}))
+rows = [t for p in papers for t in known.get(p["id"], [])]
+open({str(calls)!r}, "a").write("call\\n")
+print(json.dumps({{"type": "result", "is_error": False, "result": "```json\\n" + json.dumps({{"triples": rows}}) + "\\n```"}}))
+""")
+    fake.chmod(fake.stat().st_mode | stat.S_IEXEC)
+    monkeypatch.setenv("S3BIB_CLAUDE", str(fake))
+    seen = []
+    papers = s3bib.load_papers(df, drop_empty=False)
+    t = extract_triples(papers, "claude-code", batch_size=40, cache_dir=str(tmp_path / "cache"),
+                        progress=lambda s, p: seen.append((s, p)))
+    assert len(t) == len(real) and calls.read_text().count("call") == 3   # 109 papers, 3 batches
+    assert [round(p, 2) for _, p in seen] == [0.0, 0.33, 0.67, 1.0]
+    assert "batch 2 of 3 (80 of 109 papers)" in seen[2][0]
+    assert t["evidence_found"].sum() == real["evidence_found"].sum()
+    extract_triples(papers, "claude-code", batch_size=40, cache_dir=str(tmp_path / "cache"))
+    assert calls.read_text().count("call") == 3  # the second run comes from the cache
+    monkeypatch.delenv("S3BIB_CLAUDE")
+    monkeypatch.setenv("PATH", str(tmp_path / "empty"))
+    with pytest.raises(ExtractionError, match="not found"):
+        extract_triples(papers, "claude-code", cache_dir=None)
+    # the in-chat route: batches, progress, done
+    r = s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), **QUIET)
+    total = len(paper_table(r.papers))
+    nb = next_batch(r, 50)
+    assert not nb["done"] and len(nb["papers"]) == 50 and nb["progress"]["papers_done"] == 0
+    ids = [p["id"] for p in nb["papers"]]
+    out = save_chat_batch(r, [x for i in ids for x in by_paper.get(i, [])], ids)
+    assert out["progress"]["papers_done"] == 50 and "50 of" in out["message"]
+    while not (nb := next_batch(r, 50))["done"]:
+        ids = [p["id"] for p in nb["papers"]]
+        save_chat_batch(r, [x for i in ids for x in by_paper.get(i, [])], ids)
+    assert nb["progress"]["papers_done"] == total and len(r.triples) == r.triples.drop_duplicates(
+        ["paper", "subject", "relation", "object"]).shape[0]
+    assert r.answer("Q39").tables

@@ -9,7 +9,11 @@ Three levels, from simple to rich:
              coupling are projections of this paper-reference network).
   knowledge  papers, communities, authors, keywords, journals, institutions, countries and
   graph      funders together, with typed ties (SIMILAR_TO, CITES, IN_COMMUNITY, AUTHORED_BY,
-             HAS_KEYWORD, PUBLISHED_IN, AFFILIATED_WITH, LOCATED_IN, FUNDED_BY).
+             HAS_KEYWORD, PUBLISHED_IN, AFFILIATED_WITH, LOCATED_IN, FUNDED_BY), plus the
+             triples of s3bib.triples when the run has them: methods, data, theories,
+             constructs and settings (USES_METHOD, USES_DATA, USES_THEORY, STUDIES, STUDIED_IN,
+             IN_INDUSTRY, AT_LEVEL) and findings between constructs (INCREASES, DECREASES, ...;
+             weight = number of papers reporting the finding).
 
 Communities are not in the data: S3 derives them from the one-mode similarity network.
 In the knowledge graph they are nodes so that questions such as "which authors span
@@ -135,9 +139,44 @@ def two_mode(res, kind: str) -> Tables:
 # --------------------------------------------------------------------------
 # Knowledge graph
 # --------------------------------------------------------------------------
+def triple_graph(res, ids: Optional[List[str]] = None) -> Tables:
+    """Entities and ties from the run's triples: paper -> entity (USES_METHOD, ...) and
+    construct -> construct findings, weighted by the number of papers."""
+    T = getattr(res, "triples", None)
+    if T is None or not len(T):
+        return pd.DataFrame(columns=["id", "type", "label"]), _edges([])
+    from .triples import PAPER_RELATIONS
+    ids = ids or paper_ids(res)
+    T = T.dropna(subset=["object"])
+    oid = T["object_type"].str.lower() + ":" + T["object"].astype(str)
+    is_paper = T["relation"].isin(list(PAPER_RELATIONS))
+    paper_edges = pd.DataFrame({"source": [ids[int(p)] for p in T.loc[is_paper, "paper"]],
+                                "target": oid[is_paper].to_numpy(), "type": T.loc[is_paper, "relation"].to_numpy(),
+                                "weight": 1})
+    F = T[~is_paper]
+    sid = "construct:" + F["subject"].astype(str)
+    finding = pd.DataFrame({"source": sid.to_numpy(), "target": oid[~is_paper].to_numpy(),
+                            "type": F["relation"].to_numpy(), "paper": F["paper"].to_numpy()})
+    finding = (finding.groupby(["source", "target", "type"])["paper"].nunique()
+               .rename("weight").reset_index()) if len(finding) else _edges([])
+    # papers reporting a finding study both constructs
+    studies = pd.DataFrame({"source": [ids[int(p)] for p in F["paper"]] * 2,
+                            "target": list(sid) + list(oid[~is_paper]), "type": "STUDIES", "weight": 1})
+    edges = pd.concat([paper_edges, finding, studies], ignore_index=True).drop_duplicates()
+    ent = pd.concat([pd.DataFrame({"id": oid, "type": T["object_type"].str.lower(), "label": T["object"]}),
+                     pd.DataFrame({"id": sid, "type": "construct", "label": F["subject"]})], ignore_index=True)
+    counts = pd.concat([pd.DataFrame({"id": oid, "paper": T["paper"]}),
+                        pd.DataFrame({"id": sid, "paper": F["paper"]})]).groupby("id")["paper"].nunique()
+    ent = ent.drop_duplicates("id")
+    ent["papers"] = ent["id"].map(counts).fillna(0).astype(int)
+    return ent.reset_index(drop=True), edges.reset_index(drop=True)
+
+
 def knowledge_graph(res, kinds: Sequence[str] = KG_KINDS,
-                    ties: Sequence[str] = ("similar", "cites"), communities: bool = True) -> Tables:
-    """Papers plus several kinds of entities and tie types in one graph."""
+                    ties: Sequence[str] = ("similar", "cites"), communities: bool = True,
+                    triples: bool = True) -> Tables:
+    """Papers plus several kinds of entities and tie types in one graph (and the run's
+    triples, if any)."""
     nodes, edges = one_mode(res, ties)
     node_parts, edge_parts = [nodes], [edges]
     ids = paper_ids(res)
@@ -169,6 +208,10 @@ def knowledge_graph(res, kinds: Sequence[str] = KG_KINDS,
             members = [m for m in members if m[0] not in with_inst]
         node_parts.append(ent)
         edge_parts.append(_edges([(ids[i], f"{kind}:{name}", _EDGE_TYPE[kind], 1) for i, name, _ in members]))
+    if triples:
+        tn, te = triple_graph(res, ids)
+        node_parts.append(tn)
+        edge_parts.append(te)
     nodes = pd.concat([n for n in node_parts if not n.empty], ignore_index=True).drop_duplicates("id")
     edges = pd.concat([e for e in edge_parts if not e.empty], ignore_index=True).drop_duplicates()
     return nodes.reset_index(drop=True), edges.reset_index(drop=True)
@@ -201,6 +244,9 @@ def network(res, kind: str = "kg") -> nx.MultiDiGraph:
         t = one_mode(res)
     elif k.startswith("paper-") and k[6:] in TWO_MODE_KINDS:
         t = two_mode(res, k[6:])
+    elif k in ("triples", "triple"):
+        en, ee = triple_graph(res)
+        t = (pd.concat([_paper_nodes(res), en], ignore_index=True), ee)
     else:
         raise ValueError(f"Unknown network {kind!r}: use similarity, citation, one-mode, "
                          f"paper-<{'|'.join(TWO_MODE_KINDS)}> or kg")
@@ -243,6 +289,9 @@ def export_networks(res, directory: Union[str, Path],
     for k in kinds:
         nets[f"two_mode_paper_{k}"] = two_mode(res, k)
     nets["knowledge_graph"] = knowledge_graph(res, [k for k in KG_KINDS if k in kinds])
+    if getattr(res, "triples", None) is not None and len(res.triples):
+        en, ee = triple_graph(res)
+        nets["triples"] = (pd.concat([_paper_nodes(res), en], ignore_index=True), ee)
     out: Dict[str, str] = {}
     for name, (nodes, edges) in nets.items():
         if "csv" in formats:

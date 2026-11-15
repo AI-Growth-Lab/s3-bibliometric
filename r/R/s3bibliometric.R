@@ -239,3 +239,26 @@ s3_enrich_citations <- function(res, rebuild = TRUE, quiet = FALSE) {
     check_result(res), api_key = key, inst_token = if (nzchar(token)) token else NULL,
     rebuild = isTRUE(rebuild), progress = progress_printer(quiet)))
 }
+
+# ---------------------------------------------------------------------------
+# knowledge-graph triples
+# ---------------------------------------------------------------------------
+s3_add_triples <- function(res, triples, replace = FALSE) {
+  data <- if (is.data.frame(triples)) reticulate::r_to_py(triples) else normalizePath(triples)
+  to_r(check_result(res)$add_triples(data, replace = isTRUE(replace)))
+}
+
+s3_extract_triples <- function(res, backend = c("claude-code", "codex", "anthropic", "openai"),
+                               model = NULL, batch_size = 15L, max_papers = NULL, quiet = FALSE) {
+  backend <- match.arg(backend)
+  out <- check_result(res)$extract_triples(backend, model = model, batch_size = as.integer(batch_size),
+                                           max_papers = null_or_int(max_papers),
+                                           progress = progress_printer(quiet))
+  to_r(out)
+}
+
+s3_triples <- function(res) {
+  t <- check_result(res)$triples
+  if (inherits(t, "python.builtin.NoneType")) return(data.frame())
+  as_df(t)
+}

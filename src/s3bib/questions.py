@@ -45,7 +45,7 @@ LEVELS = {
     3: "Prediction (link prediction and graph neural networks)",
 }
 # Level 2: questions that use two-mode data or relations beyond the S3 map.
-LEVEL2 = {"Q4", "Q15", "Q16", "Q17", "Q18", "Q19", "Q20", "Q35", "Q36", "Q37"}
+LEVEL2 = {"Q4", "Q15", "Q16", "Q17", "Q18", "Q19", "Q20", "Q35", "Q36", "Q37", "Q39", "Q40"}
 # Analyses reported in the S3 paper (Bekamiri, Østergaard & Timmermans 2027); the other
 # level-1 questions are extensions built on the same S3 map.
 PUBLISHED = {"Q1", "Q2", "Q3", "Q5", "Q6", "Q7", "Q8", "Q10", "Q38"}
@@ -166,6 +166,9 @@ def _has(res, col: str) -> bool:
         return res.papers["year"].nunique() >= 3
     if col == "impact":  # enough cited papers to compare impact
         return (res.papers["cited_by"] > 0).mean() >= 0.2
+    if col == "triples":
+        T = getattr(res, "triples", None)
+        return T is not None and len(T) > 0
     s = res.papers.get(col)
     return s is not None and s.notna().any() and (s.astype(str).str.strip() != "").any()
 
@@ -1499,6 +1502,141 @@ def q_map_choice(res) -> Answer:
     return a
 
 
+def _triples(res) -> Optional[pd.DataFrame]:
+    T = getattr(res, "triples", None)
+    return T if T is not None and len(T) else None
+
+
+def _top_join(s: pd.Series, n: int = 3) -> str:
+    return "; ".join(f"{k} ({v})" for k, v in s.head(n).items())
+
+
+def q_triples_themes(res) -> Answer:
+    """Q39: methods, data, theories, constructs and settings per community (from triples)."""
+    from .triples import PAPER_RELATIONS
+    a = Answer("Q39", "")
+    T = _triples(res)
+    P = res.papers
+    T = T[T["relation"].isin(list(PAPER_RELATIONS))].copy()
+    T["community"] = P["community"].reindex(T["paper"].astype(int)).to_numpy()
+    n_with = T["paper"].nunique()
+    a.findings.append(f"{n_with} of {len(P)} papers ({n_with / len(P):.0%}) have triples; {len(T)} paper triples "
+                      f"name {T['object'].nunique()} methods, data sources, theories, constructs and settings.")
+    if "evidence_found" in T and T["evidence_found"].notna().any():
+        share = T["evidence_found"].astype(float).mean()
+        a.findings.append(f"{share:.0%} of the extracted triples quote evidence found word for word in the paper's "
+                          "title or abstract; check the others before citing them.")
+    kinds = [("Method", "methods"), ("Dataset", "data"), ("Theory", "theories"), ("Construct", "constructs"),
+             ("Country", "countries"), ("Industry", "industries"), ("Level", "levels")]
+    overall = (T.groupby(["object_type", "object"])["paper"].nunique().rename("papers").reset_index()
+               .sort_values(["object_type", "papers"], ascending=[True, False]))
+    for typ, word in kinds[:3]:
+        top = overall[overall["object_type"] == typ].head(3)
+        if len(top):
+            a.findings.append(f"Most used {word}: " + "; ".join(
+                f"{r.object} ({r.papers} paper{'s' if r.papers != 1 else ''})" for r in top.itertuples()) + ".")
+    comms = [int(c) for c in res.communities()["community"].head(10)]
+    rows, gaps = [], []
+    in_comm = T.dropna(subset=["community"])
+    field_share = T.groupby("object")["paper"].nunique() / max(n_with, 1)
+    for c in comms:
+        sub = in_comm[in_comm["community"] == c]
+        npap = sub["paper"].nunique()
+        row = {"community": c, "label": _display_name(res, c), "papers with triples": npap}
+        for typ, word in kinds:
+            s = sub[sub["object_type"] == typ].groupby("object")["paper"].nunique().sort_values(ascending=False)
+            row[word] = _top_join(s)
+        rows.append(row)
+        # distinctive: used much more in this theme than in the field
+        if npap >= 3:
+            s = sub.groupby("object")["paper"].nunique()
+            lift = (s / npap) / field_share.reindex(s.index)
+            dist = lift[(s >= 2) & (lift >= 2)].sort_values(ascending=False).head(3)
+            if len(dist):
+                a.findings.append(f"{_display_name(res, c)} stands out for " + ", ".join(dist.index) + ".")
+            used = set(sub.loc[sub["object_type"] == "Method", "object"])
+            common = overall[(overall["object_type"] == "Method")].head(5)
+            miss = [m for m in common["object"] if m not in used]
+            if miss and common["papers"].max() >= 3:
+                gaps.append(f"{_display_name(res, c)} never uses {', '.join(miss[:2])}")
+    if gaps:
+        a.findings.append("Methods common in the field but absent in a theme (possible gaps): "
+                          + "; ".join(gaps[:4]) + ".")
+    if P["year"].notna().any():
+        yrs = P["year"].reindex(T["paper"].astype(int)).to_numpy()
+        cut = float(pd.Series(P["year"]).quantile(0.67))
+        T["recent"] = yrs >= cut
+        tr = T[T["object_type"].isin(["Method", "Theory"])]
+        g = tr.groupby("object").agg(papers=("paper", "nunique"), recent=("recent", "mean"))
+        rising = g[(g["papers"] >= 3) & (g["recent"] >= 0.67)].sort_values("papers", ascending=False).head(4)
+        if len(rising):
+            a.findings.append(f"Rising (mostly used since {int(cut)}): " + ", ".join(rising.index) + ".")
+    a.tables["Methods, data, theories and settings per community"] = pd.DataFrame(rows)
+    first = (pd.DataFrame({"object": T["object"], "year": P["year"].reindex(T["paper"].astype(int)).to_numpy()})
+             .groupby("object")["year"].min())
+    tops = (T.groupby(["object_type", "object"])
+            .agg(papers=("paper", "nunique"),
+                 communities=("community", lambda s: ", ".join(_display_name(res, c)
+                                                                for c in s.dropna().astype(int).value_counts().index[:2])))
+            .reset_index().sort_values("papers", ascending=False))
+    tops["first year"] = tops["object"].map(first)
+    a.tables["All entities (type, papers, main communities)"] = tops.rename(
+        columns={"object_type": "type", "object": "entity"}).head(200)
+    focus = overall[overall["object_type"].isin(["Method", "Theory", "Dataset"])].sort_values("papers", ascending=False)
+    cols = list(focus["object"].head(12))
+    if cols and comms:
+        mat = [[int(in_comm[(in_comm["community"] == c) & (in_comm["object"] == e)]["paper"].nunique()) for e in cols]
+               for c in comms]
+        a.chart = {"type": "heatmap", "title": "Papers per community using each method, data source or theory",
+                   "rows": [_display_name(res, c) for c in comms], "cols": cols, "matrix": mat}
+    return a
+
+
+def q_findings(res) -> Answer:
+    """Q40: findings between constructs (from triples): what is established, what is contested."""
+    from .triples import FINDING_RELATIONS
+    a = Answer("Q40", "")
+    T = _triples(res)
+    F = T[T["relation"].isin(FINDING_RELATIONS)].copy()
+    if F.empty:
+        a.findings.append("The triples contain no findings between constructs (INCREASES, DECREASES, ...). "
+                          "Extract them from the abstracts or add them to the triples file.")
+        return a
+    P = res.papers
+    F["community"] = P["community"].reindex(F["paper"].astype(int)).to_numpy()
+    g = F.groupby(["subject", "object"])
+    tab = pd.DataFrame({"papers": g["paper"].nunique()})
+    for rel in FINDING_RELATIONS:
+        tab[rel.lower()] = F[F["relation"] == rel].groupby(["subject", "object"])["paper"].nunique()
+    tab = tab.fillna(0).astype(int).reset_index()
+    tab["contested"] = (tab["increases"] > 0) & ((tab["decreases"] > 0) | (tab["no_effect_on"] > 0)) | \
+                       (tab["decreases"] > 0) & (tab["no_effect_on"] > 0)
+    tab["communities"] = [", ".join(_display_name(res, c) for c in
+                                    F[(F["subject"] == r.subject) & (F["object"] == r.object)]["community"]
+                                    .dropna().astype(int).value_counts().index[:2]) for r in tab.itertuples()]
+    tab = tab.sort_values(["papers", "contested"], ascending=False).reset_index(drop=True)
+    a.findings.append(f"{len(F)} findings from {F['paper'].nunique()} papers link {tab.shape[0]} pairs of constructs.")
+    top = tab.head(3)
+    a.findings.append("Most studied: " + "; ".join(
+        f"{r.subject} \u2192 {r.object} ({r.papers} paper{'s' if r.papers != 1 else ''})" for r in top.itertuples()) + ".")
+    con = tab[tab["contested"]]
+    if len(con):
+        a.findings.append("Contested (papers report different directions or no effect): " + "; ".join(
+            f"{r.subject} \u2192 {r.object} ({r.increases} positive, {r.decreases} negative, {r.no_effect_on} no effect)"
+            for r in con.head(4).itertuples()) + ". Candidates for a review's discussion or a meta-analysis.")
+    else:
+        a.findings.append("No relation is reported in opposite directions in these abstracts.")
+    single = int((tab["papers"] == 1).sum())
+    if single:
+        a.findings.append(f"{single} of the {len(tab)} relations rest on a single paper: tested once, worth replicating.")
+    a.tables["Findings between constructs (papers per direction)"] = tab
+    show = tab.head(12)
+    a.chart = {"type": "bar", "title": "Most studied relations between constructs (papers)",
+               "labels": [f"{r.subject} \u2192 {r.object}" for r in show.itertuples()],
+               "values": show["papers"].tolist()}
+    return a
+
+
 def q_evaluation(res) -> Answer:
     """Q38: the S3 paper's evaluation (Tables 5-7)."""
     from .evaluate import evaluate
@@ -1593,6 +1731,11 @@ QUESTIONS: List[Question] = [
     Question("Q8", 2, "Essential", "Which papers is each community built on?",
              "Appendix Table C1 of the S3 paper: local vs global foundations.",
              "Top local (in-community) and global (Scopus) citations", (), q_foundational),
+    Question("Q39", 2, "Recommended", "Which methods, data, theories and settings does each theme use?",
+             "Turns themes into a methods-and-theory profile: what to expect, what stands out, what is missing.",
+             "Knowledge-graph triples (uploaded, or extracted from titles and abstracts by Claude or ChatGPT): "
+             "papers per entity and community, distinctive entities (lift), gaps and rising methods",
+             ("triples",), q_triples_themes),
     Question("Q9", 2, "Recommended", "How close are the communities to each other?",
              "Shows the map's layout: neighbouring vs distant topics.",
              "Mean S3 between communities", (), q_similarity),
@@ -1608,6 +1751,11 @@ QUESTIONS: List[Question] = [
              "Direction reveals hierarchy: who builds on whom.",
              "PageRank on in-corpus citations; source score and reciprocity of community flows vs chance",
              ("citations",), q_direction),
+    Question("Q40", 3, "Recommended", "Which findings link the constructs, and where do papers disagree?",
+             "Separates established relations from contested ones: material for the discussion section.",
+             "Finding triples between constructs (INCREASES, DECREASES, NO_EFFECT_ON, MODERATES, MEDIATES, "
+             "ASSOCIATED_WITH): papers per direction, contested and single-study relations",
+             ("triples",), q_findings),
     Question("Q13", 4, "Essential", "Which communities are emerging, growing or declining?",
              "Shows where the field is heading.", "Papers per year, momentum vs field", ("years",), q_growth),
     Question("Q14", 4, "Recommended", "Which concepts are rising or fading, and how far have they spread?",
@@ -1694,7 +1842,9 @@ def available(res, q: Question) -> Tuple[bool, str]:
     if missing:
         msgs = {"citations": "no in-corpus citations were found (needs References and EID)",
                 "years": "the papers cover fewer than 3 publication years",
-                "impact": "fewer than 20% of the papers have been cited yet"}
+                "impact": "fewer than 20% of the papers have been cited yet",
+                "triples": "no knowledge-graph triples yet: add a triples file (add_triples) or extract them "
+                           "from the abstracts with Claude or ChatGPT (extract_triples)"}
         return False, "Not enough data: " + "; ".join(msgs.get(m, f"missing column '{m}'") for m in missing) + "."
     return True, ""
 

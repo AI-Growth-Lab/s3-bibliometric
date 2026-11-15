@@ -227,6 +227,54 @@ res.export_networks("networks/")      # node/edge CSVs (Neo4j, igraph) + GraphML
                                       # paper-reference network
 ```
 
+## Knowledge-graph triples: methods, data, theories and findings
+
+Add what the papers *use* and *find* to the knowledge graph as triples, then read them per theme:
+
+| Relation | From → to | Example |
+|---|---|---|
+| `USES_METHOD` | paper → Method | fsQCA, panel regression |
+| `USES_DATA` | paper → Dataset | Community Innovation Survey, patent data |
+| `USES_THEORY` | paper → Theory | resource-based view |
+| `STUDIES` | paper → Construct | absorptive capacity |
+| `STUDIED_IN`, `IN_INDUSTRY`, `AT_LEVEL` | paper → Country, Industry, Level | Germany, manufacturing, firm |
+| `INCREASES`, `DECREASES`, `NO_EFFECT_ON`, `MODERATES`, `MEDIATES`, `ASSOCIATED_WITH` | Construct → Construct | absorptive capacity INCREASES innovation performance |
+
+**Upload your own** (CSV, Excel, JSON): columns `paper_id` (EID, DOI or title), `subject`,
+`relation`, `object`, optionally `evidence`. Spelling variants of an entity are merged.
+
+**Or let Claude or ChatGPT extract them** from the titles and abstracts, batch by batch, with a
+progress bar and a cache (an interrupted run resumes; a repeated run costs nothing):
+
+| Route | Uses | Command |
+|---|---|---|
+| `claude-code` | your Claude plan, through the Claude Code command line | `s3bib extract-triples scopus.csv --backend claude-code` |
+| `codex` | your ChatGPT plan, through the Codex command line | `--backend codex` |
+| `anthropic` | the Claude API (`ANTHROPIC_API_KEY`) | `--backend anthropic` |
+| `openai` | the OpenAI API (`OPENAI_API_KEY`) | `--backend openai --model <model>` |
+| in a Claude chat | Claude itself, in Claude Desktop or Claude Code | ask: *"extract the knowledge-graph triples"* (prompt `s3_triples`) |
+
+The API routes need `pip install "s3-bibliometric[llm]"`. Every extracted triple keeps a quote from
+the abstract as evidence, and S3 marks whether that quote is really in the title or abstract
+(`evidence_found`), so you can check the rest before citing them.
+
+```python
+res = s3bib.run_s3("scopus.csv")
+res.extract_triples("claude-code", max_papers=30)   # try on 30 papers first
+res.add_triples("my_triples.csv")                   # or add your own
+res.answer("Q39")    # methods, data, theories and settings per theme, gaps, rising methods
+res.answer("Q40")    # findings between constructs: established, contested, single-study
+```
+
+```bash
+s3bib extract-triples scopus.csv --backend claude-code -o triples.csv
+s3bib report scopus.csv --triples triples.csv
+```
+
+The triples join the knowledge graph (`res.network("kg")`, `export_networks`, Neo4j/Gephi files)
+next to themes, authors, journals and funders; the theme cards in the report list each theme's
+methods, theories and data.
+
 ## Three levels of analysis
 
 | Level | What it adds | Questions |
@@ -533,6 +581,10 @@ Notes:
 | `search_papers` | Semantic search inside the corpus |
 | `export_results` | Write CSV outputs |
 | `export_networks` | One-mode, two-mode and knowledge-graph networks as CSV + GraphML |
+| `add_triples` | Add a triples file (methods, data, theories, findings) to the knowledge graph |
+| `triple_extraction_options` | Which extraction routes work here: Claude plan, ChatGPT plan, API keys, or the chat |
+| `extract_triples` | Extract triples from the abstracts with Claude Code, Codex or an API, with progress |
+| `next_triple_batch`, `save_triples` | Claude extracts the triples itself in the chat, batch by batch, with progress |
 
 Prompts: **`s3_guided`** walks through the questions stage by stage; **`s3_report`** writes the
 intellectual-structure report. Runs are saved in `~/s3bib_runs` (change it with the

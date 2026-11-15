@@ -520,6 +520,8 @@ class S3Result:
     removed: pd.DataFrame = field(default_factory=pd.DataFrame)  # dropped records and why
     citation_source: str = "references"  # "references" (title matching) or "scopus_api"
     map_choice: Optional[Dict[str, Any]] = None  # comparison of the candidate maps (s3bib.mapchoice)
+    triples: Optional[pd.DataFrame] = None  # knowledge-graph triples (s3bib.triples): methods, data, findings
+    triples_done: set = field(default_factory=set)  # papers already processed in the in-chat extraction
 
     # ---- graph & guided questions -----------------------------------------
     def s3(self, directed: bool = True) -> np.ndarray:
@@ -754,6 +756,20 @@ class S3Result:
         out.insert(0, "score", scores[order])
         return out
 
+    def add_triples(self, data, source: str = "upload", aliases: Optional[Dict[str, str]] = None,
+                    replace: bool = False) -> Dict[str, Any]:
+        """Join knowledge-graph triples (file, table or extract_triples output) to this run."""
+        from .triples import add_triples
+        return add_triples(self, data, source, aliases, replace)
+
+    def extract_triples(self, backend: str = "claude-code", model: Optional[str] = None,
+                        batch_size: int = 15, max_papers: Optional[int] = None,
+                        progress: Optional[ProgressCallback] = None, **kw) -> Dict[str, Any]:
+        """Extract triples from the titles and abstracts with Claude Code, Codex or an API, and
+        add them to this run (s3bib.triples.extract_triples)."""
+        from .triples import extract_and_add
+        return extract_and_add(self, backend, model, batch_size, max_papers, progress, **kw)
+
     def compare_maps(self, extended: bool = False, holdout: float = 0.2, refresh: bool = False,
                      progress: Optional[ProgressCallback] = None) -> Dict[str, Any]:
         """Compare the text map with the hybrid maps on this corpus (s3bib.mapchoice), using
@@ -829,6 +845,10 @@ class S3Result:
                                                           default=_json_default))
         elif (d / "map_choice.json").exists():  # a comparison made on links that have changed since
             (d / "map_choice.json").unlink()
+        if self.triples is not None and len(self.triples):
+            self.triples.to_csv(d / "triples.csv", index=False)
+        if self.triples_done:
+            (d / "triples_done.json").write_text(json.dumps(sorted(self.triples_done)))
         return d
 
     @classmethod
@@ -846,7 +866,10 @@ class S3Result:
                    labels={int(k): v for k, v in meta.get("labels", {}).items()},
                    removed=pd.read_pickle(d / "removed.pkl") if (d / "removed.pkl").exists() else pd.DataFrame(),
                    citation_source=meta.get("citation_source", "references"),
-                   map_choice=_load_choice(d))
+                   map_choice=_load_choice(d),
+                   triples=pd.read_csv(d / "triples.csv") if (d / "triples.csv").exists() else None,
+                   triples_done=set(json.loads((d / "triples_done.json").read_text()))
+                   if (d / "triples_done.json").exists() else set())
 
     def export(self, directory: Union[str, Path]) -> Dict[str, str]:
         """Write human-friendly CSV/XLSX outputs."""

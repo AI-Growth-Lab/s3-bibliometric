@@ -74,6 +74,14 @@ stopifnot(identical(s3_communities(back)$n_papers, cm$n_papers))
 files <- s3_export(res, file.path(tempdir(), "s3_export"))
 stopifnot(all(file.exists(files)))
 
+# knowledge-graph triples (real ones Claude extracted from the sample abstracts)
+tr <- s3_add_triples(res, normalizePath(file.path("data", "openalex_sample_triples.csv")))
+stopifnot(tr$unmatched_triples == 0, tr$triples > 0)
+tt <- s3_triples(res)
+stopifnot(is.data.frame(tt), nrow(tt) == tr$triples_in_run, "USES_METHOD" %in% tt$relation)
+q39 <- s3_answer(res, "Q39")
+stopifnot(length(q39$tables) > 0, is.data.frame(q39$tables[[1]]))
+
 # models
 m <- s3_models()
 stopifnot("mpnet" %in% m$key, any(m$default))

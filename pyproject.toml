@@ -32,6 +32,7 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest"]
 bertopic = ["bertopic"]  # adds BERTopic to the evaluation (Q38)
+llm = ["anthropic", "openai"]  # triple extraction through the Claude or OpenAI API
 
 [project.urls]
 Homepage = "https://github.com/AI-Growth-Lab/S3"
