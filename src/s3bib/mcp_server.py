@@ -157,7 +157,7 @@ def run_s3_analysis(
                        dedupe=remove_duplicates, map_weights=map_relations,
                        citation_match="strict" if strict_citations else "lenient",
                        backbone=significant_ties_only)
-        res = run_s3(p, cfg)
+        res = run_s3(p, cfg, progress=False)  # stdout is the MCP channel: no progress bar
         res.save(_run_dir(run_id))
         _RUNS[run_id] = res
     out = {"run_id": run_id, "embedding_model": res.config.model_name, **res.summary()}
@@ -185,7 +185,7 @@ def compare_maps(csv_path: Optional[str] = None, embedding_model: str = "mpnet",
     from .mapchoice import compare_maps as _compare
     if run_id:
         res = _get(run_id)
-        ch = res.compare_maps(extended=extended, refresh=True)
+        ch = res.compare_maps(extended=extended, refresh=True, progress=False)
         res.save(_run_dir(run_id))
     else:
         if not csv_path:
@@ -195,7 +195,7 @@ def compare_maps(csv_path: Optional[str] = None, embedding_model: str = "mpnet",
             raise ValueError(f"File not found: {p}")
         cfg = S3Config(start_year=start_year, end_year=end_year, seed=seed, cache_dir=str(HOME / "_cache"),
                        model_name=embedding_model, citation_match="strict" if strict_citations else "lenient")
-        ch = _compare(p, cfg, extended=extended)
+        ch = _compare(p, cfg, extended=extended, progress=False)
     t = ch["table"].drop(columns=["weights", "significant ties"], errors="ignore").round(4)
     w = ch["weights"]
     # pass the exact weights, e.g. "s3=0.8,coupling=0.2", or "text"
@@ -226,7 +226,7 @@ def enrich_citations(run_id: str) -> Dict[str, Any]:
     from .scopus import ScopusAccessError, enrich_citations as _enrich
     res = _get(run_id)
     try:
-        stats = _enrich(res, cache_dir=str(HOME / "_scopus"))
+        stats = _enrich(res, cache_dir=str(HOME / "_scopus"), progress=False)
     except ScopusAccessError as e:
         return {"ok": False, "error": str(e),
                 "how_to_fix": "Add SCOPUS_API_KEY (and SCOPUS_INST_TOKEN if needed) to the env "

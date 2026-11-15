@@ -779,8 +779,10 @@ class S3Result:
             return self.map_choice
         from .mapchoice import compare_prepared
         set_seed(self.config.seed)
+        from .progress import resolve
         choice = compare_prepared(self.papers, self.embeddings, self.citation_pairs, self.config,
-                                  extended=extended, holdout=holdout, progress=progress)
+                                  extended=extended, holdout=holdout,
+                                  progress=resolve(progress, "Map comparison"))
         choice["auto"] = bool(self.map_choice and self.map_choice.get("auto"))
         self.map_choice = choice
         return choice
@@ -904,7 +906,8 @@ def run_s3(source: Union[str, Path, pd.DataFrame],
     S3Config(map_weights="hybrid") first screens the candidate maps (s3bib.mapchoice) and
     runs on the recommended one; the comparison is kept in S3Result.map_choice."""
     cfg = config or S3Config()
-    say = progress or (lambda s, p: log.info("%s (%.0f%%)", s, p * 100))
+    from .progress import resolve
+    say = resolve(progress, "S3")
     set_seed(cfg.seed)
     df, emb, removed = prepare(source, cfg, say)
     n = len(df)

@@ -780,3 +780,16 @@ print(json.dumps({{"type": "result", "is_error": False, "result": "```json\\n" +
     assert nb["progress"]["papers_done"] == total and len(r.triples) == r.triples.drop_duplicates(
         ["paper", "subject", "relation", "object"]).shape[0]
     assert r.answer("Q39").tables
+
+
+def test_progress_bar_by_default(df, capsys):
+    """Without a progress argument the long steps show a bar (notebooks and terminals);
+    progress=False shows nothing; a function receives every stage."""
+    s3bib.run_s3(df, s3bib.S3Config(map_weights="text"))
+    err = capsys.readouterr().err
+    assert "S3 · Threshold scan" in err and "100%" in err
+    s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), progress=False)
+    assert capsys.readouterr().err == ""
+    seen = []
+    s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), progress=lambda s, p: seen.append(p))
+    assert seen[0] == 0.0 and seen[-1] == 1.0 and seen == sorted(seen)

@@ -123,6 +123,8 @@ def enrich_citations(res, api_key: Optional[str] = None, inst_token: Optional[st
     if not api_key:
         raise ScopusAccessError("No Scopus API key. Set the SCOPUS_API_KEY environment variable "
                                 "(get a key at https://dev.elsevier.com).")
+    from .progress import resolve
+    progress = resolve(progress, "Scopus references")
     P = res.papers
     eid_to_idx = {str(e).strip(): i for i, e in P["eid"].items() if isinstance(e, str) and e.strip()}
     if not eid_to_idx:

@@ -358,7 +358,8 @@ def extract_triples(papers: Union[pd.DataFrame, Any], backend: str = "claude-cod
     parts = batches(table, batch_size)
     ask = BACKENDS[backend]
     cdir = Path(cache_dir).expanduser() if cache_dir else None
-    say = progress or (lambda s, p: None)
+    from .progress import resolve
+    say = resolve(progress, "Triples")
     found, errors, t0, fresh = [], [], time.time(), 0
     done_papers = 0
     say(f"Triples: {len(table)} papers in {len(parts)} batches with {backend}", 0.0)

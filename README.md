@@ -95,6 +95,11 @@ s3bib.S3Config(map_weights="text+coupling") # one of four maps (below)
 s3bib.S3Config(map_weights="hybrid")        # screen the hybrid maps, use the best one
 ```
 
+**Progress.** `run_s3`, `compare_maps`, `extract_triples` and `enrich_citations` show a progress
+bar while they work (a widget in Jupyter and Colab, a text bar in a terminal): loading, embedding
+batch by batch, the threshold scan, and so on. Pass `progress=False` to hide it, or a function
+`progress(stage, fraction)` to handle it yourself.
+
 **Strict citation matching.** Matching titles inside References text can link a short,
 generic title such as "Introduction" to every reference that contains the word. On the
 Innovation & Diversity corpus about a quarter of the matched citations came from titles of

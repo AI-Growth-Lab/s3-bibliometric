@@ -302,7 +302,8 @@ def compare_maps(source, config=None, extended: bool = False, holdout: float = 0
     Embeddings are cached (S3Config.cache_dir), so the full run afterwards does not embed again."""
     from .pipeline import S3Config, citation_edges, prepare, set_seed
     cfg = config or S3Config()
-    say = progress or (lambda s, p: None)
+    from .progress import resolve
+    say = resolve(progress, "Map comparison")
     set_seed(cfg.seed)
     df, emb, _ = prepare(source, cfg, lambda s, p: say(s, 0.4 * p))
     say("Matching in-corpus citations", 0.4)
