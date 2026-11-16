@@ -1,9 +1,22 @@
+# Python
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.egg-info/
 dist/
 build/
-*.egg-info/
 .pytest_cache/
-.DS_Store
+.ipynb_checkpoints/
+
+# R package checks
+*.Rcheck/
+r/*.tar.gz
+
+# Runs, caches and large raw data (keep exports out of git; tests/data holds the small real sample)
 s3bib_runs/
+data/raw/
+embeddings/
+.cache/
+.huggingface/
+.DS_Store

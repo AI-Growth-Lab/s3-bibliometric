@@ -601,7 +601,7 @@ def test_review_report_and_exports(res, tmp_path):
         assert 'id="brief"' in html and html.count('class="theme"') == len(res.communities().head(10))
         assert "Could not compute" not in html and "For your review" in html
         assert 'download="reading_list.ris"' in html and "Methods paragraph" in html
-        assert "https://github.com/AI-Growth-Lab/S3" in html  # the S3 project, on every report
+        assert "https://github.com/AI-Growth-Lab/s3-bibliometric" in html  # the S3 project, on every report
         assert "https://doi.org/10.1016/j.jbusres.2026.116582" in html  # and the paper
     assert "Who works on it" in html  # level 2 adds actors to the theme cards
     old = res.report(tmp_path / "q.html", layout="questions").read_text()

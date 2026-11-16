@@ -35,11 +35,12 @@ bertopic = ["bertopic"]  # adds BERTopic to the evaluation (Q38)
 llm = ["anthropic", "openai"]  # triple extraction through the Claude or OpenAI API
 
 [project.urls]
-Homepage = "https://github.com/AI-Growth-Lab/S3"
+Homepage = "https://ai-growth-lab.github.io/s3-bibliometric/"
+Source = "https://github.com/AI-Growth-Lab/s3-bibliometric"
 Paper = "https://doi.org/10.1016/j.jbusres.2026.116582"
-"Propose an analysis" = "https://github.com/AI-Growth-Lab/S3/issues"
-"Library source" = "https://github.com/AI-Growth-Lab/s3-bibliometric"
-"Library issues" = "https://github.com/AI-Growth-Lab/s3-bibliometric/issues"
+"User guide" = "https://github.com/AI-Growth-Lab/s3-bibliometric/blob/main/docs/guide.md"
+"Propose an analysis" = "https://github.com/AI-Growth-Lab/s3-bibliometric/issues/new/choose"
+Issues = "https://github.com/AI-Growth-Lab/s3-bibliometric/issues"
 
 [project.scripts]
 s3-bibliometric = "s3bib.mcp_server:main"

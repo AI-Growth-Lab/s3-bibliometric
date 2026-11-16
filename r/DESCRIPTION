@@ -20,9 +20,8 @@ Description: Maps the intellectual structure of a research field from the
     frames, compare text-only and hybrid maps, and write a report organised
     for a literature review.
 License: MIT + file LICENSE
-URL: https://github.com/AI-Growth-Lab/S3,
-    https://github.com/AI-Growth-Lab/s3-bibliometric,
-    https://ai-growth-lab.github.io/S3/
+URL: https://github.com/AI-Growth-Lab/s3-bibliometric,
+    https://ai-growth-lab.github.io/s3-bibliometric/
 BugReports: https://github.com/AI-Growth-Lab/s3-bibliometric/issues
 Depends: R (>= 4.1)
 Imports: reticulate (>= 1.41), utils

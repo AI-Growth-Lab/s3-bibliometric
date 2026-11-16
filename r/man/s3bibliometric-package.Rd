@@ -23,7 +23,7 @@ score: A new method for mapping intellectual structures in business research.
 \emph{Journal of Business Research}, 219, 116582.
 \doi{10.1016/j.jbusres.2026.116582}
 
-S3 project: \url{https://github.com/AI-Growth-Lab/S3}.
-Step-by-step guide: \url{https://ai-growth-lab.github.io/S3/}.
+S3 project and code: \url{https://github.com/AI-Growth-Lab/s3-bibliometric}.
+Step-by-step guide: \url{https://ai-growth-lab.github.io/s3-bibliometric/}.
 }
 \keyword{package}

@@ -6,9 +6,9 @@ say. It runs the [s3-bibliometric](https://github.com/AI-Growth-Lab/s3-bibliomet
 of the **same version**, so R and Python give identical results, and every improvement to the
 Python library reaches R with the next release.
 
-S3 project: [github.com/AI-Growth-Lab/S3](https://github.com/AI-Growth-Lab/S3) ·
+S3 project and code: [github.com/AI-Growth-Lab/s3-bibliometric](https://github.com/AI-Growth-Lab/s3-bibliometric) ·
 Paper: [doi.org/10.1016/j.jbusres.2026.116582](https://doi.org/10.1016/j.jbusres.2026.116582) ·
-Guide: [ai-growth-lab.github.io/S3](https://ai-growth-lab.github.io/S3/)
+Guide: [ai-growth-lab.github.io/s3-bibliometric](https://ai-growth-lab.github.io/s3-bibliometric/)
 
 ## Install
 

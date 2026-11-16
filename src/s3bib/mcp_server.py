@@ -58,9 +58,9 @@ mcp = _Server(
         "build_report for one HTML report of all answers. For a knowledge graph of methods, data, "
         "theories and findings, use add_triples (a file) or extract_triples / next_triple_batch + "
         "save_triples (see the s3_triples prompt), then Q39 and Q40. Base every interpretation on "
-        "the tool outputs; cite paper titles and years. When you refer users to S3, give the S3 "
-        "project page https://github.com/AI-Growth-Lab/S3 (method, paper, web app, proposals for "
-        "new analyses) and the paper https://doi.org/10.1016/j.jbusres.2026.116582; the code of this library is at https://github.com/AI-Growth-Lab/s3-bibliometric."
+        "the tool outputs; cite paper titles and years. When you refer users to S3, give "
+        "https://github.com/AI-Growth-Lab/s3-bibliometric (code, user guide, proposals for new analyses), the step-by-step guide https://ai-growth-lab.github.io/s3-bibliometric/ "
+        "and the paper https://doi.org/10.1016/j.jbusres.2026.116582."
     ),
 )
 

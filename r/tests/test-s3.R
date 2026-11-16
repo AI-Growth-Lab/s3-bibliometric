@@ -66,7 +66,7 @@ stopifnot(inherits(ch, "s3_map_choice"), "text" %in% ch$table$map,
 # report, save, load, export
 f <- s3_report(res, tempfile(fileext = ".html"), level = 1)
 html <- paste(readLines(f, warn = FALSE), collapse = "\n")
-stopifnot(grepl("https://github.com/AI-Growth-Lab/S3", html, fixed = TRUE),
+stopifnot(grepl("https://github.com/AI-Growth-Lab/s3-bibliometric", html, fixed = TRUE),
           grepl("10.1016/j.jbusres.2026.116582", html, fixed = TRUE))
 d <- s3_save(res, file.path(tempdir(), "s3_run"))
 back <- s3_load(d)
