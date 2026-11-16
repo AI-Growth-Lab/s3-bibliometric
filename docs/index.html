@@ -86,6 +86,11 @@ a.fact:hover{border-color:var(--teal)}
 .l1 .pill{background:var(--teal-soft);color:var(--teal)}.l2 .pill{background:var(--plum-soft);color:var(--plum)}.l3 .pill{background:var(--amber-soft);color:var(--amber)}
 .refs{margin-top:16px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--teal);padding:2px 0 2px 12px;max-width:80ch}
 .refs a{color:var(--teal)}
+.video{margin-top:20px;max-width:720px}
+.video .frame{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video p{margin:6px 0 0;font-size:.88rem;color:var(--muted)}
+.video p a{color:var(--teal)}
 @media (max-width:860px){
   .fork{grid-template-columns:1fr;padding-top:0}
   .fork::before,.merge::before{display:none}
@@ -108,6 +113,11 @@ a.fact:hover{border-color:var(--teal)}
     <span>Code, user guide and proposals: <a href="https://github.com/AI-Growth-Lab/s3-bibliometric">github.com/AI-Growth-Lab/s3-bibliometric</a> · Package: <a href="https://pypi.org/project/s3-bibliometric/">pypi.org/project/s3-bibliometric</a></span>
     <span>Method: Bekamiri, H., Østergaard, C. R., &amp; Timmermans, B. (2027). Semantic similarity score: A new method for mapping intellectual structures in business research. <i>Journal of Business Research</i>, 219, 116582. <a href="https://doi.org/10.1016/j.jbusres.2026.116582">https://doi.org/10.1016/j.jbusres.2026.116582</a></span>
   </div>
+
+  <figure class="video" aria-label="Video tutorial">
+    <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/xPJ_P2p9dtE" title="S3: map a research field from titles and abstracts (3-minute tutorial)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <p>The whole guide in 3 minutes. <a href="https://youtu.be/xPJ_P2p9dtE">Watch on YouTube</a>.</p>
+  </figure>
 
   <div class="flow">
     <section class="step" aria-labelledby="s1">

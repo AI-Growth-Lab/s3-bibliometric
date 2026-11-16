@@ -14,12 +14,17 @@ from Python or from R.
 [![App](https://img.shields.io/badge/app-s3--bibliometric.com-0f6b74)](https://s3-bibliometric.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/AI-Growth-Lab/s3-bibliometric/blob/main/LICENSE)
 
+**[Video tutorial (3 min)](https://youtu.be/xPJ_P2p9dtE)** ·
 **[Step-by-step guide](https://ai-growth-lab.github.io/s3-bibliometric/)** ·
 **[User guide](https://github.com/AI-Growth-Lab/s3-bibliometric/blob/main/docs/guide.md)** ·
 **[Web app](https://s3-bibliometric.com/)** ·
 **[Paper](https://doi.org/10.1016/j.jbusres.2026.116582)** ·
 **[R package](https://github.com/AI-Growth-Lab/s3-bibliometric/tree/main/r)** ·
 **[Propose an analysis](https://github.com/AI-Growth-Lab/s3-bibliometric/issues/new/choose)**
+
+<a href="https://youtu.be/xPJ_P2p9dtE" title="Watch the 3-minute S3 tutorial on YouTube"><img src="https://img.youtube.com/vi/xPJ_P2p9dtE/maxresdefault.jpg" alt="S3 tutorial video: map a research field from titles and abstracts (3 minutes, YouTube)" width="640"></a>
+
+▶ *Watch the 3-minute tutorial: export from Scopus, run S3, read the report.*
 
 </div>
 
