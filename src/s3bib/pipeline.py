@@ -748,6 +748,13 @@ class S3Result:
             })
         return pd.DataFrame(rows)
 
+    def embedding_map(self, method: str = "auto") -> pd.DataFrame:
+        """The papers' embeddings in 2-D (UMAP if umap-learn is installed, else PCA), with their
+        S3 community, title and year: the picture of the silhouette shown in Q2 of the report.
+        method: "auto", "umap" or "pca"; the method used is in `.attrs["method"]`."""
+        from .embedmap import embedding_map
+        return embedding_map(self, method)
+
     def search(self, query: str, top_k: int = 10) -> pd.DataFrame:
         q = embed_texts([query], self.config.model_name)[0]
         scores = self.embeddings @ q

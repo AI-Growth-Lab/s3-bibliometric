@@ -518,11 +518,43 @@ def _wordgrid(spec: Dict[str, Any]) -> str:
             f'<script type="application/json" id="{wid}-data">{data}</script><script>s3WG("{wid}")</script>')
 
 
+def _scatter(spec: Dict[str, Any]) -> str:
+    """Papers as dots (x, y, community, title, year); one scale for both axes, grey dots underneath."""
+    pts = spec["points"]
+    if len(pts) < 2:
+        return ""
+    w, h, pad = 640, 440, 14
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    x0, y0 = min(xs), min(ys)
+    k = min((w - 2 * pad) / ((max(xs) - x0) or 1), (h - 2 * pad) / ((max(ys) - y0) or 1))
+    ox = (w - (max(xs) - x0) * k) / 2
+    oy = (h - (max(ys) - y0) * k) / 2
+    r = 3.2 if len(pts) <= 500 else 2.4 if len(pts) <= 3000 else 1.6
+    out = [f'<svg viewBox="0 0 {w} {h}" class="chart scatter" role="img" aria-label="{_e(spec.get("title"))}">',
+           f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="6" class="frame"/>']
+    for p in sorted(pts, key=lambda p: p[2] >= 0):
+        x, y = ox + (p[0] - x0) * k, h - (oy + (p[1] - y0) * k)
+        c = _col(p[2]) if p[2] >= 0 else GREY
+        tip = _e(p[3]) + (f" ({p[4]})" if p[4] else "")
+        op = ".85" if p[2] >= 0 else ".45"
+        out.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="{c}" fill-opacity="{op}"><title>{tip}</title></circle>')
+    out.append("</svg>")
+    items = [(f'{g["name"]} ({g["n"]})', _col(g["id"])) for g in spec["legend"]]
+    n_out = sum(1 for p in pts if p[2] < 0)
+    if n_out:
+        items.append((f"outside the main communities ({n_out})", GREY))
+    note = ("UMAP keeps each paper's neighbourhood; the distance between far-apart groups has no meaning."
+            if spec.get("method") == "UMAP" else "PCA: the two directions of largest variance.")
+    return ("".join(out) + _legend(items) +
+            f'<p class="more">Hover a dot for the paper. Axes have no units. {note}</p>')
+
+
 def _chart(spec: Optional[Dict[str, Any]]) -> str:
     if not spec:
         return ""
     fn = {"bar": _bar, "line": _line, "heatmap": _heat, "stack": _stack, "sankey": _sankey,
-          "network": _network, "ktree": _ktree, "wordcloud": _wordcloud, "wordgrid": _wordgrid}.get(spec["type"])
+          "network": _network, "ktree": _ktree, "wordcloud": _wordcloud, "wordgrid": _wordgrid,
+          "scatter": _scatter}.get(spec["type"])
     body = fn(spec) if fn else ""
     return f'<figure><figcaption>{_e(spec.get("title"))}</figcaption>{body}</figure>' if body else ""
 
@@ -650,6 +682,7 @@ nav a{color:var(--fg);text-decoration:none}nav a:hover{color:var(--acc)}nav b{co
 figure{margin:0}figcaption{font-size:.85rem;color:var(--mut);margin-bottom:4px}
 .chart{width:100%;max-width:680px;height:auto}.chart text{font-size:11px;fill:var(--mut)}.chart .lab{fill:var(--fg)}
 .chart .axis{stroke:var(--mut)}.chart .grid{stroke:var(--line)}
+.chart .frame{fill:none;stroke:var(--line)}.scatter circle:hover{stroke:var(--fg);stroke-width:1.5}
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--mut)}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
 details{border:1px solid var(--line);border-radius:6px;padding:4px 10px;margin:8px 0;background:var(--card)}
 details summary{cursor:pointer;font-size:.9rem;font-weight:600;margin:4px 0}

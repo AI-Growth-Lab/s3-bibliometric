@@ -793,3 +793,29 @@ def test_progress_bar_by_default(df, capsys):
     seen = []
     s3bib.run_s3(df, s3bib.S3Config(map_weights="text"), progress=lambda s, p: seen.append(p))
     assert seen[0] == 0.0 and seen[-1] == 1.0 and seen == sorted(seen)
+
+
+def test_embedding_map_in_q2(res, tmp_path):
+    """Q2 shows the real embeddings in 2-D (UMAP if installed, else PCA) and separation per community."""
+    from s3bib import embedmap
+    m = res.embedding_map()
+    assert len(m) == len(res.papers) and m.attrs["method"] in ("UMAP", "PCA")
+    assert np.isfinite(m[["x", "y"]].to_numpy()).all()
+    main = set(res.communities()["community"])
+    assert set(m["community"].dropna().astype(int)) <= main
+    pca = res.embedding_map("pca")
+    assert pca.attrs["method"] == "PCA" and len(pca) == len(res.papers)
+    with pytest.raises(ValueError):
+        res.embedding_map("tsne")
+    sep = embedmap.separation(res)
+    assert set(sep["community"]) == main
+    assert sep["silhouette"].between(-1, 1).all()
+    assert (sep["agreement by chance"] < 1).all()
+    a = res.answer("Q2")
+    spec = [c for c in a.charts if c["type"] == "scatter"][0]
+    assert len(spec["points"]) == len(res.papers)
+    assert "Separation per community (embeddings)" in a.tables
+    html = (tmp_path / "r.html")
+    res.report(html)
+    text = html.read_text()
+    assert 'class="chart scatter"' in text and "The papers&#x27; embeddings in two dimensions" in text

@@ -95,8 +95,8 @@ and the QI of the communities; otherwise it keeps the text map.
 - **Gaps and agenda**: knowledge gaps and emerging themes for your discussion section.
 - **Methods and findings** (optional): methods, data, theories and findings per theme, from
   triples you upload or that Claude or ChatGPT extract from the abstracts.
-- **Trust in the map**: the threshold choice (SII), coherence against other methods, and outliers
-  that do not belong to the field.
+- **Trust in the map**: the threshold choice (SII), coherence against other methods, an embedding
+  map (UMAP) that shows how well the themes separate, and outliers that do not belong to the field.
 
 All of this comes as one HTML report organised for a literature review, with a methods paragraph
 to adapt and reading lists for Zotero, EndNote or Mendeley.

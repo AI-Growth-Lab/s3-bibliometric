@@ -420,7 +420,37 @@ def q_quality(res) -> Answer:
         "SII": round(res.best["sii"], 2), "modularity": round(mod, 4), "density": round(dens, 5),
         "papers": len(P), "clustered": int(P["community"].notna().sum()),
         "outliers": int(P["is_outlier"].sum()), "communities": len(groups), "components": comps}])
+    _embedding_view(res, a)
     return a
+
+
+def _embedding_view(res, a: Answer) -> None:
+    """Q2's picture of the silhouette: the embeddings in 2-D, and separation per community."""
+    from . import embedmap
+    try:
+        sep = embedmap.separation(res)
+        spec = embedmap.chart(res, names={c: _name(res, c) for c in _main_comms(res)})
+    except Exception as ex:  # never lose Q2 over the picture
+        a.findings.append(f"The embedding map could not be drawn: {ex}")
+        return
+    how = ("UMAP, cosine, 15 neighbours" if spec["method"] == "UMAP"
+           else "PCA; install umap-learn for a UMAP view: pip install \"s3-bibliometric[umap]\"")
+    a.findings.append(
+        f"Embedding map ({how}): each dot is a paper placed by what its title and abstract say, "
+        "coloured by its S3 community; grey dots are outside the main communities. Tight, separate "
+        "colours mean distinct themes; mixed colours mean themes that share vocabulary. Read the "
+        "neighbourhoods, not the distances between far-apart groups, which this projection does not keep.")
+    if len(sep):
+        sep = sep.assign(community=[_name(res, c) for c in sep["community"]])
+        ok = sep.dropna(subset=["neighbour agreement"])
+        above = int((ok["neighbour agreement"] > ok["agreement by chance"]).sum())
+        weakest = sep.sort_values("silhouette").iloc[0]
+        a.findings.append(
+            f"In the full embedding space, {above} of {len(ok)} communities have more of their nearest papers "
+            f"inside the community than chance; the least separated is {weakest['community']} "
+            f"(silhouette {weakest['silhouette']:.2f}).")
+        a.tables["Separation per community (embeddings)"] = sep
+    a.charts.append(spec)
 
 
 def q_outliers(res) -> Answer:
@@ -1705,7 +1735,9 @@ QUESTIONS: List[Question] = [
              "Shows the S3 threshold choice is data-driven, not arbitrary.",
              "Threshold scan 0.75-0.85, SII = silhouette × retained papers", (), q_threshold),
     Question("Q2", 1, "Essential", "How clear is the community structure?",
-             "Reviewers ask whether the communities are real.", "Silhouette, modularity, density", (), q_quality),
+             "Reviewers ask whether the communities are real.",
+             "Silhouette, modularity, density; the embeddings in 2-D (UMAP, else PCA) with silhouette and "
+             "nearest-neighbour agreement per community", (), q_quality),
     Question("Q3", 1, "Essential", "Which papers do not belong to the field?",
              "Cleans the corpus; S3 detects off-topic papers that keyword searches let in.",
              "Papers without S3 links above the threshold", (), q_outliers),

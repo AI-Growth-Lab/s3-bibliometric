@@ -312,6 +312,19 @@ embeddings for every method, and QI. BERTopic is included when installed
 (`pip install "s3-bibliometric[bertopic]"`). Absolute values depend on text cleaning, so compare
 the methods within one run rather than with the numbers printed in the paper.
 
+Q2 also draws the **embedding map**: every paper placed in two dimensions by its title + abstract
+embedding and coloured by its S3 community, so readers can see the separation the silhouette
+measures, the papers outside the main communities and those between them. It uses UMAP (cosine,
+15 neighbours, seeded) when `umap-learn` is installed (`pip install "s3-bibliometric[umap]"`) and
+PCA otherwise. A table gives, per community, the mean silhouette and the share of each paper's 15
+nearest papers that are in its own community, next to the share expected by chance; both are
+computed on the full embeddings, not on the 2-D picture. UMAP keeps neighbourhoods, not the
+distances between far-apart groups, so use Q9 and Q10 for how close or connected themes are.
+
+```python
+res.embedding_map()            # x, y, community, title, year; .attrs["method"] is "UMAP" or "PCA"
+```
+
 ## The report: organised for a literature review
 
 `res.report("report.html")` writes one self-contained HTML page in the order a review is written:
