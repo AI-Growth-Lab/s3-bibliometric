@@ -1,7 +1,7 @@
 Package: s3bibliometric
 Type: Package
 Title: Semantic Similarity Score (S3) for Mapping Research Fields
-Version: 0.16.3
+Version: 0.17.0
 Authors@R: c(
     person("Hamid", "Bekamiri", email = "hamidb@business.aau.dk",
            role = c("aut", "cre")),
