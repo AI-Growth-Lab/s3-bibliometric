@@ -70,6 +70,8 @@ NOTES = {
     "Q38": "Evidence that the themes are coherent: report it when reviewers ask why you used S3.",
     "Q39": "Describe each theme's methods and theories; the gaps are ready-made suggestions for future research.",
     "Q40": "Established vs contested findings: the core of a review's discussion. Check each against the papers.",
+    "Q41": "The network description for your results section; hubs and connectors are good examples when "
+           "you introduce a theme or link two themes.",
 }
 
 SECTIONS = [
@@ -80,14 +82,17 @@ SECTIONS = [
      "the other themes. Each card is the material for one subsection of your review.", ["Q5", "Q6", "Q7", "Q8", "Q39"]),
     ("connect", "3. How themes connect",
      "Closeness in content, citation flows and the papers that bridge themes.", ["Q9", "Q10", "Q37", "Q12", "Q21"]),
-    ("evolution", "4. Evolution", "How the themes and their concepts change over time.", ["Q13", "Q14", "Q23"]),
-    ("actors", "5. Who does the work",
+    ("network", "4. Network indicators",
+     "The network as a whole, each theme as a subnetwork, and each paper's position in it: hub, connector "
+     "or peripheral.", ["Q41"]),
+    ("evolution", "5. Evolution", "How the themes and their concepts change over time.", ["Q13", "Q14", "Q23"]),
+    ("actors", "6. Who does the work",
      "Authors, countries and institutions, journals and funders behind the themes.",
      ["Q15", "Q16", "Q18", "Q19", "Q20"]),
-    ("agenda", "6. Research agenda",
+    ("agenda", "7. Research agenda",
      "Material for your discussion and future-research sections.",
      ["Q40", "Q11", "Q17", "Q22", "Q25", "Q26", "Q27", "Q28", "Q29", "Q33"]),
-    ("methods", "7. Methods appendix",
+    ("methods", "8. Methods appendix",
      "A methods paragraph to adapt, a glossary, and the analyses that show the map can be trusted.",
      ["Q0", "Q1", "Q2", "Q38", "Q4", "Q35", "Q36", "Q24", "Q30", "Q31", "Q32", "Q34"]),
 ]
@@ -106,6 +111,12 @@ GLOSSARY = [
     (1, "Momentum", "A theme's share of papers in the last 3 years relative to the field's (above 1.2 = growing)."),
     (1, "Knowledge gap", "Two themes close in content that rarely cite each other."),
     (1, "Outlier", "A paper with no similarity link above the threshold."),
+    (1, "Degree / strength", "A paper's number of links in the map / the sum of their similarities."),
+    (1, "Betweenness", "How often a paper lies on the shortest paths between other papers: here, between topics."),
+    (1, "Participation (P)", "How evenly a paper's links spread over the themes (0 = all in its own theme)."),
+    (1, "Hub / connector", "A paper with many more links than others in its theme (z ≥ 2.5) / one whose links "
+                           "spread over several themes (Guimerà & Amaral 2005)."),
+    (1, "Small-world", "Much more clustered than a random network with the same links, with similarly short paths."),
     (2, "Bibliographic coupling", "Two papers cite the same references."),
     (2, "Co-citation", "Two papers are cited together by a third."),
     (2, "Significant ties", "Coupling, co-citation or co-authorship ties that are more frequent than chance."),

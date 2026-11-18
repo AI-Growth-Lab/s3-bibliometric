@@ -288,7 +288,7 @@ methods, theories and data.
 
 | Level | What it adds | Questions |
 |---|---|---|
-| **1. S3** — the published method | The text-similarity map and what the S3 paper reports from it. Questions marked *S3 paper* are in the paper; *extension* questions use the same map. | **S3 paper:** Q1 threshold (SII) · Q2 structure quality · Q3 outliers · Q38 evaluation against coupling, BERTopic and random clusters (paper Tables 5–7) · Q5 communities · Q6 topics · Q7 core papers · Q8 local vs global foundations · Q10 citation flows, QI, MI (Tables 1–2). **Extensions:** Q0 which map to use (text alone or text plus citations) · Q9 closeness · Q11 knowledge gaps · Q12 bridges · Q13 growth · Q14 concepts · Q21–Q23 interdisciplinarity |
+| **1. S3** — the published method | The text-similarity map and what the S3 paper reports from it. Questions marked *S3 paper* are in the paper; *extension* questions use the same map. | **S3 paper:** Q1 threshold (SII) · Q2 structure quality · Q3 outliers · Q38 evaluation against coupling, BERTopic and random clusters (paper Tables 5–7) · Q5 communities · Q6 topics · Q7 core papers · Q8 local vs global foundations · Q10 citation flows, QI, MI (Tables 1–2). **Extensions:** Q0 which map to use (text alone or text plus citations) · Q9 closeness · Q11 knowledge gaps · Q12 bridges · Q41 network indicators · Q13 growth · Q14 concepts · Q21–Q23 interdisciplinarity |
 | **2. Two-mode networks and knowledge graph** (default) | Authors, institutions, countries, journals, funders and references; the map options that mix in citation relations | Q4 agreement with coupling and co-citation · Q15–Q20 actors · Q35 layer overlap and projection check · Q36 homophily · Q37 citation direction |
 | **3. Prediction** (off unless asked) | Link prediction and graph neural networks | Q24–Q34 |
 
@@ -325,6 +325,33 @@ distances between far-apart groups, so use Q9 and Q10 for how close or connected
 res.embedding_map()            # x, y, community, title, year; .attrs["method"] is "UMAP" or "PCA"
 ```
 
+**Network indicators (Q41).** The report's *Network indicators* section describes the map as a
+network, the way bibliometric network papers report it:
+
+- **Network level**, for the map at the Q1 threshold and, at level 2, the coupling, co-citation,
+  direct-citation and co-authorship layers: papers and links, density, average degree, connected
+  groups and the share of papers in the largest one, clustering, average path length and diameter,
+  degree centralization, degree assortativity, the modularity of the S3 communities on each network
+  (do the S3 themes also structure citations and co-authorship?), and a small-world check against a
+  random network with the same papers and links.
+- **Communities as subnetworks**: links inside and to other communities, density inside, clustering,
+  and how many hubs and connectors each has.
+- **Node level**, one row per paper: degree, strength (sum of link similarities), eigenvector
+  centrality, betweenness, harmonic closeness, PageRank, local clustering, k-core, participation P
+  and within-community degree z, and the role these two give (Guimerà & Amaral 2005): hub
+  (z ≥ 2.5), connector (links spread over several themes) or peripheral.
+
+All measures are exact (igraph). The map is a similarity network cut at a threshold: a paper's
+degree depends on that threshold, betweenness means it sits *between topics* rather than passing
+information along, and clustering is high by construction. Flow readings belong to the citation
+network (Q10, Q37).
+
+```python
+res.network_metrics()            # indicators x networks (map, coupling, co-citation, ...)
+res.community_network_metrics()  # one row per community
+res.node_metrics()               # one row per paper, with its role; also node_metrics.csv in res.export()
+```
+
 ## The report: organised for a literature review
 
 `res.report("report.html")` writes one self-contained HTML page in the order a review is written:
@@ -335,7 +362,7 @@ res.embedding_map()            # x, y, community, title, year; .attrs["method"] 
 3. **Themes** — one card per theme: terms and keywords, papers to read first, foundations,
    growth, which themes it builds on and is used by, the closest themes in content, and at
    level 2 its authors, countries, journals and funders. Each card is one subsection of your review.
-4. **How themes connect**, **Evolution**, **Who does the work** (level 2).
+4. **How themes connect**, **Network indicators** (Q41), **Evolution**, **Who does the work** (level 2).
 5. **Research agenda** — knowledge gaps, emerging themes, collaboration gaps (level 2) and
    forecasts (level 3), for your discussion and future-research sections.
 6. **Methods appendix** — a methods paragraph to adapt (with the references), a glossary, and the

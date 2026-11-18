@@ -819,3 +819,53 @@ def test_embedding_map_in_q2(res, tmp_path):
     res.report(html)
     text = html.read_text()
     assert 'class="chart scatter"' in text and "The papers&#x27; embeddings in two dimensions" in text
+
+
+def test_network_indicators_q41(res, tmp_path):
+    """Q41 on real data: network-, community- and node-level indicators match networkx."""
+    import networkx as nx
+    G = res.graph()
+    net = res.network_metrics()
+    assert list(net.columns[:1]) == ["S3 map"] and {"coupling", "co-authorship"} <= set(net.columns)
+    s = net["S3 map"]
+    assert s["links"] == G.number_of_edges() and s["papers"] == len(res.papers)
+    assert s["density"] == pytest.approx(nx.density(G))
+    assert s["clustering (transitivity)"] == pytest.approx(nx.transitivity(G))
+    assert s["degree assortativity"] == pytest.approx(nx.degree_assortativity_coefficient(G))
+    q2 = res.answer("Q2").tables["Structure quality"]["modularity"].iat[0]
+    assert s["modularity of the S3 communities"] == pytest.approx(q2, abs=1e-4)
+
+    nodes = res.node_metrics()
+    assert len(nodes) == len(res.papers) and (nodes.index == res.papers.index).all()
+    bet = nx.betweenness_centrality(G)
+    assert np.allclose(nodes["betweenness"].to_numpy(), [bet[i] for i in range(len(G))])
+    harm = nx.harmonic_centrality(G)
+    assert np.allclose(nodes["harmonic closeness"].to_numpy(), [harm[i] / (len(G) - 1) for i in range(len(G))])
+    assert (nodes["degree"].to_numpy() == [G.degree(i) for i in range(len(G))]).all()
+    assert nodes["participation"].between(0, 1).all()
+    assert ((nodes["role"] == "outlier (no links)") == res.papers["is_outlier"]).all()
+    # eigenvector centrality: defined within each connected group (it used to be 0 for every paper)
+    big = max(nx.connected_components(G), key=len)
+    ref = nx.eigenvector_centrality_numpy(G.subgraph(big), weight="weight")
+    assert np.allclose([nodes["eigenvector"].iat[i] for i in sorted(big)], [ref[i] for i in sorted(big)])
+    assert (nodes.loc[nodes["degree"] > 0, "eigenvector"] > 0).all()
+
+    comm = res.community_network_metrics()
+    assert set(comm["community"]) == set(res.communities()["community"])
+    assert comm["links inside"].sum() + comm["links to other communities"].sum() / 2 <= G.number_of_edges()
+
+    a = res.answer("Q41")
+    assert {"Network-level indicators", "Communities as subnetworks"} <= set(a.tables)
+    assert a.chart["type"] == "bar" and sum(a.chart["values"]) == len(res.papers)
+    html = res.report(tmp_path / "r.html").read_text()
+    assert 'id="network"' in html and "Network-level indicators" in html
+    out = res.export(tmp_path / "out")
+    assert len(pd.read_csv(out["node_metrics_csv"])) == len(res.papers)
+
+    # runs saved before the fix carry eigenvector 0 for every paper: recomputed on load
+    d = res.save(tmp_path / "run")
+    P = pd.read_pickle(d / "papers.pkl")
+    P["eigen_centrality"] = 0.0
+    P.to_pickle(d / "papers.pkl")
+    old = s3bib.S3Result.load(d)
+    assert np.allclose(old.papers["eigen_centrality"], res.papers["eigen_centrality"])

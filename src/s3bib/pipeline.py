@@ -334,6 +334,31 @@ def build_graph(sim: np.ndarray, threshold: float) -> nx.Graph:
     return G
 
 
+def eigenvector_by_component(G: nx.Graph) -> Dict[int, float]:
+    """Weighted eigenvector centrality computed within each connected group of papers.
+
+    Eigenvector centrality is not defined for a network with separate groups (networkx raises),
+    and the S3 network always has them: outliers have no links. Each group's vector has unit
+    length, as in networkx, so values compare papers within a group, which is how they are used
+    (ranking the papers of a community). Papers without links get 0."""
+    import scipy.sparse.linalg as sla
+    out = {v: 0.0 for v in G}
+    for comp in nx.connected_components(G):
+        if len(comp) < 2:
+            continue
+        nodes = sorted(comp)
+        A = nx.to_scipy_sparse_array(G.subgraph(nodes), nodelist=nodes, weight="weight", dtype=float)
+        if len(nodes) <= 100:
+            vals, vecs = np.linalg.eigh(A.toarray())
+            v = vecs[:, int(np.argmax(vals))]
+        else:
+            v = sla.eigsh(A, k=1, which="LA")[1][:, 0]
+        v = np.abs(v)
+        v = v / (np.linalg.norm(v) or 1.0)
+        out.update(zip(nodes, v.tolist()))
+    return out
+
+
 def _louvain(G: nx.Graph, seed: int) -> Dict[int, int]:
     from community import community_louvain  # python-louvain
     return community_louvain.best_partition(G, weight="weight", random_state=seed)
@@ -755,6 +780,26 @@ class S3Result:
         from .embedmap import embedding_map
         return embedding_map(self, method)
 
+    def network_metrics(self, layers: Optional[bool] = None) -> pd.DataFrame:
+        """Network-level indicators (Q41): rows are indicators, columns the map network and, with
+        layers=True (default at level 2), the coupling, co-citation, direct-citation and
+        co-authorship layers. See s3bib.netmetrics."""
+        from .netmetrics import network_level
+        return network_level(self, layers)
+
+    def node_metrics(self) -> pd.DataFrame:
+        """Node-level indicators (Q41), one row per paper: degree, strength, eigenvector,
+        betweenness, harmonic closeness, PageRank, local clustering, k-core, participation,
+        within-community z and role (Guimerà & Amaral 2005)."""
+        from .netmetrics import node_level
+        return node_level(self)
+
+    def community_network_metrics(self) -> pd.DataFrame:
+        """Each main community as a subnetwork of the map (Q41): links inside and to other
+        communities, density inside, clustering, hubs and connectors."""
+        from .netmetrics import community_level
+        return community_level(self)
+
     def search(self, query: str, top_k: int = 10) -> pd.DataFrame:
         q = embed_texts([query], self.config.model_name)[0]
         scores = self.embeddings @ q
@@ -868,7 +913,7 @@ class S3Result:
         c.setdefault("community_method", "louvain")  # runs saved before 0.3.0 used Louvain
         c["thresholds"] = tuple(c["thresholds"])
         cfg = S3Config(**{k: v for k, v in c.items() if k in S3Config.__dataclass_fields__})
-        return cls(papers=pd.read_pickle(d / "papers.pkl"),
+        res = cls(papers=pd.read_pickle(d / "papers.pkl"),
                    embeddings=np.load(d / "embeddings.npy"),
                    scan=meta["scan"], best=meta["best"], config=cfg,
                    citation_pairs=[tuple(p) for p in meta["citation_pairs"]],
@@ -879,6 +924,13 @@ class S3Result:
                    triples=pd.read_csv(d / "triples.csv") if (d / "triples.csv").exists() else None,
                    triples_done=set(json.loads((d / "triples_done.json").read_text()))
                    if (d / "triples_done.json").exists() else set())
+        # runs saved with 0.17.0 or earlier have eigenvector centrality 0 for every paper (networkx refused
+        # the disconnected S3 network): recompute it per connected group
+        P = res.papers
+        if res.best and "eigen_centrality" in P and not (P["eigen_centrality"] > 0).any():
+            eig = eigenvector_by_component(res.graph())
+            P["eigen_centrality"] = [float(eig.get(i, 0.0)) for i in range(len(P))]
+        return res
 
     def export(self, directory: Union[str, Path]) -> Dict[str, str]:
         """Write human-friendly CSV/XLSX outputs."""
@@ -893,6 +945,11 @@ class S3Result:
         papers.to_csv(out["papers_csv"], index=False)
         self.communities().to_csv(out["communities_csv"], index=False)
         pd.DataFrame(self.scan).to_csv(out["threshold_scan_csv"], index=False)
+        if self.best:
+            out["node_metrics_csv"] = d / "node_metrics.csv"
+            out["network_metrics_csv"] = d / "network_metrics.csv"
+            self.node_metrics().to_csv(out["node_metrics_csv"], index=False)
+            self.network_metrics().rename_axis("indicator").to_csv(out["network_metrics_csv"])
         if self.citation_pairs:
             out["citation_matrix_csv"] = d / "citation_matrix.csv"
             self.citation_matrix().to_csv(out["citation_matrix_csv"])
@@ -1018,10 +1075,7 @@ def _run_prepared(df: pd.DataFrame, emb: np.ndarray, removed: List[Dict[str, Any
         # Singletons are not communities: they are the S3 "irrelevant" papers.
         df["community"] = pd.array([int(l) if sizes[l] > 1 else None for l in labels], dtype="Int64")
         df["community"] = _renumber(df["community"])
-        try:
-            eig = nx.eigenvector_centrality_numpy(G, weight="weight")
-        except Exception:
-            eig = {i: 0.0 for i in range(n)}
+        eig = eigenvector_by_component(G)
         df["eigen_centrality"] = [float(eig.get(i, 0.0)) for i in range(n)]
 
         deg = np.array([G.degree(i) for i in range(n)])

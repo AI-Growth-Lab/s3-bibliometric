@@ -157,6 +157,15 @@ s3_scan <- function(res) {
   as_df(pd$DataFrame(check_result(res)$scan))
 }
 
+s3_network_metrics <- function(res, layers = NULL) {
+  df <- check_result(res)$network_metrics(layers = layers)
+  as_df(df$rename_axis("indicator")$reset_index())
+}
+
+s3_node_metrics <- function(res) {
+  as_df(check_result(res)$node_metrics())
+}
+
 s3_search <- function(res, query, top_k = 10L) {
   df <- as_df(check_result(res)$search(query, top_k = as.integer(top_k)))
   df$text <- NULL

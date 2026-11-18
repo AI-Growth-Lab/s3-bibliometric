@@ -53,7 +53,7 @@ mcp = _Server(
         "then compare_maps with run_id to check the map choice on the exact data) if the user wants "
         "exact citations -> get_community for each main "
         "community and save_community_labels with short labels -> list_questions shows "
-        "the ranked research questions (Q1-Q23 and Q35-Q37; Q24-Q34 prediction when asked) this dataset can answer -> "
+        "the ranked research questions (Q0-Q23 and Q35-Q41; Q24-Q34 prediction when asked) this dataset can answer -> "
         "answer_question for the ones the user cares about, in rank order -> "
         "build_report for one HTML report of all answers. For a knowledge graph of methods, data, "
         "theories and findings, use add_triples (a file) or extract_triples / next_triple_batch + "

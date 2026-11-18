@@ -453,6 +453,120 @@ def _embedding_view(res, a: Answer) -> None:
     a.charts.append(spec)
 
 
+def q_network(res) -> Answer:
+    """Q41: network-level, community-level and node-level indicators of the map network."""
+    from . import netmetrics as nm
+    a = Answer("Q41", "")
+    net = nm.network_level(res)
+    lab = nm.map_label(res)
+    s = net[lab]
+    t = res.best["threshold"]
+    a.findings.append(
+        f"At the threshold chosen in Q1 ({t:.2f}), the {lab} links {int(s['papers with links']):,} of "
+        f"{int(s['papers']):,} papers with {int(s['links']):,} links: density {s['density']:.4f}, average "
+        f"degree {s['average degree']:.1f}. {s['share of papers in the largest group']:.0%} of the papers are in "
+        f"the largest connected group, and the papers with links form "
+        f"{int(s['connected groups (papers with links)'])} separate group(s).")
+    n_big = round(s["share of papers in the largest group"] * s["papers"])
+    if pd.notna(s["small-world sigma"]) and n_big < 30:
+        a.findings.append(f"Clustering (transitivity) is {s['clustering (transitivity)']:.2f}. The largest group "
+                          f"has only {n_big} papers, too few for a small-world check.")
+    elif pd.notna(s["small-world sigma"]):
+        est = " (estimated from a sample of start papers)" if s["path lengths estimated from a sample"] else ""
+        sw = (f"so it is small-world (σ = {s['small-world sigma']:.1f} > 1)" if s["small-world sigma"] > 1
+              else f"so it is not small-world (σ = {s['small-world sigma']:.1f})")
+        a.findings.append(
+            f"Clustering (transitivity) is {s['clustering (transitivity)']:.2f}; in the largest group it is "
+            f"{s['clustering / random network']:.1f}× that of a random network with the same papers and links, "
+            f"and the average path length is {s['average path length (largest group)']:.1f} steps{est} "
+            f"({s['path length / random network']:.1f}× random), {sw}. Similarity networks are clustered by "
+            "construction (two papers similar to a third tend to be similar to each other), so high "
+            "clustering says little on its own.")
+    if pd.notna(s["degree assortativity"]):
+        r = s["degree assortativity"]
+        how = (": well-linked papers link to each other (a dense core)" if r > 0.1 else
+               ": well-linked papers link to weakly linked ones (hubs with their own peripheries)" if r < -0.1
+               else ": no strong pattern")
+        a.findings.append(f"Degree centralization is {s['degree centralization']:.2f} (0 = every paper equally "
+                          f"linked, 1 = one paper linked to all others); degree assortativity is {r:+.2f}{how}.")
+    if len(net.columns) > 1:
+        mods = net.loc["modularity of the S3 communities"]
+        a.findings.append(
+            "Modularity of the S3 communities on each network: " +
+            ", ".join(f"{k} {v:.2f}" for k, v in mods.items() if pd.notna(v)) +
+            ". Well above 0 on a citation or co-authorship layer means the S3 communities also structure "
+            "that network; near 0 means those ties run across the communities.")
+
+    nodes = nm.node_level(res)
+    roles = nodes["role"].value_counts()
+    inside = nodes[nodes["role"].isin(nm.ROLES)]
+    hubs = inside[inside["role"].str.contains("hub")]
+    conn = inside[inside["role"].isin(["connector", "kinless", "connector hub", "kinless hub"])]
+    a.findings.append(
+        f"Roles of the papers in the main communities (Guimerà & Amaral 2005, from within-community "
+        f"degree z and participation P): {len(hubs)} hub(s) (z ≥ {nm.HUB_Z:g}), {len(conn)} connector(s) "
+        f"(P > 0.62, or hubs with P > 0.30), and {int(roles.get('peripheral', 0) + roles.get('ultra-peripheral', 0))} "
+        f"peripheral papers that link mostly inside their own community.")
+    if len(hubs):
+        h = hubs.sort_values(["within-community z", "degree"], ascending=False).iloc[0]
+        a.findings.append(f"The strongest hub is “{h['title']}” ({_yr(h['year'])}, {_name(res, h['community'])}, "
+                          f"{int(h['degree'])} links, z = {h['within-community z']:.1f}).")
+    if len(conn):
+        c = conn.sort_values(["participation", "degree"], ascending=False).iloc[0]
+        a.findings.append(f"The most connecting paper is “{c['title']}” ({_yr(c['year'])}, "
+                          f"{_name(res, c['community'])}, participation {c['participation']:.2f}).")
+    a.findings.append(
+        "Reading: this is a similarity network cut at the Q1 threshold. A paper's degree depends on that "
+        "threshold, betweenness means it sits between topics rather than passing information along, and "
+        "eigenvector centrality compares papers within a connected group. Flow readings belong to the "
+        "citation network (Q10, Q37).")
+
+    show = net.drop(index="path lengths estimated from a sample").copy()
+
+    def fmt(ind, v):
+        if pd.isna(v):
+            return ""
+        if ind in ("papers", "links", "papers with links", "connected groups (papers with links)",
+                   "diameter (largest group)"):
+            return f"{int(v):,}"
+        if ind == "density":
+            return f"{v:.5f}"
+        if ind == "share of papers in the largest group":
+            return f"{v:.1%}"
+        return f"{v:.3f}" if abs(v) < 10 else f"{v:.1f}"
+    disp = pd.DataFrame({col: [fmt(i, v) for i, v in show[col].items()] for col in show.columns}, index=show.index)
+    a.tables["Network-level indicators"] = disp.reset_index().rename(columns={"index": "indicator"})
+    comm = nm.community_level(res)
+    if len(comm):
+        comm = comm.assign(community=[_name(res, c) for c in comm["community"]]).round(3)
+        a.tables["Communities as subnetworks"] = comm
+    cols = ["title", "year", "community", "cited_by", "degree", "strength", "eigenvector", "betweenness",
+            "harmonic closeness", "pagerank", "local clustering", "k-core", "participation",
+            "within-community z", "role"]
+    top = nodes[nodes["degree"] > 0].sort_values(["degree", "betweenness"], ascending=False).head(25)[cols].copy()
+    top["community"] = [_name(res, c) if pd.notna(c) else "" for c in top["community"]]
+    a.tables["Node-level indicators (25 papers with the most links; all papers: res.node_metrics())"] = top.round(4)
+    if len(conn) or len(hubs):
+        hc = pd.concat([hubs, conn]).drop_duplicates(subset=["title"])
+        hc = hc.sort_values(["participation", "within-community z"], ascending=False).head(25)[cols].copy()
+        hc["community"] = [_name(res, c) for c in hc["community"]]
+        a.tables["Hubs and connectors"] = hc.round(4)
+
+    dd = nm.degree_distribution(res)
+    a.chart = {"type": "bar", "title": f"Degree distribution of the {lab}: papers by number of links",
+               "labels": dd["links"].tolist(), "values": dd["papers"].tolist()}
+    order = list(nm.ROLES) + ["outside the main communities", "outlier (no links)"]
+    rc = [(k, int(roles.get(k, 0))) for k in order if roles.get(k, 0)]
+    if rc:
+        a.charts.append({"type": "bar", "title": "Papers by network role (Guimerà & Amaral 2005)",
+                         "labels": [k for k, _ in rc], "values": [v for _, v in rc]})
+    return a
+
+
+def _yr(y) -> str:
+    return str(int(y)) if pd.notna(y) else "n.d."
+
+
 def q_outliers(res) -> Answer:
     a = Answer("Q3", "")
     o = res.outliers()
@@ -1738,6 +1852,13 @@ QUESTIONS: List[Question] = [
              "Reviewers ask whether the communities are real.",
              "Silhouette, modularity, density; the embeddings in 2-D (UMAP, else PCA) with silhouette and "
              "nearest-neighbour agreement per community", (), q_quality),
+    Question("Q41", 1, "Recommended", "What does the S3 network look like, and which position does each paper hold?",
+             "The network description reviewers expect, and each paper's role: hub, connector or peripheral.",
+             "Network level: density, connected groups, clustering, path length, degree centralization and "
+             "assortativity, modularity, small-world check (the map; at level 2 also coupling, co-citation, "
+             "direct citation, co-authorship). Communities as subnetworks. Node level: degree, strength, "
+             "eigenvector, betweenness, harmonic closeness, PageRank, clustering, k-core, participation, "
+             "within-community z and roles (Guimerà & Amaral 2005)", (), q_network),
     Question("Q3", 1, "Essential", "Which papers do not belong to the field?",
              "Cleans the corpus; S3 detects off-topic papers that keyword searches let in.",
              "Papers without S3 links above the threshold", (), q_outliers),

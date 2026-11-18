@@ -97,6 +97,9 @@ and the QI of the communities; otherwise it keeps the text map.
   triples you upload or that Claude or ChatGPT extract from the abstracts.
 - **Trust in the map**: the threshold choice (SII), coherence against other methods, an embedding
   map (UMAP) that shows how well the themes separate, and outliers that do not belong to the field.
+- **Network indicators**: the map as a network (density, clustering, path length, small-world
+  check, modularity on the citation and co-authorship layers) and each paper's position: degree,
+  betweenness, PageRank, k-core, and its role as hub, connector or peripheral.
 
 All of this comes as one HTML report organised for a literature review, with a methods paragraph
 to adapt and reading lists for Zotero, EndNote or Mendeley.
