@@ -215,8 +215,17 @@ a.fact:hover{border-color:var(--teal)}
     <div class="fork">
       <section class="lane" style="--c:var(--teal);--cs:var(--teal-soft)" aria-labelledby="la">
         <header><span class="badge">Chat runs S3</span><h3 id="la">Claude Desktop</h3><span class="who">Mac or Windows app</span></header>
+        <p class="mut" style="margin:0 0 10px">Claude Desktop runs <b>S3 bibliometric</b>, an open-source Python library and MCP server: <a href="https://pypi.org/project/s3-bibliometric/" style="color:var(--teal)">s3-bibliometric on PyPI</a> · <a href="https://github.com/AI-Growth-Lab/s3-bibliometric" style="color:var(--teal)">code on GitHub</a>. The config below makes Claude start it on your computer with uvx (which installs it from PyPI), so Claude can use S3's tools.</p>
         <ol>
-          <li><div>Open <b>Settings → Developer → Edit Config</b>.</div></li>
+          <li><div>Open <b>Settings → Developer → Edit Config</b>. Settings is in the <b>Claude</b> menu in the menu bar (Mac) or the <b>☰</b> menu at the top left → <b>File</b> (Windows). Edit Config shows the file <code>claude_desktop_config.json</code> in Finder or File Explorer: open it with <b>TextEdit</b> (Mac) or <b>Notepad</b> (Windows).
+            <span class="mut">Where the file is, if you want to open it yourself:</span>
+            <div class="label">Mac (Finder → Go → Go to Folder…, paste this)</div>
+            <div class="cmd"><span>~/Library/Application Support/Claude/claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
+            <div class="label">Windows (paste into the File Explorer address bar)</div>
+            <div class="cmd"><span>%APPDATA%\Claude\claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
+            <span class="mut">Or open it from Terminal (Mac; creates the file if it is missing):</span>
+            <div class="cmd"><span>mkdir -p ~/Library/Application\ Support/Claude && touch ~/Library/Application\ Support/Claude/claude_desktop_config.json && open -a TextEdit ~/Library/Application\ Support/Claude/claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
+            <span class="mut">or from PowerShell (Windows): <code>notepad "$env:APPDATA\Claude\claude_desktop_config.json"</code>. Claude from the Microsoft Store keeps the file in another folder: use Edit Config.</span></div></li>
           <li><div>Paste this and save:
             <div class="cmd"><span>{
   "mcpServers": {
@@ -225,11 +234,14 @@ a.fact:hover{border-color:var(--teal)}
       "args": ["s3-bibliometric"]
     }
   }
-}</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Quit Claude completely and open it again. S3's tools appear in the tools menu of the chat box.</div></li>
-          <li><div>Ask:<div class="ask">Run S3 on ~/Downloads/scopus.csv, label the themes and build the literature-review report.</div></div></li>
+}</span><button class="copy" type="button">Copy</button></div>
+            <span class="mut">If the file already has <code>"mcpServers"</code>, add only the <code>"s3-bibliometric"</code> part inside it. Paste rather than type: TextEdit can turn typed quotes into curly ones, which breaks the file.</span></div></li>
+          <li><div>Quit Claude completely and open it again. S3's tools appear in the tools menu of the chat box, listed as <b>s3-bibliometric</b>.</div></li>
+          <li><div>Ask, naming the tools so Claude uses them:<div class="ask">Use the s3-bibliometric tools to run S3 on ~/Downloads/scopus.csv, label the themes and build the literature-review report.</div></div></li>
         </ol>
-        <p class="fix">Tools missing? Run <code>which uvx</code> (Mac) or <code>where uvx</code> (Windows) and put that full path in <code>"command"</code>. Updating: restart Claude; if the new tools don't show, run <code>uv cache clean s3-bibliometric</code> first.</p>
+        <p class="fix"><b>Papers in several languages?</b> Add “use the multilingual model” to your request. S3 downloads it from HuggingFace the first time (about 1.1 GB). If that fails or takes too long in the chat, download it once in Terminal (Mac) or PowerShell (Windows), then ask again:</p>
+        <div class="cmd"><span>uvx --from s3-bibliometric s3bib download-model multilingual</span><button class="copy" type="button">Copy</button></div>
+        <p class="fix">Claude says it cannot find S3, or tries to install a library itself? The tools are not loaded: check that <b>s3-bibliometric</b> is in the tools menu, that the config file is valid (straight quotes, every bracket closed), and restart Claude. Still missing? Run <code>which uvx</code> (Mac) or <code>where uvx</code> (Windows) and put that full path in <code>"command"</code>. Updating: restart Claude; if the new tools don't show, run <code>uv cache clean s3-bibliometric</code> first.</p>
       </section>
 
       <section class="lane" style="--c:var(--plum);--cs:var(--plum-soft)" aria-labelledby="lb">
@@ -239,7 +251,7 @@ a.fact:hover{border-color:var(--teal)}
             <div class="cmd"><span>claude mcp add s3-bibliometric -- uvx s3-bibliometric</span><button class="copy" type="button">Copy</button></div></div></li>
           <li><div>Ask:<div class="ask">Run S3 on my Scopus file, show me the themes and the papers to read first, and write the methods paragraph.</div></div></li>
         </ol>
-        <p class="fix">Claude asks which language model to use (mpnet, from the S3 paper, is the default) and whether you have a Scopus API key. Never paste a key into the chat.</p>
+        <p class="fix">Claude asks which language model to use (mpnet, from the S3 paper, is the default; multilingual for papers in several languages) and whether you have a Scopus API key. Never paste a key into the chat. If a model download fails, run <code>uvx --from s3-bibliometric s3bib download-model multilingual</code> (or the model you chose) once in the terminal.</p>
       </section>
 
       <section class="lane" style="--c:var(--green);--cs:var(--green-soft)" aria-labelledby="ld">

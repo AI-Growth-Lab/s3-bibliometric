@@ -869,3 +869,13 @@ def test_network_indicators_q41(res, tmp_path):
     P.to_pickle(d / "papers.pkl")
     old = s3bib.S3Result.load(d)
     assert np.allclose(old.papers["eigen_centrality"], res.papers["eigen_centrality"])
+
+
+def test_model_download_help():
+    """A failed model download tells the user what to do, with the Terminal command."""
+    from s3bib.models import download_help, model_key, model_table
+    assert model_key("sentence-transformers/paraphrase-multilingual-mpnet-base-v2") == "multilingual"
+    msg = download_help("multilingual", OSError("We couldn't connect to 'https://huggingface.co'"))
+    assert "uvx --from s3-bibliometric s3bib download-model multilingual" in msg
+    assert "1.1 GB" in msg and "HF_ENDPOINT" in msg and "huggingface.co" in msg
+    assert {m["key"]: m["download"] for m in model_table()}["mpnet"] == "420 MB"

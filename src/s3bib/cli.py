@@ -124,6 +124,10 @@ def main(argv=None) -> None:
     tx.add_argument("--batch-size", type=int, default=15)
     tx.add_argument("--max-papers", type=int, help="Only the first N papers, e.g. to test")
     sub.add_parser("models", help="List the embedding models you can choose")
+    dm = sub.add_parser("download-model", help="Download embedding models once (e.g. before using them "
+                                               "from Claude Desktop), and check they load")
+    dm.add_argument("models", nargs="*", default=["mpnet"],
+                    help="Model keys (s3bib models) or sentence-transformers names; default mpnet")
     a = p.parse_args(argv)
 
     if a.cmd == "questions":
@@ -138,6 +142,17 @@ def main(argv=None) -> None:
         for m in model_table():
             print(f"{m['key']:<12} {m['model']:<62} [{m['kind']}]{'  (default)' if m['default'] else ''}\n"
                   f"{'':<12} {m['description']}")
+        return
+
+    if a.cmd == "download-model":
+        from .models import download_model, model_key
+        for name in a.models:
+            print(f"Downloading {model_key(name)} ...", flush=True)
+            try:
+                full = download_model(name)
+            except RuntimeError as ex:
+                sys.exit(str(ex))
+            print(f"Ready: {full}. S3 (also in Claude Desktop) now loads it from this computer.")
         return
 
     if a.cmd == "extract-triples":

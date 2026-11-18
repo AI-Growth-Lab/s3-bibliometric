@@ -43,7 +43,9 @@ mcp = _Server(
         "Tools for the S3 (Semantic Similarity Score) bibliometric method. "
         "Before the first run_s3_analysis, ask the user two questions unless they already "
         "answered: (1) which embedding model to use (call list_embedding_models; the default "
-        "is mpnet, the model of the published S3 paper), and (2) whether they want exact "
+        "is mpnet, the model of the published S3 paper; multilingual for corpora in several languages; "
+        "for a model other than mpnet call download_embedding_model first, and if it fails give the user "
+        "the Terminal command from its error), and (2) whether they want exact "
         "citations from the Scopus API (needs SCOPUS_API_KEY set in this MCP server's "
         "environment; never ask the user to paste a key into the chat). "
         "Typical flow: run_s3_analysis (the text map, the published method, by default; "
@@ -212,6 +214,23 @@ def list_embedding_models() -> List[Dict[str, Any]]:
     description). Default: mpnet, the model used in the published S3 paper."""
     from .models import model_table
     return model_table()
+
+
+@mcp.tool()
+def download_embedding_model(embedding_model: str = "mpnet") -> Dict[str, Any]:
+    """Download an embedding model from HuggingFace (or find it in the local cache) and check it
+    loads, before run_s3_analysis. Use it when the user picks a model other than mpnet (e.g.
+    multilingual, about 1.1 GB): the first download can take minutes. If it fails, show the user
+    the error's steps, in particular the Terminal command `uvx --from s3-bibliometric s3bib
+    download-model <key>`, which downloads the model without the chat's time limit."""
+    import time
+    from .models import download_model
+    t = time.time()
+    try:
+        full = download_model(embedding_model)
+    except RuntimeError as ex:
+        return {"ok": False, "model": embedding_model, "error": str(ex)}
+    return {"ok": True, "model": full, "seconds": round(time.time() - t, 1)}
 
 
 @mcp.tool()

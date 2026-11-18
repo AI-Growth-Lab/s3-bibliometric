@@ -62,6 +62,11 @@ The most-cited copy is kept; `res.removed` lists every dropped record and why.
 Any other sentence-transformers model name also works. The threshold range 0.75–0.85 was
 calibrated for mpnet; other models get a wider scan (0.40–0.95) unless you set one.
 
+Models download from HuggingFace the first time (mpnet about 420 MB, multilingual about 1.1 GB)
+and are then loaded from your computer. To download one ahead, for example before using it from
+Claude Desktop: `uvx --from s3-bibliometric s3bib download-model multilingual`. A model folder on
+your computer also works: give its path as the model.
+
 **Exact, complete references (optional).** A Scopus CSV export can miss references: some
 records have none, and a long reference list can be cut at 32,767 characters, the cell limit
 of spreadsheet programs (do not open and re-save the export in Excel). By default S3 finds
@@ -495,10 +500,30 @@ Close and reopen the Terminal (or PowerShell) window afterwards.
 
 ### Step 2a: Claude Desktop
 
-1. In Claude Desktop open **Settings → Developer → Edit Config**. This opens
-   `claude_desktop_config.json`.
+Claude Desktop runs **S3 bibliometric**, this open-source Python library and MCP server
+([s3-bibliometric on PyPI](https://pypi.org/project/s3-bibliometric/),
+[code on GitHub](https://github.com/AI-Growth-Lab/s3-bibliometric)). The config below makes Claude
+start it on your computer with `uvx`, which installs it from PyPI, so Claude can use S3's tools.
+
+1. In Claude Desktop open **Settings → Developer → Edit Config**. Settings is in the **Claude**
+   menu in the menu bar (Mac) or the **☰** menu at the top left → **File** (Windows). Edit Config
+   shows the file `claude_desktop_config.json` in Finder or File Explorer; open it with TextEdit
+   (Mac) or Notepad (Windows). The file is at:
+
+   | | Path |
+   |---|---|
+   | Mac | `~/Library/Application Support/Claude/claude_desktop_config.json` (Finder → Go → Go to Folder…) |
+   | Windows | `%APPDATA%\Claude\claude_desktop_config.json` (paste into the File Explorer address bar) |
+
+   Or open it from Terminal on a Mac (this creates the file if it is missing):
+   ```bash
+   mkdir -p ~/Library/Application\ Support/Claude && touch ~/Library/Application\ Support/Claude/claude_desktop_config.json && open -a TextEdit ~/Library/Application\ Support/Claude/claude_desktop_config.json
+   ```
+   or from PowerShell on Windows: `notepad "$env:APPDATA\Claude\claude_desktop_config.json"`.
+   Claude installed from the Microsoft Store keeps the file in another folder: use Edit Config.
 2. Paste this and save (if the file already has `"mcpServers"`, add only the
-   `"s3-bibliometric"` part inside it):
+   `"s3-bibliometric"` part inside it). Paste rather than type: TextEdit can turn typed quotes
+   into curly ones, which breaks the file.
    ```json
    {
      "mcpServers": {
@@ -510,10 +535,10 @@ Close and reopen the Terminal (or PowerShell) window afterwards.
    }
    ```
 3. Quit Claude Desktop completely and open it again. S3's tools now appear in Claude's
-   tools menu in the chat box.
-4. Ask, for example:
+   tools menu in the chat box, listed as **s3-bibliometric**.
+4. Ask, naming the tools so Claude uses them, for example:
 
-   > Run S3 on ~/Downloads/scopus.csv. Label the communities, walk me through the
+   > Use the s3-bibliometric tools to run S3 on ~/Downloads/scopus.csv. Label the communities, walk me through the
    > level-1 questions, and build the literature-review report.
 
    Claude asks which language model to use (mpnet, the model of the S3 paper, is the default)
@@ -521,6 +546,23 @@ Close and reopen the Terminal (or PowerShell) window afterwards.
    the chat). To use one, add it to the config above, next to `"args"`:
    `"env": {"SCOPUS_API_KEY": "your-key"}`, and restart Claude Desktop. The first run downloads the model (about 420 MB) and takes a few minutes; later
    runs are fast.
+
+**Papers in several languages?** Add "use the multilingual model" to your request. S3
+downloads it from HuggingFace the first time (about 1.1 GB). If that fails or takes too long in
+the chat, download it once in Terminal (Mac) or PowerShell (Windows), then ask again:
+
+```bash
+uvx --from s3-bibliometric s3bib download-model multilingual
+```
+
+The same works for any model in `s3bib models`. If huggingface.co is blocked on your network, set
+`HF_ENDPOINT` to a HuggingFace mirror in the config, next to `"args"`:
+`"env": {"HF_ENDPOINT": "https://..."}`, or give the path of a model folder you copied to your
+computer as the embedding model.
+
+**If Claude says it cannot find S3, or tries to install a library itself**, the tools are not
+loaded: check that **s3-bibliometric** is in the tools menu, that the config file is valid
+(straight quotes, every bracket closed), and restart Claude.
 
 **If the tools do not appear**: Claude Desktop may not find `uvx`. In Terminal run
 `which uvx` (Mac) or `where uvx` (Windows) and put that full path in `"command"`, e.g.

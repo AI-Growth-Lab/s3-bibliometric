@@ -268,7 +268,11 @@ _MODELS: Dict[str, Any] = {}
 def _get_model(name: str):
     if name not in _MODELS:
         from sentence_transformers import SentenceTransformer
-        _MODELS[name] = SentenceTransformer(name, device="cpu")
+        try:
+            _MODELS[name] = SentenceTransformer(name, device="cpu")
+        except Exception as ex:  # no network, blocked HuggingFace, interrupted download, bad path
+            from .models import download_help
+            raise RuntimeError(download_help(name, ex)) from ex
     return _MODELS[name]
 
 
