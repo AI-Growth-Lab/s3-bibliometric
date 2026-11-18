@@ -1,233 +1,256 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>S3 step by step</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Map the themes of a research field from a Scopus export with S3: pick how you want to run it (Google Colab, Claude Desktop, Claude.ai or ChatGPT, Claude Code, R or the command line) and follow three or four steps.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a flow chart read top to bottom: three shared steps, four ways to run S3 (2 x 2), one shared result. */
+/* One shared step (export), one choice (how to run S3), the chosen way's steps, the result.
+   Each way is a panel; extras and fixes sit in closed <details>. Without JavaScript every
+   panel and every way's extras are shown, each with its own label. */
 :root{
   --bg:#f5f8f8; --surface:#ffffff; --ink:#122126; --muted:#56686e; --line:#d5e0e2;
-  --teal:#0f6b74; --teal-soft:#e2f0f1; --amber:#c2672c; --amber-soft:#f8ebe1; --plum:#5b4a8a; --plum-soft:#ece8f5;
-  --green:#2f7a4b; --green-soft:#e3f2e8; --blue:#2b5c9e; --blue-soft:#e3ecf7;
+  --teal:#0f6b74; --teal-soft:#e2f0f1; --amber:#b25a22; --amber-soft:#f8ebe1; --plum:#5b4a8a; --plum-soft:#ece8f5;
+  --green:#2f7a4b; --green-soft:#e3f2e8; --blue:#2b5c9e; --blue-soft:#e3ecf7; --slate:#46585e; --slate-soft:#e8eef0;
   --code-bg:#0f2a2f; --code-ink:#e6f4f5;
   --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
   --body:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0c1618; --surface:#132226; --ink:#e3eef0; --muted:#97aab0; --line:#24393e;
   --teal:#5fc0c8; --teal-soft:#16343a; --amber:#e79a63; --amber-soft:#3a281c; --plum:#b9a8ee; --plum-soft:#2a2540;
-  --green:#7fcf9c; --green-soft:#1a3324; --blue:#8db4ec; --blue-soft:#17283f;
+  --green:#7fcf9c; --green-soft:#1a3324; --blue:#8db4ec; --blue-soft:#17283f; --slate:#a9bcc1; --slate-soft:#1d2d31;
   --code-bg:#071113; --code-ink:#d8eef0; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0c1618; --surface:#132226; --ink:#e3eef0; --muted:#97aab0; --line:#24393e;
   --teal:#5fc0c8; --teal-soft:#16343a; --amber:#e79a63; --amber-soft:#3a281c; --plum:#b9a8ee; --plum-soft:#2a2540;
-  --green:#7fcf9c; --green-soft:#1a3324; --blue:#8db4ec; --blue-soft:#17283f;
+  --green:#7fcf9c; --green-soft:#1a3324; --blue:#8db4ec; --blue-soft:#17283f; --slate:#a9bcc1; --slate-soft:#1d2d31;
   --code-bg:#071113; --code-ink:#d8eef0; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
-.wrap{max-width:1180px;margin:0 auto;padding-block:36px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+html{scroll-padding-top:16px}
+body{margin:0;overflow-wrap:break-word;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+a{color:var(--teal)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:36px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
 h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.01em}
-.lede{color:var(--muted);max-width:70ch;margin:10px 0 0;font-size:1.02rem}
-.facts{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
-.fact{font-size:.82rem;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 12px;color:var(--muted)}
+.lede{overflow-wrap:anywhere;color:var(--muted);max-width:68ch;margin:10px 0 0;font-size:1.02rem}
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:start;margin-top:4px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.fact{font-size:.82rem;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 12px;color:var(--muted);text-decoration:none}
 .fact b{color:var(--ink);font-weight:600}
-a.fact{text-decoration:none}
 a.fact:hover{border-color:var(--teal)}
-.flow{margin-top:30px;display:flex;flex-direction:column;align-items:stretch}
-.join{width:2px;height:26px;background:var(--line);margin:0 auto}
-.step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;min-width:0}
-.step.opt{border-style:dashed}
-.num{grid-row:span 2;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;background:var(--teal);color:var(--surface)}
-.opt .num{background:var(--surface);color:var(--teal);border:2px dashed var(--teal)}
-.step h2{font-size:1.15rem;align-self:center}
-.step .body{grid-column:2;min-width:0}
+.refs{overflow-wrap:anywhere;margin-top:14px;font-size:.84rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--teal);padding:2px 0 2px 12px}
+.video{margin:0}
+.video .frame{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video p{margin:6px 0 0;font-size:.85rem;color:var(--muted)}
+
+/* steps */
+.flow{margin-top:34px;display:flex;flex-direction:column}
+.join{width:2px;height:24px;background:var(--line);margin:0 auto}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.step-h{display:flex;align-items:center;gap:14px}
+.num{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;background:var(--teal);color:var(--surface)}
+.step h2{font-size:1.2rem}
+.step .body{margin:8px 0 0 50px;min-width:0}
 .step p{margin:4px 0}
 .mut{color:var(--muted)}
-.label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:12px 0 4px}
-.os{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 16px}
-.cmd{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:8px;font:13px/1.5 var(--mono);padding:10px 84px 10px 12px;overflow-x:auto;white-space:pre;margin:4px 0;min-width:0}
-.copy{position:absolute;top:7px;right:7px;font:600 12px var(--body);background:var(--teal);color:#fff;border:0;border-radius:6px;padding:4px 10px;cursor:pointer}
-.copy:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:10px 0 4px}
 .ticks{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
 .tick{font-size:.8rem;background:var(--teal-soft);color:var(--teal);border-radius:6px;padding:2px 8px;font-weight:500}
 .tick.req{background:var(--amber-soft);color:var(--amber)}
-.warn{font-size:.88rem;background:var(--amber-soft);border-radius:8px;padding:8px 10px;margin-top:8px}
-.fork{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;position:relative;padding-top:26px}
-.fork::before{content:"";position:absolute;top:0;left:25%;right:25%;height:26px;border:2px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0}
-.fork::after{content:"";position:absolute;top:-26px;left:50%;width:2px;height:26px;background:var(--line)}
-.lane{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.lane header{display:flex;flex-direction:column;gap:4px}
-.lane h3{font-size:1.15rem}
-.lane.wide{grid-column:1/-1}
-.lane.wide ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px 18px}
-.who{font-size:.85rem;color:var(--muted)}
-.badge{align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 9px;background:var(--cs);color:var(--c)}
-.lane ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:s}
-.lane li{counter-increment:s;display:grid;grid-template-columns:24px 1fr;gap:8px;min-width:0}
-.lane li::before{content:counter(s, upper-alpha);width:24px;height:24px;border-radius:6px;display:grid;place-items:center;font:700 .75rem var(--display);background:var(--cs);color:var(--c)}
-.lane li>div{min-width:0}
-.ask{border-left:3px solid var(--c);background:var(--cs);border-radius:0 8px 8px 0;padding:8px 10px;font-size:.9rem;font-style:italic}
-.fix{font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
-.fix code,.step code,.lane code,.warn code{font:12.5px var(--mono);background:var(--teal-soft);color:var(--ink);padding:1px 5px;border-radius:4px}
-.merge{position:relative;height:52px}
-.merge::before{content:"";position:absolute;bottom:26px;left:25%;right:25%;height:26px;border:2px solid var(--line);border-top:0;border-radius:0 0 12px 12px}
-.merge::after{content:"";position:absolute;bottom:0;left:50%;width:2px;height:26px;background:var(--line)}
+.warn{font-size:.88rem;background:var(--amber-soft);border-radius:8px;padding:8px 10px;margin-top:10px!important}
+code{font:12.5px var(--mono);background:var(--teal-soft);color:var(--ink);padding:1px 5px;border-radius:4px}
+.cmd{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:8px;font:13px/1.5 var(--mono);padding:10px 84px 10px 12px;overflow-x:auto;white-space:pre;margin:6px 0;min-width:0}
+.copy{position:absolute;top:7px;right:7px;font:600 12px var(--body);background:var(--teal);color:#fff;border:0;border-radius:6px;padding:4px 10px;cursor:pointer}
+.copy:focus-visible,.card:focus-visible,.other:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.os{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:4px 16px}
+
+/* the choice */
+.choose-note{margin:6px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.card{--c:var(--teal);--cs:var(--teal-soft);font:inherit;color:inherit;text-align:left;cursor:pointer;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0;position:relative}
+.card:hover{border-color:var(--c)}
+.card[aria-selected="true"]{border-color:var(--c);background:var(--cs)}
+.card[aria-selected="true"]::after{content:"✓";position:absolute;top:10px;right:12px;width:22px;height:22px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+.card b{font-family:var(--display);font-size:1.08rem;padding-right:26px}
+.card .who{font-size:.86rem;color:var(--muted)}
+.tag{align-self:flex-start;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 9px;background:var(--cs);color:var(--c)}
+.card[aria-selected="true"] .tag{background:var(--surface)}
+.others{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.others span{font-size:.86rem;color:var(--muted);margin-right:2px}
+.other{--c:var(--teal);--cs:var(--teal-soft);font:500 .88rem var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:99px;padding:5px 14px;cursor:pointer}
+.other:hover{border-color:var(--c)}
+.other[aria-selected="true"]{border-color:var(--c);background:var(--cs);color:var(--c);font-weight:600}
+.p-colab{--c:var(--green);--cs:var(--green-soft)} .p-desktop{--c:var(--teal);--cs:var(--teal-soft)}
+.p-chat{--c:var(--amber);--cs:var(--amber-soft)} .p-code{--c:var(--plum);--cs:var(--plum-soft)}
+.p-r{--c:var(--blue);--cs:var(--blue-soft)} .p-cli{--c:var(--slate);--cs:var(--slate-soft)}
+
+/* the chosen way */
+.panel{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:14px;padding:18px 20px;min-width:0}
+.panel-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.panel h3{font-size:1.25rem}
+.panel .intro{margin:6px 0 0;color:var(--muted);max-width:75ch}
+.panel ol{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;counter-reset:s}
+.panel li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
+.panel li::before{content:counter(s);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 .85rem var(--display);background:var(--cs);color:var(--c)}
+.panel li>div{min-width:0;padding-top:2px}
+.panel li b.do{font-weight:600}
+.ask{border-left:3px solid var(--c);background:var(--cs);border-radius:0 8px 8px 0;padding:8px 10px;margin-top:6px;font-size:.92rem;font-style:italic}
+details{border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+details>summary{cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink);list-style:none;display:flex;align-items:center;gap:8px}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸";color:var(--muted);transition:transform .15s}
+details[open]>summary::before{transform:rotate(90deg)}
+details .inner{font-size:.9rem;margin-top:6px}
+details .inner p{margin:6px 0}
+details ul{margin:6px 0;padding-left:20px}
+details li{margin:4px 0}
+.step details .inner, .panel details .inner{color:var(--ink)}
+
+/* result, extras, levels */
 .result{background:#0f6b74;color:#ffffff;border-radius:14px;padding:22px 24px}
-.result h2{font-size:1.35rem}
+.result h2{font-size:1.3rem}
 .parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}
 .part{background:rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;font-size:.9rem}
 .part b{display:block;font-family:var(--display);font-size:.98rem;margin-bottom:2px}
+.more{margin-top:34px}
+.more h2{font-size:1.2rem}
+.more>p{margin:4px 0 0}
+.extra{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+.extra>summary{font-size:1rem}
+.extra>summary small{font-weight:400;color:var(--muted);font-size:.86rem}
+.extra{border-top:1px solid var(--line)}
+.forpath{margin-top:8px}
 .levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:8px}
-.levels-label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:24px 0 0}
+.levels-label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:30px 0 0}
 .lv{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.88rem;min-width:0}
 .lv b{font-family:var(--display);display:block;font-size:1rem}
 .lv .pill{display:inline-block;font-size:.7rem;font-weight:600;border-radius:99px;padding:1px 8px;margin-bottom:6px}
 .l1 .pill{background:var(--teal-soft);color:var(--teal)}.l2 .pill{background:var(--plum-soft);color:var(--plum)}.l3 .pill{background:var(--amber-soft);color:var(--amber)}
-.refs{margin-top:16px;font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--teal);padding:2px 0 2px 12px;max-width:80ch}
-.refs a{color:var(--teal)}
-.video{margin-top:20px;max-width:720px}
-.video .frame{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video p{margin:6px 0 0;font-size:.88rem;color:var(--muted)}
-.video p a{color:var(--teal)}
 @media (max-width:860px){
-  .fork{grid-template-columns:1fr;padding-top:0}
-  .fork::before,.merge::before{display:none}
-  .fork::after{display:none}
-  .merge{height:26px}.merge::after{height:26px}
+  .top{grid-template-columns:minmax(0,1fr)}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .step .body{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+html:not(.js) .js-only{display:none}
 </style>
-
+</head>
+<body>
 <div class="wrap">
-  <h1>Analyse your literature with S3, step by step</h1>
-  <p class="lede">S3 maps the themes of a research field from the titles and abstracts of its papers, checks which map fits your data best, and writes a report organised for a literature review. Use it from Claude, ChatGPT or a Google Colab notebook without writing code yourself, or from R.</p>
-  <div class="facts">
-    <span class="fact"><b>Free</b> and open source</span>
-    <span class="fact">Runs on <b>your computer</b>, or in <b>Google Colab</b></span>
-    <span class="fact">First run downloads a <b>420 MB</b> language model (a few minutes)</span>
-    <a class="fact" id="s3-version" href="https://pypi.org/project/s3-bibliometric/">Latest version on <b>PyPI</b></a>
+  <div class="top">
+    <div>
+      <h1>Analyse your literature with S3</h1>
+      <p class="lede">S3 maps the themes of a research field from the titles and abstracts of its papers and writes a report organised for a literature review. Export your papers from Scopus, pick how you want to run S3, and follow three or four steps.</p>
+      <div class="facts">
+        <span class="fact"><b>Free</b> and open source</span>
+        <span class="fact">No coding needed</span>
+        <a class="fact" id="s3-version" href="https://pypi.org/project/s3-bibliometric/">Latest version on <b>PyPI</b></a>
+      </div>
+      <div class="refs" aria-label="Code, package and method">
+        <span>Code and user guide: <a href="https://github.com/AI-Growth-Lab/s3-bibliometric">github.com/AI-Growth-Lab/s3-bibliometric</a> · Package: <a href="https://pypi.org/project/s3-bibliometric/">PyPI</a></span>
+        <span>Method: Bekamiri, H., Østergaard, C. R., &amp; Timmermans, B. (2027). Semantic similarity score: A new method for mapping intellectual structures in business research. <i>Journal of Business Research</i>, 219, 116582. <a href="https://doi.org/10.1016/j.jbusres.2026.116582">doi.org/10.1016/j.jbusres.2026.116582</a></span>
+      </div>
+    </div>
+    <figure class="video" aria-label="Video tutorial">
+      <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/xPJ_P2p9dtE" title="S3: map a research field from titles and abstracts (3-minute tutorial)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p>The whole guide in 3 minutes. <a href="https://youtu.be/xPJ_P2p9dtE">Watch on YouTube</a>.</p>
+    </figure>
   </div>
-  <div class="refs" aria-label="Code, package and method">
-    <span>Code, user guide and proposals: <a href="https://github.com/AI-Growth-Lab/s3-bibliometric">github.com/AI-Growth-Lab/s3-bibliometric</a> · Package: <a href="https://pypi.org/project/s3-bibliometric/">pypi.org/project/s3-bibliometric</a></span>
-    <span>Method: Bekamiri, H., Østergaard, C. R., &amp; Timmermans, B. (2027). Semantic similarity score: A new method for mapping intellectual structures in business research. <i>Journal of Business Research</i>, 219, 116582. <a href="https://doi.org/10.1016/j.jbusres.2026.116582">https://doi.org/10.1016/j.jbusres.2026.116582</a></span>
-  </div>
-
-  <figure class="video" aria-label="Video tutorial">
-    <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/xPJ_P2p9dtE" title="S3: map a research field from titles and abstracts (3-minute tutorial)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-    <p>The whole guide in 3 minutes. <a href="https://youtu.be/xPJ_P2p9dtE">Watch on YouTube</a>.</p>
-  </figure>
 
   <div class="flow">
+    <!-- 1. shared -->
     <section class="step" aria-labelledby="s1">
-      <div class="num">1</div>
-      <h2 id="s1">Export your papers from Scopus</h2>
+      <div class="step-h"><div class="num">1</div><h2 id="s1">Export your papers from Scopus</h2></div>
       <div class="body">
-        <p>Select all results → <b>Export</b> → <b>CSV</b>, and tick every information group. Step by step, with what each field unlocks: <a href="scopus-export.html" style="color:var(--teal)">Scopus export for S3</a>.</p>
+        <p>Select all results → <b>Export</b> → <b>CSV</b>, and tick every information group. Screenshots and what each field adds: <a href="scopus-export.html">Scopus export for S3</a>.</p>
         <div class="ticks">
           <span class="tick req">Title (required)</span><span class="tick req">Abstract (required)</span>
           <span class="tick">Year</span><span class="tick">Cited by</span><span class="tick">Authors</span><span class="tick">Affiliations</span>
           <span class="tick">Keywords</span><span class="tick">References</span><span class="tick">EID</span><span class="tick">Funding</span>
         </div>
-        <p class="mut">Each extra field unlocks more of the analysis: references give citation flows and the map comparison, authors and affiliations give the who's who. Web of Science and OpenAlex exports also work.</p>
-        <p class="warn">Give S3 the file exactly as Scopus exported it. Opening and re-saving it in Excel cuts long reference lists at 32,767 characters.</p>
+        <p class="warn">Use the file exactly as Scopus exported it: opening and re-saving it in Excel cuts long reference lists. Web of Science and OpenAlex exports also work.</p>
       </div>
     </section>
     <div class="join"></div>
 
+    <!-- 2. the choice -->
     <section class="step" aria-labelledby="s2">
-      <div class="num">2</div>
-      <h2 id="s2">Install uv, once (not needed in Colab or R)</h2>
+      <div class="step-h"><div class="num">2</div><h2 id="s2">Choose how to run S3</h2></div>
       <div class="body">
-        <p>uv starts S3 and installs everything it needs. Paste one line, then close and reopen the window.</p>
-        <div class="os">
-          <div><div class="label">Mac: Terminal</div>
-            <div class="cmd"><span>curl -LsSf https://astral.sh/uv/install.sh | sh</span><button class="copy" type="button">Copy</button></div></div>
-          <div><div class="label">Windows: PowerShell</div>
-            <div class="cmd"><span>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</span><button class="copy" type="button">Copy</button></div></div>
+        <p class="choose-note mut">Not sure? Choose <b>Google Colab</b>: it needs nothing installed.</p>
+        <div class="cards" role="tablist" aria-label="How to run S3">
+          <button class="card p-colab" role="tab" id="t-colab" aria-controls="colab" aria-selected="false" data-path="colab" type="button">
+            <span class="tag">Easiest</span><b>Google Colab</b><span class="who">In your browser, nothing to install. You paste two cells and get the report.</span></button>
+          <button class="card p-desktop" role="tab" id="t-desktop" aria-controls="claude-desktop" aria-selected="false" data-path="desktop" type="button">
+            <span class="tag">Claude runs S3</span><b>Claude Desktop</b><span class="who">The Mac or Windows app. Claude runs S3 for you and explains the results.</span></button>
+          <button class="card p-chat" role="tab" id="t-chat" aria-controls="claude-ai-chatgpt" aria-selected="false" data-path="chat" type="button">
+            <span class="tag">Chat explains</span><b>Claude.ai or ChatGPT</b><span class="who">In the browser or on a phone. You make the report, the chat explains it.</span></button>
+        </div>
+        <div class="others" role="tablist" aria-label="Other ways to run S3">
+          <span>Other ways:</span>
+          <button class="other p-code" role="tab" id="t-code" aria-controls="claude-code" aria-selected="false" data-path="code" type="button">Claude Code</button>
+          <button class="other p-r" role="tab" id="t-r" aria-controls="r" aria-selected="false" data-path="r" type="button">R or RStudio</button>
+          <button class="other p-cli" role="tab" id="t-cli" aria-controls="command-line" aria-selected="false" data-path="cli" type="button">Command line or Python</button>
         </div>
       </div>
     </section>
     <div class="join"></div>
 
-    <section class="step opt" aria-labelledby="s3o">
-      <div class="num">3</div>
-      <h2 id="s3o">Optional: complete references with a Scopus API key</h2>
-      <div class="body">
-        <p>With a key from <a href="https://dev.elsevier.com" style="color:var(--teal)">dev.elsevier.com</a>, S3 fetches every paper's full reference list from Scopus using the EID column of your export: exact citations, and bibliographic coupling from Scopus IDs instead of reference text. Without a key, S3 matches titles in the References column.</p>
-        <div class="os">
-          <div><div class="label">Command line (Mac)</div>
-            <div class="cmd"><span>export SCOPUS_API_KEY="your-key"</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Then add <code>--scopus</code> to the report command.</span></div>
-          <div><div class="label">Claude Desktop: in the config, next to "args"</div>
-            <div class="cmd"><span>"env": {"SCOPUS_API_KEY": "your-key"}</span><button class="copy" type="button">Copy</button></div></div>
-        </div>
-        <p class="mut">Reference lists need your institution's Scopus access: run it on campus or the VPN, or ask your library for an institutional token. Never paste a key into a chat.</p>
-      </div>
+    <!-- 3. the chosen way -->
+    <section class="panel p-colab" id="colab" role="tabpanel" aria-labelledby="h-colab" data-path="colab">
+      <div class="panel-h"><h3 id="h-colab">Google Colab</h3><span class="mut">nothing to install</span></div>
+      <p class="intro">Colab runs Python in your browser, on Google's servers.</p>
+      <ol>
+        <li><div><b class="do">Open <a href="https://colab.research.google.com">colab.research.google.com</a> → New notebook.</b></div></li>
+        <li><div><b class="do">Paste this into the first cell and press ▶.</b> It installs S3 and asks for your Scopus file.
+          <div class="cmd"><span>!pip install -q s3-bibliometric
+from google.colab import files
+csv = list(files.upload())[0]</span><button class="copy" type="button">Copy</button></div></div></li>
+        <li><div><b class="do">Add a second cell, paste this and press ▶.</b> S3 runs and the report downloads.
+          <div class="cmd"><span>import s3bib
+res = s3bib.run_s3(csv)
+res.report("s3_report.html")
+files.download("s3_report.html")</span><button class="copy" type="button">Copy</button></div>
+          <span class="mut">The first run downloads the language model and takes a few minutes. Open the report in your browser.</span></div></li>
+      </ol>
+      <details><summary>Tips and if something goes wrong</summary><div class="inner"><ul>
+        <li>Faster: <b>Runtime → Change runtime type → T4 GPU</b> before you start.</li>
+        <li>Your file is uploaded to Google's servers. To keep it on your computer, use another way.</li>
+        <li>Colab stopped or disconnected? Run both cells again; S3 starts over.</li>
+        <li>Jupyter on your own computer: skip the upload lines and use the file path, e.g. <code>res = s3bib.run_s3("scopus.csv")</code>.</li>
+      </ul></div></details>
     </section>
-    <div class="join"></div>
 
-    <section class="step opt" aria-labelledby="s4o">
-      <div class="num">4</div>
-      <h2 id="s4o">Optional: a hybrid map (text plus citations)</h2>
-      <div class="body">
-        <p>S3 uses the text map by default, as in the published method. If you ask for a <b>hybrid map</b>, S3 first screens text plus bibliographic coupling, co-citation or direct citation at 5%, 10%, … 40% weight. It uses the best hybrid only when it raises <b>both</b> the silhouette and the QI of the communities above the text map's, while clustering at least 90% as many papers; otherwise it keeps the text map. Citations only count for papers that are already close in content.</p>
-        <div class="os">
-          <div><div class="label">Claude Desktop or Claude Code: ask</div>
-            <div class="cmd"><span>Run S3 on ~/Downloads/scopus.csv with a hybrid map.</span><button class="copy" type="button">Copy</button></div></div>
-          <div><div class="label">Command line (Claude.ai or ChatGPT route)</div>
-            <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv --map hybrid -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div></div>
-          <div><div class="label">Google Colab or Python</div>
-            <div class="cmd"><span>res = s3bib.run_s3(csv, s3bib.S3Config(map_weights="hybrid"))</span><button class="copy" type="button">Copy</button></div></div>
-          <div><div class="label">R</div>
-            <div class="cmd"><span>res &lt;- s3_run("~/Downloads/scopus.csv", map = "hybrid")</span><button class="copy" type="button">Copy</button></div></div>
-        </div>
-        <p class="mut">The report's Q0 shows the screening: silhouette, QI and topic coherence at every weight, and which map was used.</p>
-      </div>
-    </section>
-    <div class="join"></div>
-
-    <section class="step opt" aria-labelledby="s5o">
-      <div class="num">5</div>
-      <h2 id="s5o">Optional: a knowledge graph of methods, data, theories and findings</h2>
-      <div class="body">
-        <p>S3 can add what each paper <b>uses</b> and <b>finds</b> to its knowledge graph as triples: methods, data sources, theories, constructs, countries, industries and level of analysis, and findings between constructs such as <i>absorptive capacity → increases → innovation performance</i>. The report then shows each theme's methods and theories, gaps, and which findings papers agree or disagree on (Q39 and Q40).</p>
-        <p><b>Upload your own</b> triples (CSV or Excel with <code>paper_id</code>, <code>subject</code>, <code>relation</code>, <code>object</code>), or let <b>Claude or ChatGPT extract them</b> from the abstracts. A progress bar shows each batch, and every triple keeps a quote from the abstract that S3 checks.</p>
-        <div class="os">
-          <div><div class="label">Claude Desktop or Claude Code: ask</div>
-            <div class="cmd"><span>Extract the knowledge-graph triples for my S3 run and show me Q39 and Q40.</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Claude asks whether to use your Claude plan, your ChatGPT plan, an API key, or do it in the chat.</span></div>
-          <div><div class="label">Command line, with your Claude plan (Claude Code installed)</div>
-            <div class="cmd"><span>uvx --from s3-bibliometric s3bib extract-triples ~/Downloads/scopus.csv --backend claude-code -o ~/Desktop/triples.csv</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Then add <code>--triples ~/Desktop/triples.csv</code> to the report command. <code>--backend codex</code> uses your ChatGPT plan.</span></div>
-          <div><div class="label">Google Colab or Python, with an API key or your own file</div>
-            <div class="cmd"><span>res.extract_triples("anthropic", max_papers=30)   # or res.add_triples("triples.csv")</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">API keys need <code>pip install "s3-bibliometric[llm]"</code> and <code>ANTHROPIC_API_KEY</code> or <code>OPENAI_API_KEY</code> (Colab: Secrets).</span></div>
-          <div><div class="label">R</div>
-            <div class="cmd"><span>s3_extract_triples(res, "claude-code")   # or s3_add_triples(res, "triples.csv")</span><button class="copy" type="button">Copy</button></div></div>
-        </div>
-        <p class="mut">Try 30 papers first: extraction takes a few seconds per paper, and the answers are saved, so a stopped run carries on where it left off.</p>
-      </div>
-    </section>
-    <div class="join" style="height:0"></div>
-
-    <div class="fork">
-      <section class="lane" style="--c:var(--teal);--cs:var(--teal-soft)" aria-labelledby="la">
-        <header><span class="badge">Chat runs S3</span><h3 id="la">Claude Desktop</h3><span class="who">Mac or Windows app</span></header>
-        <p class="mut" style="margin:0 0 10px">Claude Desktop runs <b>S3 bibliometric</b>, an open-source Python library and MCP server: <a href="https://pypi.org/project/s3-bibliometric/" style="color:var(--teal)">s3-bibliometric on PyPI</a> · <a href="https://github.com/AI-Growth-Lab/s3-bibliometric" style="color:var(--teal)">code on GitHub</a>. The config below makes Claude start it on your computer with uvx (which installs it from PyPI), so Claude can use S3's tools.</p>
-        <ol>
-          <li><div>Open <b>Settings → Developer → Edit Config</b>. Settings is in the <b>Claude</b> menu in the menu bar (Mac) or the <b>☰</b> menu at the top left → <b>File</b> (Windows). Edit Config shows the file <code>claude_desktop_config.json</code> in Finder or File Explorer: open it with <b>TextEdit</b> (Mac) or <b>Notepad</b> (Windows).
-            <span class="mut">Where the file is, if you want to open it yourself:</span>
+    <section class="panel p-desktop" id="claude-desktop" role="tabpanel" aria-labelledby="h-desktop" data-path="desktop">
+      <div class="panel-h"><h3 id="h-desktop">Claude Desktop</h3><span class="mut">Mac or Windows app</span></div>
+      <p class="intro">You add S3 to Claude once. Claude then runs it on your computer and explains the results. S3 is an open-source library and MCP server: <a href="https://pypi.org/project/s3-bibliometric/">s3-bibliometric on PyPI</a>, <a href="https://github.com/AI-Growth-Lab/s3-bibliometric">code on GitHub</a>.</p>
+      <ol>
+        <li><div><b class="do">Install uv, once.</b> It downloads and starts S3 for Claude. Paste one line, then close the window.
+          <div class="os">
+            <div><div class="label">Mac: Terminal</div>
+              <div class="cmd"><span>curl -LsSf https://astral.sh/uv/install.sh | sh</span><button class="copy" type="button">Copy</button></div></div>
+            <div><div class="label">Windows: PowerShell</div>
+              <div class="cmd"><span>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</span><button class="copy" type="button">Copy</button></div></div>
+          </div></div></li>
+        <li><div><b class="do">In Claude, open Settings → Developer → Edit Config.</b> It shows the file <code>claude_desktop_config.json</code>: open it with TextEdit (Mac) or Notepad (Windows).
+          <details><summary>Where is Settings, and where is the file?</summary><div class="inner">
+            <p>Settings is in the <b>Claude</b> menu in the menu bar (Mac), or the <b>☰</b> menu at the top left → <b>File</b> (Windows). The file is here:</p>
             <div class="label">Mac (Finder → Go → Go to Folder…, paste this)</div>
             <div class="cmd"><span>~/Library/Application Support/Claude/claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
             <div class="label">Windows (paste into the File Explorer address bar)</div>
             <div class="cmd"><span>%APPDATA%\Claude\claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Or open it from Terminal (Mac; creates the file if it is missing):</span>
+            <div class="label">Or open it from Terminal (Mac; creates the file if it is missing)</div>
             <div class="cmd"><span>mkdir -p ~/Library/Application\ Support/Claude && touch ~/Library/Application\ Support/Claude/claude_desktop_config.json && open -a TextEdit ~/Library/Application\ Support/Claude/claude_desktop_config.json</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">or from PowerShell (Windows): <code>notepad "$env:APPDATA\Claude\claude_desktop_config.json"</code>. Claude from the Microsoft Store keeps the file in another folder: use Edit Config.</span></div></li>
-          <li><div>Paste this and save:
-            <div class="cmd"><span>{
+            <p>From PowerShell (Windows): <code>notepad "$env:APPDATA\Claude\claude_desktop_config.json"</code>. Claude from the Microsoft Store keeps the file in another folder: use Edit Config.</p>
+          </div></details></div></li>
+        <li><div><b class="do">Paste this, save, then quit Claude completely and open it again.</b>
+          <div class="cmd"><span>{
   "mcpServers": {
     "s3-bibliometric": {
       "command": "uvx",
@@ -235,100 +258,197 @@ a.fact:hover{border-color:var(--teal)}
     }
   }
 }</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">If the file already has <code>"mcpServers"</code>, add only the <code>"s3-bibliometric"</code> part inside it. Paste rather than type: TextEdit can turn typed quotes into curly ones, which breaks the file.</span></div></li>
-          <li><div>Quit Claude completely and open it again. S3's tools appear in the tools menu of the chat box, listed as <b>s3-bibliometric</b>.</div></li>
-          <li><div>Ask, naming the tools so Claude uses them:<div class="ask">Use the s3-bibliometric tools to run S3 on ~/Downloads/scopus.csv, label the themes and build the literature-review report.</div></div></li>
-        </ol>
-        <p class="fix"><b>Papers in several languages?</b> Add “use the multilingual model” to your request. S3 downloads it from HuggingFace the first time (about 1.1 GB). If that fails or takes too long in the chat, download it once in Terminal (Mac) or PowerShell (Windows), then ask again:</p>
-        <div class="cmd"><span>uvx --from s3-bibliometric s3bib download-model multilingual</span><button class="copy" type="button">Copy</button></div>
-        <p class="fix">Claude says it cannot find S3, or tries to install a library itself? The tools are not loaded: check that <b>s3-bibliometric</b> is in the tools menu, that the config file is valid (straight quotes, every bracket closed), and restart Claude. Still missing? Run <code>which uvx</code> (Mac) or <code>where uvx</code> (Windows) and put that full path in <code>"command"</code>. Updating: restart Claude; if the new tools don't show, run <code>uv cache clean s3-bibliometric</code> first.</p>
-      </section>
+          <span class="mut">Paste rather than type (TextEdit can turn typed quotes into curly ones). If the file already has <code>"mcpServers"</code>, add only the <code>"s3-bibliometric"</code> part inside it.</span></div></li>
+        <li><div><b class="do">Ask Claude</b>, naming the tools so it uses them:
+          <div class="ask">Use the s3-bibliometric tools to run S3 on ~/Downloads/scopus.csv, label the themes and build the literature-review report.</div>
+          <span class="mut">Claude asks which language model to use (the default is fine) and whether you have a Scopus API key.</span></div></li>
+      </ol>
+      <details><summary>If something goes wrong</summary><div class="inner"><ul>
+        <li><b>Claude says it cannot find S3</b>, or tries to install a library itself: the tools are not loaded. Check that <b>s3-bibliometric</b> is in the tools menu of the chat box, that the config file is valid (straight quotes, every bracket closed), and restart Claude.</li>
+        <li><b>Still no tools:</b> Claude may not find uvx. Run <code>which uvx</code> (Mac) or <code>where uvx</code> (Windows) and put that full path in <code>"command"</code>.</li>
+        <li><b>A language model does not download</b> (e.g. the 1.1 GB multilingual model): download it once in Terminal or PowerShell, then ask again: <code>uvx --from s3-bibliometric s3bib download-model multilingual</code>.</li>
+        <li><b>Updating S3:</b> restart Claude. If the new tools don't show, run <code>uv cache clean s3-bibliometric</code> first.</li>
+      </ul></div></details>
+    </section>
 
-      <section class="lane" style="--c:var(--plum);--cs:var(--plum-soft)" aria-labelledby="lb">
-        <header><span class="badge">Chat runs S3</span><h3 id="lb">Claude Code</h3><span class="who">Terminal or the Claude desktop app's Code tab</span></header>
-        <ol>
-          <li><div>Add S3 with one command:
-            <div class="cmd"><span>claude mcp add s3-bibliometric -- uvx s3-bibliometric</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Ask:<div class="ask">Run S3 on my Scopus file, show me the themes and the papers to read first, and write the methods paragraph.</div></div></li>
-        </ol>
-        <p class="fix">Claude asks which language model to use (mpnet, from the S3 paper, is the default; multilingual for papers in several languages) and whether you have a Scopus API key. Never paste a key into the chat. If a model download fails, run <code>uvx --from s3-bibliometric s3bib download-model multilingual</code> (or the model you chose) once in the terminal.</p>
-      </section>
+    <section class="panel p-chat" id="claude-ai-chatgpt" role="tabpanel" aria-labelledby="h-chat" data-path="chat">
+      <div class="panel-h"><h3 id="h-chat">Claude.ai or ChatGPT</h3><span class="mut">browser, phone or the ChatGPT app</span></div>
+      <p class="intro">These chats can't run programs on your computer, so you make the report first and the chat explains it.</p>
+      <ol>
+        <li><div><b class="do">Make the report.</b> The easiest way is <a href="#colab" data-go="colab">Google Colab</a> (nothing to install). Or, with <a href="#command-line" data-go="cli">uv installed</a>, run in Terminal or PowerShell (change the file path):
+          <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div></div></li>
+        <li><div><b class="do">Open <code>s3_report.html</code> and click the downloads at the top:</b> themes table, methods paragraph and reading list.</div></li>
+        <li><div><b class="do">Upload the report and those files to the chat, and ask:</b>
+          <div class="ask">This is an S3 analysis of my literature. Name each theme in 3–5 words and draft the structure of my literature review, with the gaps to discuss.</div></div></li>
+      </ol>
+      <details><summary>Why can't the chat run S3 itself?</summary><div class="inner">
+        <p>S3 needs to download a language model (420 MB) and run on your data. Browser chats work in a closed sandbox that can't do that. Claude Desktop and Claude Code can: they start S3 on your computer.</p>
+      </div></details>
+    </section>
 
-      <section class="lane" style="--c:var(--green);--cs:var(--green-soft)" aria-labelledby="ld">
-        <header><span class="badge">Notebook runs S3</span><h3 id="ld">Google Colab (or Jupyter)</h3><span class="who">Browser, nothing to install</span></header>
-        <ol>
-          <li><div>Open <a href="https://colab.research.google.com" style="color:var(--teal)">colab.research.google.com</a> → <b>New notebook</b>. Optional: <b>Runtime → Change runtime type → T4 GPU</b> makes the embedding faster.</div></li>
-          <li><div>Install S3 (first cell):
-            <div class="cmd"><span>!pip install -q s3-bibliometric</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Upload your Scopus CSV (pick the file when asked):
-            <div class="cmd"><span>from google.colab import files
-csv = list(files.upload())[0]</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Run S3 and download the report:
-            <div class="cmd"><span>import s3bib
-res = s3bib.run_s3(csv)
-res.report("s3_report.html")
-files.download("s3_report.html")</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">For a hybrid map, see step 4.</span></div></li>
-        </ol>
-        <p class="fix">Colab runs on Google's servers, so your file is uploaded there. Scopus API key: store it under <b>Secrets</b> (key icon) as <code>SCOPUS_API_KEY</code>, then run <code>import os; from google.colab import userdata</code>, <code>os.environ["SCOPUS_API_KEY"] = userdata.get("SCOPUS_API_KEY")</code> and <code>s3bib.enrich_citations(res)</code> before the report; Google's servers are off campus, so this usually also needs an institutional token. In Jupyter on your computer, skip the upload cell and use the file path.</p>
-      </section>
+    <section class="panel p-code" id="claude-code" role="tabpanel" aria-labelledby="h-code" data-path="code">
+      <div class="panel-h"><h3 id="h-code">Claude Code</h3><span class="mut">terminal, or the Code tab of the Claude app</span></div>
+      <ol>
+        <li><div><b class="do">Install uv, once</b> (skip if you have it):
+          <div class="os">
+            <div><div class="label">Mac: Terminal</div>
+              <div class="cmd"><span>curl -LsSf https://astral.sh/uv/install.sh | sh</span><button class="copy" type="button">Copy</button></div></div>
+            <div><div class="label">Windows: PowerShell</div>
+              <div class="cmd"><span>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</span><button class="copy" type="button">Copy</button></div></div>
+          </div></div></li>
+        <li><div><b class="do">Add S3 to Claude Code:</b>
+          <div class="cmd"><span>claude mcp add s3-bibliometric -- uvx s3-bibliometric</span><button class="copy" type="button">Copy</button></div></div></li>
+        <li><div><b class="do">Ask:</b>
+          <div class="ask">Run S3 on my Scopus file, show me the themes and the papers to read first, and write the methods paragraph.</div></div></li>
+      </ol>
+      <details><summary>If something goes wrong</summary><div class="inner"><ul>
+        <li>A language model does not download: run <code>uvx --from s3-bibliometric s3bib download-model multilingual</code> (or the model you chose) once in the terminal, then ask again.</li>
+        <li>Never paste a Scopus API key into the chat; see <a href="#extras">Go further</a>.</li>
+      </ul></div></details>
+    </section>
 
-      <section class="lane" style="--c:var(--amber);--cs:var(--amber-soft)" aria-labelledby="lc">
-        <header><span class="badge">You run S3, chat explains</span><h3 id="lc">Claude.ai or ChatGPT</h3><span class="who">Browser or phone</span></header>
-        <ol>
-          <li><div>Make the report with one command (change the file path):
-            <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Press Enter for the default model; answer <code>n</code> if you have no Scopus API key. Add <code>--map hybrid</code> for a hybrid map (step 4).</span></div></li>
-          <li><div>Open <code>s3_report.html</code> and click the downloads at the top: themes table, methods paragraph, reading list.</div></li>
-          <li><div>Upload the report and files to the chat, and ask:<div class="ask">Name each theme in 3–5 words and draft the structure of my literature review, with the gaps to discuss.</div></div></li>
-        </ol>
-        <p class="fix">Browser chats can't start programs on your computer, so they read the report S3 made instead of running S3 themselves.</p>
-      </section>
-      <section class="lane wide" style="--c:var(--blue);--cs:var(--blue-soft)" aria-labelledby="le">
-        <header><span class="badge">R runs S3</span><h3 id="le">R or RStudio</h3><span class="who">R 4.1 or newer; results come back as data frames</span></header>
-        <ol>
-          <li><div>Install the R package once:
-            <div class="cmd"><span>install.packages("remotes")
+    <section class="panel p-r" id="r" role="tabpanel" aria-labelledby="h-r" data-path="r">
+      <div class="panel-h"><h3 id="h-r">R or RStudio</h3><span class="mut">R 4.1 or newer; results come back as data frames</span></div>
+      <ol>
+        <li><div><b class="do">Install the R package once:</b>
+          <div class="cmd"><span>install.packages("remotes")
 remotes::install_github("AI-Growth-Lab/s3-bibliometric", subdir = "r")</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Run S3, see the themes and write the report:
-            <div class="cmd"><span>library(s3bibliometric)
+        <li><div><b class="do">Run S3 and write the report:</b>
+          <div class="cmd"><span>library(s3bibliometric)
 res &lt;- s3_run("~/Downloads/scopus.csv")
-s3_communities(res)
 s3_report(res, "s3_report.html")</span><button class="copy" type="button">Copy</button></div></div></li>
-          <li><div>Work with any answer in R, for example the foundations of each theme:
-            <div class="cmd"><span>s3_answer(res, "Q8")$tables[[1]]</span><button class="copy" type="button">Copy</button></div>
-            <span class="mut">Try it first on the included example: <code>s3_run(s3_example())</code>.</span></div></li>
-        </ol>
-        <p class="fix">The first time, R sets up the matching Python library by itself (through reticulate), and the first run downloads the language model (420 MB). The R package and the Python library always have the same version, so they give the same results. Scopus API key: put <code>SCOPUS_API_KEY=your-key</code> in <code>~/.Renviron</code>, restart R, then <code>s3_enrich_citations(res)</code>.</p>
-      </section>
-    </div>
-    <div class="merge"></div>
+        <li><div><b class="do">Work with any answer in R</b>, for example the themes or the foundations of each theme:
+          <div class="cmd"><span>s3_communities(res)
+s3_answer(res, "Q8")$tables[[1]]</span><button class="copy" type="button">Copy</button></div></div></li>
+      </ol>
+      <details><summary>Tips and if something goes wrong</summary><div class="inner"><ul>
+        <li>Try it first on the included example: <code>res &lt;- s3_run(s3_example())</code>.</li>
+        <li>The first time, R sets up the matching Python library by itself (through reticulate), and the first run downloads the language model (420 MB).</li>
+        <li>The R package and the Python library always have the same version, so they give the same results.</li>
+      </ul></div></details>
+    </section>
 
+    <section class="panel p-cli" id="command-line" role="tabpanel" aria-labelledby="h-cli" data-path="cli">
+      <div class="panel-h"><h3 id="h-cli">Command line or Python</h3><span class="mut">Terminal (Mac) or PowerShell (Windows)</span></div>
+      <ol>
+        <li><div><b class="do">Install uv, once,</b> then close and reopen the window:
+          <div class="os">
+            <div><div class="label">Mac: Terminal</div>
+              <div class="cmd"><span>curl -LsSf https://astral.sh/uv/install.sh | sh</span><button class="copy" type="button">Copy</button></div></div>
+            <div><div class="label">Windows: PowerShell</div>
+              <div class="cmd"><span>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</span><button class="copy" type="button">Copy</button></div></div>
+          </div></div></li>
+        <li><div><b class="do">Make the report</b> (change the file path):
+          <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div>
+          <span class="mut">It asks which language model to use (press Enter for the default) and whether you have a Scopus API key (answer <code>n</code> if not).</span></div></li>
+        <li><div><b class="do">Open <code>s3_report.html</code></b> in your browser.</div></li>
+      </ol>
+      <details><summary>In Python instead</summary><div class="inner">
+        <div class="cmd"><span>pip install s3-bibliometric</span><button class="copy" type="button">Copy</button></div>
+        <div class="cmd"><span>import s3bib
+res = s3bib.run_s3("scopus.csv")
+res.report("s3_report.html")</span><button class="copy" type="button">Copy</button></div>
+        <p>Every answer is also a table: <code>res.communities()</code>, <code>res.answer("Q8")</code>. All functions: <a href="https://github.com/AI-Growth-Lab/s3-bibliometric/blob/main/docs/guide.md">user guide</a>.</p>
+      </div></details>
+      <details><summary>If something goes wrong</summary><div class="inner"><ul>
+        <li><b>uvx: command not found</b>: close and reopen Terminal or PowerShell after installing uv.</li>
+        <li><b>A language model does not download:</b> <code>uvx --from s3-bibliometric s3bib download-model multilingual</code> (or the model you chose) downloads it on its own, then run the report again.</li>
+      </ul></div></details>
+    </section>
+    <div class="join"></div>
+
+    <!-- the result -->
     <section class="result" aria-labelledby="s4">
       <h2 id="s4">What you get: a report organised for your literature review</h2>
       <div class="parts">
         <div class="part"><b>The field at a glance</b>Numbers, themes, one paper per theme to read first, trends and gaps.</div>
-        <div class="part"><b>Theme cards</b>What each theme is about, word clouds, foundations, growth, links between themes, and with triples its methods, theories and data.</div>
+        <div class="part"><b>Theme cards</b>What each theme is about, word clouds, foundations, growth and links between themes.</div>
         <div class="part"><b>Network indicators</b>The network as a whole and each paper's position: hub, connector or peripheral.</div>
         <div class="part"><b>Research agenda</b>Knowledge gaps and emerging themes for your discussion section.</div>
-        <div class="part"><b>Methods appendix</b>Which map was used and why (text alone or text plus citations), a methods paragraph to adapt, a glossary and the validation against other methods.</div>
+        <div class="part"><b>Methods appendix</b>A methods paragraph to adapt, a glossary and the validation against other methods.</div>
         <div class="part"><b>Downloads</b>Reading lists for Zotero, EndNote or Mendeley (RIS, BibTeX), themes table, PRISMA counts.</div>
       </div>
     </section>
   </div>
 
-  <p class="levels-label" id="lvl">Levels of analysis</p>
+  <!-- extras -->
+  <section class="more" id="extras" aria-labelledby="hx">
+    <h2 id="hx">Go further (optional)</h2>
+    <p class="mut">Each one adds to the same report. <span class="js-only">The commands shown are for the way you chose above.</span></p>
+
+    <details class="extra"><summary>Papers in several languages <small>· the multilingual model</small></summary><div class="inner">
+      <p>S3's default model reads English. For a corpus that mixes languages, use the multilingual model (about 1.1 GB, downloaded the first time).</p>
+      <div class="forpath" data-for="colab"><div class="label">Google Colab: in the second cell</div>
+        <div class="cmd"><span>res = s3bib.run_s3(csv, s3bib.S3Config(model_name="multilingual"))</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="desktop code"><div class="label">Claude Desktop or Claude Code: ask</div>
+        <div class="cmd"><span>Use the s3-bibliometric tools with the multilingual model to run S3 on ~/Downloads/scopus.csv.</span><button class="copy" type="button">Copy</button></div>
+        <p class="mut">If the download fails in the chat, download it once in Terminal or PowerShell: <code>uvx --from s3-bibliometric s3bib download-model multilingual</code>.</p></div>
+      <div class="forpath" data-for="chat cli"><div class="label">Command line: add <code>--model multilingual</code></div>
+        <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv --model multilingual -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="r"><div class="label">R</div>
+        <div class="cmd"><span>res &lt;- s3_run("~/Downloads/scopus.csv", model = "multilingual")</span><button class="copy" type="button">Copy</button></div></div>
+    </div></details>
+
+    <details class="extra"><summary>Exact, complete references <small>· a Scopus API key</small></summary><div class="inner">
+      <p>With a key from <a href="https://dev.elsevier.com">dev.elsevier.com</a>, S3 fetches every paper's full reference list from Scopus: exact citations and bibliographic coupling, instead of matching titles in the References column. It needs your institution's Scopus access (campus, VPN or an institutional token). Never paste a key into a chat.</p>
+      <div class="forpath" data-for="colab"><div class="label">Google Colab: store the key under Secrets (key icon) as SCOPUS_API_KEY, then before the report</div>
+        <div class="cmd"><span>import os
+from google.colab import userdata
+os.environ["SCOPUS_API_KEY"] = userdata.get("SCOPUS_API_KEY")
+s3bib.enrich_citations(res)</span><button class="copy" type="button">Copy</button></div>
+        <p class="mut">Google's servers are off campus, so this usually needs an institutional token too.</p></div>
+      <div class="forpath" data-for="desktop"><div class="label">Claude Desktop: in the config, next to "args", then restart Claude</div>
+        <div class="cmd"><span>"env": {"SCOPUS_API_KEY": "your-key"}</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="code"><div class="label">Claude Code: add S3 with the key</div>
+        <div class="cmd"><span>claude mcp add s3-bibliometric --env SCOPUS_API_KEY=your-key -- uvx s3-bibliometric</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="chat cli"><div class="label">Command line: set the key, then add <code>--scopus</code> to the report command</div>
+        <div class="os">
+          <div><div class="label">Mac</div><div class="cmd"><span>export SCOPUS_API_KEY="your-key"</span><button class="copy" type="button">Copy</button></div></div>
+          <div><div class="label">Windows PowerShell</div><div class="cmd"><span>$env:SCOPUS_API_KEY="your-key"</span><button class="copy" type="button">Copy</button></div></div>
+        </div></div>
+      <div class="forpath" data-for="r"><div class="label">R: put SCOPUS_API_KEY=your-key in ~/.Renviron, restart R, then</div>
+        <div class="cmd"><span>s3_enrich_citations(res)</span><button class="copy" type="button">Copy</button></div></div>
+    </div></details>
+
+    <details class="extra"><summary>A hybrid map <small>· text plus citations</small></summary><div class="inner">
+      <p>S3 uses the text map by default, as in the published method. A hybrid map mixes in bibliographic coupling, co-citation or direct citation at 5–40% weight. S3 screens them and uses the best hybrid only when it improves both the silhouette and the QI of the communities; otherwise it keeps the text map. The report's Q0 shows the screening.</p>
+      <div class="forpath" data-for="colab"><div class="label">Google Colab: in the second cell</div>
+        <div class="cmd"><span>res = s3bib.run_s3(csv, s3bib.S3Config(map_weights="hybrid"))</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="desktop code"><div class="label">Claude Desktop or Claude Code: ask</div>
+        <div class="cmd"><span>Run S3 on ~/Downloads/scopus.csv with a hybrid map.</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="chat cli"><div class="label">Command line: add <code>--map hybrid</code></div>
+        <div class="cmd"><span>uvx --from s3-bibliometric s3bib report ~/Downloads/scopus.csv --map hybrid -o ~/Desktop/s3_report.html</span><button class="copy" type="button">Copy</button></div></div>
+      <div class="forpath" data-for="r"><div class="label">R</div>
+        <div class="cmd"><span>res &lt;- s3_run("~/Downloads/scopus.csv", map = "hybrid")</span><button class="copy" type="button">Copy</button></div></div>
+    </div></details>
+
+    <details class="extra"><summary>A knowledge graph <small>· methods, data, theories and findings</small></summary><div class="inner">
+      <p>S3 can record what each paper uses and finds, as triples such as <i>absorptive capacity → increases → innovation performance</i>. The report then shows each theme's methods and theories, and which findings papers agree or disagree on (Q39, Q40). Upload your own triples, or let Claude or ChatGPT extract them from the abstracts. Try 30 papers first.</p>
+      <div class="forpath" data-for="desktop code"><div class="label">Claude Desktop or Claude Code: ask</div>
+        <div class="cmd"><span>Extract the knowledge-graph triples for my S3 run and show me Q39 and Q40.</span><button class="copy" type="button">Copy</button></div>
+        <p class="mut">Claude asks whether to use your Claude plan, your ChatGPT plan, an API key, or do it in the chat.</p></div>
+      <div class="forpath" data-for="chat cli"><div class="label">Command line, with your Claude plan (Claude Code installed; --backend codex uses your ChatGPT plan)</div>
+        <div class="cmd"><span>uvx --from s3-bibliometric s3bib extract-triples ~/Downloads/scopus.csv --backend claude-code -o ~/Desktop/triples.csv</span><button class="copy" type="button">Copy</button></div>
+        <p class="mut">Then add <code>--triples ~/Desktop/triples.csv</code> to the report command.</p></div>
+      <div class="forpath" data-for="colab"><div class="label">Google Colab: with an API key in Secrets, or your own file</div>
+        <div class="cmd"><span>res.extract_triples("anthropic", max_papers=30)   # or res.add_triples("triples.csv")</span><button class="copy" type="button">Copy</button></div>
+        <p class="mut">API keys need <code>!pip install -q "s3-bibliometric[llm]"</code> and <code>ANTHROPIC_API_KEY</code> or <code>OPENAI_API_KEY</code> in Secrets.</p></div>
+      <div class="forpath" data-for="r"><div class="label">R</div>
+        <div class="cmd"><span>s3_extract_triples(res, "claude-code")   # or s3_add_triples(res, "triples.csv")</span><button class="copy" type="button">Copy</button></div></div>
+    </div></details>
+  </section>
+
+  <p class="levels-label" id="lvl">Levels of analysis in the report</p>
   <div class="levels" aria-labelledby="lvl">
-    <div class="lv l1"><span class="pill">Level 1</span><b>The published S3 method</b>Themes, central and foundational papers, citation flows, gaps, growth.</div>
+    <div class="lv l1"><span class="pill">Level 1</span><b>The published S3 method</b>Themes, central and foundational papers, citation flows, gaps, growth, network indicators.</div>
     <div class="lv l2"><span class="pill">Level 2 · default</span><b>+ Who and where</b>Authors, countries, journals, funders and citation networks.</div>
     <div class="lv l3"><span class="pill">Level 3 · when you ask</span><b>+ Predictions</b>Which gaps will close, which themes will grow, who will collaborate.</div>
   </div>
-
 </div>
 
 <script>
+document.documentElement.classList.add('js');
 // The version chip shows the latest release on PyPI, so it never goes stale.
-// Without network access to PyPI it stays a plain link to the PyPI page.
 (function(){
   const el=document.getElementById('s3-version');
   if(!el||!window.fetch) return;
@@ -337,15 +457,50 @@ s3_report(res, "s3_report.html")</span><button class="copy" type="button">Copy</
     .then(d=>{const v=d&&d.info&&d.info.version; if(v&&/^[0-9][0-9A-Za-z.+-]*$/.test(v)){el.textContent='Version ';const b=document.createElement('b');b.textContent=v;el.appendChild(b);el.title='Latest release on PyPI';}})
     .catch(()=>{});
 })();
+
+// Copy buttons.
 document.querySelectorAll('.copy').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const text=btn.parentElement.querySelector('span').textContent;
+    const span=btn.parentElement.querySelector('span');
     const done=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',1500);};
-    const fallback=()=>{const r=document.createRange();r.selectNodeContents(btn.parentElement.querySelector('span'));
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(span);
       const s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Press ⌘C / Ctrl+C';};
-    try{navigator.clipboard.writeText(text).then(done,fallback);}catch(e){fallback();}
+    try{navigator.clipboard.writeText(span.textContent).then(done,fallback);}catch(e){fallback();}
   });
 });
-</script>
 
-</body></html>
+// The choice: one way at a time. The way is kept in the address (#colab, #claude-desktop, ...)
+// and remembered in this browser. Without JavaScript every way is shown.
+(function(){
+  const tabs=[...document.querySelectorAll('[role="tab"][data-path]')];
+  const panels=[...document.querySelectorAll('.panel[data-path]')];
+  const byHash={}; panels.forEach(p=>byHash[p.id]=p.dataset.path);
+  const hashOf={}; panels.forEach(p=>hashOf[p.dataset.path]=p.id);
+  const KEY='s3-guide-way';
+  function choose(path,opts){
+    if(!hashOf[path]) path='colab';
+    tabs.forEach(t=>{const on=t.dataset.path===path;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;});
+    panels.forEach(p=>p.hidden=p.dataset.path!==path);
+    document.querySelectorAll('.forpath').forEach(f=>f.hidden=!f.dataset.for.split(' ').includes(path));
+    try{localStorage.setItem(KEY,path);}catch(e){}
+    if(opts&&opts.push&&location.hash!=='#'+hashOf[path]) history.replaceState(null,'','#'+hashOf[path]);
+    if(opts&&opts.scroll) document.getElementById(hashOf[path]).scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>choose(t.dataset.path,{push:true}));
+    t.addEventListener('keydown',e=>{
+      const k=e.key; if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(k)) return;
+      e.preventDefault();
+      const n=k==='Home'?0:k==='End'?tabs.length-1:(i+(k==='ArrowRight'||k==='ArrowDown'?1:-1)+tabs.length)%tabs.length;
+      tabs[n].focus(); choose(tabs[n].dataset.path,{push:true});
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();choose(a.dataset.go,{push:true,scroll:true});}));
+  window.addEventListener('hashchange',()=>{const p=byHash[location.hash.slice(1)];if(p) choose(p);});
+  let start=byHash[location.hash.slice(1)];
+  if(!start){try{start=localStorage.getItem(KEY);}catch(e){}}
+  choose(start||'colab');
+})();
+</script>
+</body>
+</html>
