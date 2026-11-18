@@ -65,7 +65,7 @@ a.fact:hover{border-color:var(--teal)}
 .tick.req{background:var(--amber-soft);color:var(--amber)}
 .warn{font-size:.88rem;background:var(--amber-soft);border-radius:8px;padding:8px 10px;margin-top:10px!important}
 code{font:12.5px var(--mono);background:var(--teal-soft);color:var(--ink);padding:1px 5px;border-radius:4px}
-.cmd{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:8px;font:13px/1.5 var(--mono);padding:10px 84px 10px 12px;overflow-x:auto;white-space:pre;margin:6px 0;min-width:0}
+.cmd{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:8px;font:13px/1.5 var(--mono);padding:10px 84px 10px 12px;white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0;min-width:0}
 .copy{position:absolute;top:7px;right:7px;font:600 12px var(--body);background:var(--teal);color:#fff;border:0;border-radius:6px;padding:4px 10px;cursor:pointer}
 .copy:focus-visible,.card:focus-visible,.other:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 .os{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:4px 16px}
@@ -96,10 +96,10 @@ code{font:12.5px var(--mono);background:var(--teal-soft);color:var(--ink);paddin
 .panel h3{font-size:1.25rem}
 .panel .intro{margin:6px 0 0;color:var(--muted);max-width:75ch}
 .panel ol{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;counter-reset:s}
-.panel li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
-.panel li::before{content:counter(s);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 .85rem var(--display);background:var(--cs);color:var(--c)}
-.panel li>div{min-width:0;padding-top:2px}
-.panel li b.do{font-weight:600}
+.panel ol>li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
+.panel ol>li::before{content:counter(s);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 .85rem var(--display);background:var(--cs);color:var(--c)}
+.panel ol>li>div{min-width:0;padding-top:2px}
+.panel ol>li b.do{font-weight:600}
 .ask{border-left:3px solid var(--c);background:var(--cs);border-radius:0 8px 8px 0;padding:8px 10px;margin-top:6px;font-size:.92rem;font-style:italic}
 details{border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
 details>summary{cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink);list-style:none;display:flex;align-items:center;gap:8px}
